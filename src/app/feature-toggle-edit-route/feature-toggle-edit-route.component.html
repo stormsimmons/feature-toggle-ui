@@ -1,22 +1,28 @@
-<div>
-  <mat-card>
-    <mat-list>
-      <mat-list-item> Name: {{ featureToggle.name }} </mat-list-item>
-      <mat-list-item> Created At: {{ featureToggle.createdAt | date }} </mat-list-item>
-    </mat-list>
+<mat-card>
+  <mat-list>
+    <mat-list-item> Name: {{ featureToggle.name }} </mat-list-item>
+    <mat-list-item> Created At: {{ featureToggle.createdAt | date }} </mat-list-item>
+  </mat-list>
 
-    <div>
-      <mat-form-field>
-        <mat-label>Environment</mat-label>
-        <mat-select [(ngModel)]="selectedEnvironmentKey" (selectionChange)="onSelectionChangeEnvironmentKey()">
-          <mat-option *ngFor="let environment of featureToggle.environments" [value]="environment.key">
-            {{ environment.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Environment</mat-label>
+      <mat-select [(ngModel)]="selectedEnvironmentKey" (selectionChange)="onSelectionChangeEnvironmentKey()">
+        <mat-option *ngFor="let environment of featureToggle.environments" [value]="environment.key">
+          {{ environment.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-    <mat-list>
+  <mat-list>
+    <mat-list-item>
+      <mat-checkbox [(ngModel)]="selectedEnvironment.enabled">Enabled</mat-checkbox>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-checkbox [(ngModel)]="selectedEnvironment.enabledForAll">Enabled for All</mat-checkbox>
+    </mat-list-item>
+    <ng-container *ngIf="!selectedEnvironment.enabledForAll">
       <mat-list-item *ngFor="let consumer of selectedEnvironment.consumers">
         <mat-icon matListIcon>delete</mat-icon>
         {{ consumer }}
@@ -26,6 +32,6 @@
           <input matInput placeholder="New Consumer" />
         </mat-form-field>
       </mat-list-item>
-    </mat-list>
-  </mat-card>
-</div>
+    </ng-container>
+  </mat-list>
+</mat-card>
