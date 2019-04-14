@@ -1,0 +1,31 @@
+<div>
+  <mat-card>
+    <mat-list>
+      <mat-list-item> Name: {{ featureToggle.name }} </mat-list-item>
+      <mat-list-item> Created At: {{ featureToggle.createdAt | date }} </mat-list-item>
+    </mat-list>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Environment</mat-label>
+        <mat-select [(ngModel)]="selectedEnvironmentKey" (selectionChange)="onSelectionChangeEnvironmentKey()">
+          <mat-option *ngFor="let environment of featureToggle.environments" [value]="environment.key">
+            {{ environment.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-list>
+      <mat-list-item *ngFor="let consumer of selectedEnvironment.consumers">
+        <mat-icon matListIcon>delete</mat-icon>
+        {{ consumer }}
+      </mat-list-item>
+      <mat-list-item>
+        <mat-form-field>
+          <input matInput placeholder="New Consumer" />
+        </mat-form-field>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+</div>

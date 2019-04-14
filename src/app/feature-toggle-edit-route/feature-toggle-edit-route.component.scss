@@ -1,0 +1,11 @@
+div {
+  padding: 20px;
+
+  mat-form-field {
+    width: 100%;
+
+    &.margin-15 {
+      margin: 15px;
+    }
+  }
+}
