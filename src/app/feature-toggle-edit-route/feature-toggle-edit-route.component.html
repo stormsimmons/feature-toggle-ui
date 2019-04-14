@@ -1,7 +1,9 @@
-<mat-card>
+<mat-card *ngIf="featureToggle">
   <mat-list>
+    <mat-list-item> Key: {{ featureToggle.key }} </mat-list-item>
     <mat-list-item> Name: {{ featureToggle.name }} </mat-list-item>
     <mat-list-item> Created At: {{ featureToggle.createdAt | date }} </mat-list-item>
+    <mat-list-item> Updated At: {{ featureToggle.updatedAt | date }} </mat-list-item>
   </mat-list>
 
   <div>
@@ -29,7 +31,12 @@
       </mat-list-item>
       <mat-list-item>
         <mat-form-field>
-          <input matInput placeholder="New Consumer" />
+          <input
+            [(ngModel)]="newConsumer"
+            (keyup.enter)="onKeyUpEnterNewConsumer()"
+            matInput
+            placeholder="New Consumer"
+          />
         </mat-form-field>
       </mat-list-item>
     </ng-container>

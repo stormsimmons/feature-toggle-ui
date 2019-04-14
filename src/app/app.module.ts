@@ -16,13 +16,20 @@ import {
   MatSelectModule,
   MatInputModule,
   MatIconModule,
+  MatSidenavModule,
 } from '@angular/material';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { FormsModule } from '@angular/forms';
+import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-toggle-create.component';
 
 @NgModule({
-  declarations: [AppComponent, FeatureTogglesRouteComponent, FeatureToggleEditRouteComponent],
+  declarations: [
+    AppComponent,
+    FeatureTogglesRouteComponent,
+    FeatureToggleEditRouteComponent,
+    FeatureToggleCreateComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,6 +45,7 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatInputModule,
     MatIconModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

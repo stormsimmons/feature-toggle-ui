@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IFeatureToggle, IEnvironment } from '../core';
+import { IFeatureToggle, IEnvironment, FeatureToggleService } from '../core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-feature-toggle-edit-route',
@@ -7,45 +8,36 @@ import { IFeatureToggle, IEnvironment } from '../core';
   styleUrls: ['./feature-toggle-edit-route.component.scss'],
 })
 export class FeatureToggleEditRouteComponent implements OnInit {
-  public featureToggle: IFeatureToggle = {
-    createdAt: new Date().getTime(),
-    environments: [
-      {
-        consumers: ['1', '2', '3'],
-        enabled: true,
-        enabledForAll: true,
-        key: 'development',
-        name: 'Development',
-      },
-      {
-        consumers: ['1', '2', '3'],
-        enabled: true,
-        enabledForAll: false,
-        key: 'staging',
-        name: 'Staging',
-      },
-      {
-        consumers: ['1', '2', '3', '4', '5', '6'],
-        enabled: false,
-        enabledForAll: true,
-        key: 'production',
-        name: 'Production',
-      },
-    ],
-    key: 'feature-toggle-1',
-    name: 'Feature Toggle 1',
-  };
+  public featureToggle: IFeatureToggle = null;
+
+  public newConsumer = '';
 
   public selectedEnvironment: IEnvironment = null;
 
   public selectedEnvironmentKey: string = null;
 
-  constructor() {}
+  constructor(protected activatedRoute: ActivatedRoute, protected featureToggleService: FeatureToggleService) {}
 
   public ngOnInit(): void {
-    this.selectedEnvironmentKey = this.featureToggle.environments[0].key;
+    const key: string = this.activatedRoute.snapshot.params.key;
 
-    this.onSelectionChangeEnvironmentKey();
+    this.featureToggleService.find(key).subscribe((featureToggle: IFeatureToggle) => {
+      this.featureToggle = featureToggle;
+
+      this.selectedEnvironmentKey = this.featureToggle.environments[0].key;
+
+      this.onSelectionChangeEnvironmentKey();
+    });
+  }
+
+  public onKeyUpEnterNewConsumer(): void {
+    if (!this.newConsumer) {
+      return;
+    }
+
+    this.selectedEnvironment.consumers.push(this.newConsumer);
+
+    this.newConsumer = '';
   }
 
   public onSelectionChangeEnvironmentKey(): void {

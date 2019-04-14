@@ -8,4 +8,6 @@ export interface IFeatureToggle {
   key: string;
 
   name: string;
+
+  updatedAt: number;
 }
