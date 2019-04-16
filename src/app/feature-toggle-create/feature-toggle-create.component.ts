@@ -26,6 +26,7 @@ export class FeatureToggleCreateComponent implements OnInit {
   public onClickSubmit(): void {
     this.featureToggleService
       .create({
+        archived: false,
         createdAt: new Date().getTime(),
         environments: [
           {

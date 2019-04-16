@@ -22,7 +22,12 @@
       <mat-checkbox [(ngModel)]="selectedEnvironment.enabled" (change)="onChangeFeatureToggle()">Enabled</mat-checkbox>
     </mat-list-item>
     <mat-list-item>
-      <mat-checkbox [(ngModel)]="selectedEnvironment.enabledForAll" (change)="onChangeFeatureToggle()">Enabled for All</mat-checkbox>
+      <mat-checkbox [(ngModel)]="selectedEnvironment.enabledForAll" (change)="onChangeFeatureToggle()">
+        Enabled for All
+      </mat-checkbox>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-checkbox [(ngModel)]="featureToggle.archived" (change)="onChangeFeatureToggle()">Archived</mat-checkbox>
     </mat-list-item>
     <ng-container *ngIf="!selectedEnvironment.enabledForAll">
       <mat-list-item *ngFor="let consumer of selectedEnvironment.consumers">

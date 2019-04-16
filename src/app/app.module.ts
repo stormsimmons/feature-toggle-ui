@@ -18,6 +18,8 @@ import {
   MatIconModule,
   MatSidenavModule,
   MatDialogModule,
+  MatSlideToggleModule,
+  MatProgressBarModule,
 } from '@angular/material';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
@@ -50,6 +52,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatSidenavModule,
     MatDialogModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
