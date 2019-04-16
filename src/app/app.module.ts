@@ -18,7 +18,6 @@ import {
   MatIconModule,
   MatSidenavModule,
   MatDialogModule,
-  MatSlideToggleModule,
   MatProgressBarModule,
 } from '@angular/material';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
@@ -26,6 +25,8 @@ import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/fea
 import { FormsModule } from '@angular/forms';
 import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-toggle-create.component';
 import { HttpClientModule } from '@angular/common/http';
+import { OpenIDService, CustomOpenIDService } from './core';
+import { CallbackRouteComponent } from './callback-route/callback-route.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     FeatureTogglesRouteComponent,
     FeatureToggleEditRouteComponent,
     FeatureToggleCreateComponent,
+    CallbackRouteComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     MatProgressBarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: OpenIDService,
+      useClass: CustomOpenIDService,
+    },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [FeatureToggleCreateComponent],
 })
