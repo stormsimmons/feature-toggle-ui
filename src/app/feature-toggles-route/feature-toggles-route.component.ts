@@ -46,7 +46,7 @@ export class FeatureTogglesRouteComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {
       this.featureToggles = null;
-      
+
       this.featureToggleService.findAll().subscribe((featureToggles: Array<IFeatureToggle>) => {
         this.featureToggles = featureToggles;
       });

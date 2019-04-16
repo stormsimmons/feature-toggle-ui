@@ -8,9 +8,8 @@ describe('FeatureToggleCreateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeatureToggleCreateComponent ]
-    })
-    .compileComponents();
+      declarations: [FeatureToggleCreateComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,9 +8,8 @@ describe('FeatureTogglesRouteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeatureTogglesRouteComponent ]
-    })
-    .compileComponents();
+      declarations: [FeatureTogglesRouteComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
