@@ -30,6 +30,10 @@ export class FeatureToggleEditRouteComponent implements OnInit {
     });
   }
 
+  public onChangeFeatureToggle(): void {
+    this.featureToggleService.update(this.featureToggle).subscribe();
+  }
+
   public onKeyUpEnterNewConsumer(): void {
     if (!this.newConsumer) {
       return;
@@ -38,6 +42,8 @@ export class FeatureToggleEditRouteComponent implements OnInit {
     this.selectedEnvironment.consumers.push(this.newConsumer);
 
     this.newConsumer = '';
+
+    this.featureToggleService.update(this.featureToggle).subscribe();
   }
 
   public onSelectionChangeEnvironmentKey(): void {

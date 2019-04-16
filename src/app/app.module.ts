@@ -17,11 +17,13 @@ import {
   MatInputModule,
   MatIconModule,
   MatSidenavModule,
+  MatDialogModule,
 } from '@angular/material';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { FormsModule } from '@angular/forms';
 import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-toggle-create.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-to
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatTableModule,
     MatListModule,
@@ -46,8 +49,10 @@ import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-to
     MatInputModule,
     MatIconModule,
     MatSidenavModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [FeatureToggleCreateComponent],
 })
 export class AppModule {}

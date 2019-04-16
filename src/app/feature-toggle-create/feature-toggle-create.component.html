@@ -1,3 +1,16 @@
-<p>
-  feature-toggle-create works!
-</p>
+<h1 mat-dialog-title>Create Feature Toggle</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input [(ngModel)]="key" matInput placeholder="Key" />
+    <mat-hint>E.g. my-awesome-feature</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [(ngModel)]="name" matInput placeholder="Name" />
+    <mat-hint>E.g. My Awesome Feature</mat-hint>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onClickClose()" mat-button>Close</button>
+  <button (click)="onClickSubmit()" mat-button>Submit</button>
+</div>
