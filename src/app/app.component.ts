@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(protected router: Router) {}
 
-  public onClickAudit(): void {
-    this.router.navigateByUrl('');
+  public onClickAudits(): void {
+    this.router.navigateByUrl('/audits');
   }
 
   public onClickHome(): void {

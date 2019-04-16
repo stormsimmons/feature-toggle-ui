@@ -12,7 +12,7 @@ export class OpenIDService {
       client_id: string;
       redirect_uri: string;
       scope: string;
-      signingKeys: Array<any>,
+      signingKeys: Array<any>;
       post_logout_redirect_uri: string;
     },
     protected router: Router,

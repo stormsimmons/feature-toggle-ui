@@ -4,8 +4,14 @@ import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-to
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { OpenIDGuard } from './open-id.guard';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
+import { AuditsRouteComponent } from './audits-route/audits-route.component';
 
 const routes: Routes = [
+  {
+    canActivate: [OpenIDGuard],
+    component: AuditsRouteComponent,
+    path: 'audits',
+  },
   {
     canActivate: [OpenIDGuard],
     component: FeatureTogglesRouteComponent,

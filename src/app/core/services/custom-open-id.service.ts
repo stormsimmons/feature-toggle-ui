@@ -8,9 +8,6 @@ import { environment } from 'src/environments/environment';
 })
 export class CustomOpenIDService extends OpenIDService {
   constructor(router: Router) {
-    super(
-      environment.openIdConfiguration,
-      router,
-    );
+    super(environment.openIdConfiguration, router);
   }
 }

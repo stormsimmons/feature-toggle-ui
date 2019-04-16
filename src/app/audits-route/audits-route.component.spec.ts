@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CallbackRouteComponent } from './callback-route.component';
+import { AuditsRouteComponent } from './audits-route.component';
 
-describe('CallbackRouteComponent', () => {
-  let component: CallbackRouteComponent;
-  let fixture: ComponentFixture<CallbackRouteComponent>;
+describe('AuditsRouteComponent', () => {
+  let component: AuditsRouteComponent;
+  let fixture: ComponentFixture<AuditsRouteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CallbackRouteComponent],
+      declarations: [AuditsRouteComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CallbackRouteComponent);
+    fixture = TestBed.createComponent(AuditsRouteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -5,7 +5,7 @@ import { OpenIDGuard } from './open-id.guard';
 describe('OpenIDGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [OpenIDGuard]
+      providers: [OpenIDGuard],
     });
   });
 
