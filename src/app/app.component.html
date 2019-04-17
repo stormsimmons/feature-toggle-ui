@@ -1,15 +1,29 @@
-<mat-toolbar color="primary">Feature Toggle UI</mat-toolbar>
+<mat-toolbar color="primary">
+  <mat-icon (click)="sidenav.toggle()" matListIcon>menu</mat-icon> Feature Toggle UI
+</mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav mode="side" opened>
+  <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
+      <mat-list-item *ngIf="user">
+        <mat-icon matListIcon>face</mat-icon>
+        {{ user.profile.name }}
+      </mat-list-item>
       <mat-list-item (click)="onClickHome()">
         <mat-icon matListIcon>home</mat-icon>
         Home
       </mat-list-item>
+      <mat-list-item (click)="onClickDocumentation()">
+        <mat-icon matListIcon>link</mat-icon>
+        Documentation
+      </mat-list-item>
       <mat-list-item (click)="onClickAudits()">
         <mat-icon matListIcon>edit</mat-icon>
         Audits
+      </mat-list-item>
+      <mat-list-item (click)="onClickSignOut()">
+        <mat-icon matListIcon>vpn_key</mat-icon>
+        Sign Out
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>

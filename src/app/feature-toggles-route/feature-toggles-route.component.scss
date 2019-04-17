@@ -1,28 +1,25 @@
-mat-progress-bar {
-  margin: 0px 0px 100px 0px;
-}
+div {
+  table {
+    width: 100%;
 
-table {
-  margin: 0px 0px 100px 0px;
-  width: 100%;
+    tr {
+      &:nth-child(even) {
+        background: #eceff1;
+      }
 
-  tr {
-    &:nth-child(even) {
-      background: #eceff1;
-    }
+      &:nth-child(odd) {
+        background: #fff;
+      }
 
-    &:nth-child(odd) {
-      background: #fff;
-    }
-
-    mat-chip-list {
-      margin: 10px;
+      mat-chip-list {
+        margin: 10px;
+      }
     }
   }
-}
 
-button[mat-fab] {
-  bottom: 20px;
-  position: fixed;
-  right: 10px;
+  button[mat-fab] {
+    bottom: 50px;
+    position: fixed;
+    right: 50px;
+  }
 }

@@ -43,10 +43,10 @@ export class OpenIDService {
     return from(this.manager.getUser());
   }
 
-  public signIn(): Observable<boolean> {
+  public signIn(force: boolean = false): Observable<boolean> {
     return this.authenticated().pipe(
       tap((result: boolean) => {
-        if (!result) {
+        if (force || !result) {
           this.manager.signinRedirect();
         }
       }),

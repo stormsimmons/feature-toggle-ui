@@ -28,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OpenIDService, CustomOpenIDService } from './core';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
+import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AuditsRouteComponent } from './audits-route/audits-route.component';
     FeatureToggleCreateComponent,
     CallbackRouteComponent,
     AuditsRouteComponent,
+    DocumentationRouteComponent,
   ],
   imports: [
     BrowserModule,

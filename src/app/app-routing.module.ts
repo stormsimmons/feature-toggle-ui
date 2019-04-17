@@ -5,12 +5,21 @@ import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/fea
 import { OpenIDGuard } from './open-id.guard';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
+import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
 
 const routes: Routes = [
   {
     canActivate: [OpenIDGuard],
     component: AuditsRouteComponent,
     path: 'audits',
+  },
+  {
+    component: CallbackRouteComponent,
+    path: 'callback',
+  },
+  {
+    component: DocumentationRouteComponent,
+    path: 'documentation',
   },
   {
     canActivate: [OpenIDGuard],
@@ -21,10 +30,6 @@ const routes: Routes = [
     canActivate: [OpenIDGuard],
     component: FeatureToggleEditRouteComponent,
     path: 'feature-toggle/:key',
-  },
-  {
-    component: CallbackRouteComponent,
-    path: 'callback',
   },
 ];
 

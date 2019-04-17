@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { IFeatureToggle } from '../models';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { OpenIDService } from './open-id.service';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +21,13 @@ export class AuditService {
           }),
         }),
       ),
+    ).pipe(
+      catchError((error: Error) => {
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+          this.openIDService.signIn(true).subscribe();
+        }
+        return throwError(error);
+      }),
     );
   }
 }

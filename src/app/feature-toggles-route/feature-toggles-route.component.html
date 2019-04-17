@@ -1,39 +1,41 @@
-<mat-progress-bar *ngIf="!featureToggles" mode="indeterminate"></mat-progress-bar>
-<table *ngIf="featureToggles" [dataSource]="featureToggles" mat-table class="mat-elevation-z8">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+<div>
+  <mat-progress-bar *ngIf="!featureToggles" mode="indeterminate"></mat-progress-bar>
+  <table *ngIf="featureToggles" [dataSource]="featureToggles" mat-table class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef>Status</th>
-    <td mat-cell *matCellDef="let element">
-      <mat-list>
-        <mat-list-item *ngFor="let environment of element.environments">
-          <mat-checkbox [(ngModel)]="environment.enabled" (change)="onChangeFeatureToggle(element)">{{
-            environment.name
-          }}</mat-checkbox>
-          <mat-chip-list>
-            <mat-chip *ngIf="!environment.enabledForAll">{{ environment.consumers.length }} consumers</mat-chip>
-            <mat-chip *ngIf="environment.enabledForAll">Enabled For All</mat-chip>
-          </mat-chip-list>
-        </mat-list-item>
-      </mat-list>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-list>
+          <mat-list-item *ngFor="let environment of element.environments">
+            <mat-checkbox [(ngModel)]="environment.enabled" (change)="onChangeFeatureToggle(element)">{{
+              environment.name
+            }}</mat-checkbox>
+            <mat-chip-list>
+              <mat-chip *ngIf="!environment.enabledForAll">{{ environment.consumers.length }} consumers</mat-chip>
+              <mat-chip *ngIf="environment.enabledForAll">Enabled For All</mat-chip>
+            </mat-chip-list>
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>
-      <mat-checkbox [(ngModel)]="includeArchived" (change)="onChangeIncludeArchived()">Include Archived</mat-checkbox>
-    </th>
-    <td mat-cell *matCellDef="let element">
-      <button (click)="onClickView(element)" mat-button color="primary">View</button>
-      <button *ngIf="!element.archived" (click)="onClickArchive(element)" mat-button color="accent">Archive</button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox [(ngModel)]="includeArchived" (change)="onChangeIncludeArchived()">Include Archived</mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="onClickView(element)" mat-button color="primary">View</button>
+        <button *ngIf="!element.archived" (click)="onClickArchive(element)" mat-button color="accent">Archive</button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 
-<button (click)="onClickFabAdd()" mat-fab color="primary"><mat-icon matListIcon>add</mat-icon></button>
+  <button (click)="onClickFabAdd()" mat-fab color="primary"><mat-icon matListIcon>add</mat-icon></button>
+</div>
