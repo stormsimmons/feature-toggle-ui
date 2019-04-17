@@ -11,9 +11,9 @@
       <td mat-cell *matCellDef="let element">
         <mat-list>
           <mat-list-item *ngFor="let environment of element.environments">
-            <mat-checkbox [(ngModel)]="environment.enabled" (change)="onChangeFeatureToggle(element)">{{
-              environment.name
-            }}</mat-checkbox>
+            <mat-checkbox [(ngModel)]="environment.enabled" (change)="onChangeFeatureToggle(element)">
+              {{ environment.name }}
+            </mat-checkbox>
             <mat-chip-list>
               <mat-chip *ngIf="!environment.enabledForAll">{{ environment.consumers.length }} consumers</mat-chip>
               <mat-chip *ngIf="environment.enabledForAll">Enabled For All</mat-chip>
