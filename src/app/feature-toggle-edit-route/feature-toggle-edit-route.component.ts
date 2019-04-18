@@ -34,6 +34,18 @@ export class FeatureToggleEditRouteComponent implements OnInit {
     this.featureToggleService.update(this.featureToggle).subscribe();
   }
 
+  public onClickRemoveConsumer(consumer: string): void {
+    const index: number = this.selectedEnvironment.consumers.indexOf(consumer);
+
+    if (index === -1) {
+      return;
+    }
+
+    this.selectedEnvironment.consumers.splice(index, 1);
+
+    this.featureToggleService.update(this.featureToggle).subscribe();
+  }
+
   public onKeyUpEnterNewConsumer(): void {
     if (!this.newConsumer) {
       return;
