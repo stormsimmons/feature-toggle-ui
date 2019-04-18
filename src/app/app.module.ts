@@ -19,10 +19,11 @@ import {
   MatSidenavModule,
   MatDialogModule,
   MatProgressBarModule,
+  MatSnackBarModule,
 } from '@angular/material';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-toggle-create.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OpenIDService, CustomOpenIDService } from './core';
@@ -46,6 +47,7 @@ import { DocumentationRouteComponent } from './documentation-route/documentation
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatTableModule,
     MatListModule,
@@ -59,6 +61,7 @@ import { DocumentationRouteComponent } from './documentation-route/documentation
     MatSidenavModule,
     MatDialogModule,
     MatProgressBarModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
