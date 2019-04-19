@@ -11,7 +11,7 @@ export class AppComponent {
   public user: any = null;
 
   constructor(protected openIDService: OpenIDService, protected router: Router) {
-    this.openIDService.getUser().subscribe((user) => (this.user = user));
+    this.loadUser();
   }
 
   public onClickAudits(): void {
@@ -27,6 +27,18 @@ export class AppComponent {
   }
 
   public onClickSignOut(): void {
-    this.openIDService.signOut().subscribe(console.log);
+    this.openIDService.signOut().subscribe();
+  }
+
+  protected loadUser(): void {
+    this.openIDService.getUser().subscribe((user) => {
+      if (!user) {
+        setTimeout(() => this.loadUser(), 1000);
+
+        return;
+      }
+
+      this.user = user;
+    });
   }
 }
