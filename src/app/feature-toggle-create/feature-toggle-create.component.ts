@@ -67,6 +67,7 @@ export class FeatureToggleCreateComponent implements OnInit {
         key: this.key.value,
         name: this.name.value,
         updatedAt: new Date().getTime(),
+        user: null,
       })
       .subscribe(
         () => {
