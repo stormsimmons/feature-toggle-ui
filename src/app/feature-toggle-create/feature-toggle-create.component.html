@@ -2,13 +2,13 @@
 <div mat-dialog-content>
   <mat-form-field>
     <input [formControl]="key" matInput placeholder="Key" />
-    <mat-hint>E.g. my-awesome-feature</mat-hint>
+    <mat-hint>E.g. my-awesome-feature-toggle</mat-hint>
     <mat-error *ngIf="key.invalid">{{ getErrorMessage('key') }}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <input [formControl]="name" matInput placeholder="Name" />
-    <mat-hint>E.g. My Awesome Feature</mat-hint>
+    <mat-hint>E.g. My Awesome Feature Toggle</mat-hint>
     <mat-error *ngIf="name.invalid">{{ getErrorMessage('name') }}</mat-error>
   </mat-form-field>
 </div>
