@@ -30,6 +30,7 @@ import { OpenIDService, CustomOpenIDService } from './core';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
+import { AccessControlRouteComponent } from './access-control-route/access-control-route.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DocumentationRouteComponent } from './documentation-route/documentation
     CallbackRouteComponent,
     AuditsRouteComponent,
     DocumentationRouteComponent,
+    AccessControlRouteComponent,
   ],
   imports: [
     BrowserModule,
