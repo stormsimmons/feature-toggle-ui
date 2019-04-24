@@ -31,6 +31,7 @@ import { CallbackRouteComponent } from './callback-route/callback-route.componen
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
 import { AccessControlRouteComponent } from './access-control-route/access-control-route.component';
+import { AccessControlCreateComponent } from './access-control-create/access-control-create.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AccessControlRouteComponent } from './access-control-route/access-contr
     AuditsRouteComponent,
     DocumentationRouteComponent,
     AccessControlRouteComponent,
+    AccessControlCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +74,6 @@ import { AccessControlRouteComponent } from './access-control-route/access-contr
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [FeatureToggleCreateComponent],
+  entryComponents: [AccessControlCreateComponent, FeatureToggleCreateComponent],
 })
 export class AppModule {}

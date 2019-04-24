@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Create Access Control</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input [formControl]="user" matInput placeholder="User" />
+    <mat-hint>E.g. someone@example.com</mat-hint>
+    <mat-error *ngIf="user.invalid">{{ getErrorMessage('user') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [(ngModel)]="roleKey" placeholder="Select a role" (selectionChange)="onSelectionChangeRoleKey()">
+      <mat-option *ngFor="let role of roles" [value]="role.key">
+        {{ role.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onClickClose()" mat-button>Close</button>
+  <button (click)="onClickSubmit()" mat-button>Submit</button>
+</div>

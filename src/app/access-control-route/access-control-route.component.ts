@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { AccessControlCreateComponent } from '../access-control-create/access-control-create.component';
 
 @Component({
   selector: 'app-access-control-route',
@@ -10,7 +12,13 @@ export class AccessControlRouteComponent implements OnInit {
 
   public displayedColumns: Array<string> = ['user', 'role'];
 
-  constructor() {}
+  constructor(protected dialog: MatDialog) {}
 
   public ngOnInit(): void {}
+
+  public onClickFabAdd(): void {
+    const dialogRef = this.dialog.open(AccessControlCreateComponent, {});
+
+    dialogRef.afterClosed().subscribe(() => {});
+  }
 }
