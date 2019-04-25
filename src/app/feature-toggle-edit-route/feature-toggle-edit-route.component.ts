@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IFeatureToggle, IEnvironment, FeatureToggleService } from '../core';
 import { ActivatedRoute } from '@angular/router';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material';
 
 @Component({
   selector: 'app-feature-toggle-edit-route',
@@ -9,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FeatureToggleEditRouteComponent implements OnInit {
   public displayedColumnsForRoleBasedAccessControlItems: Array<string> = ['user', 'role'];
+  
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   public featureToggle: IFeatureToggle = null;
 
@@ -36,6 +40,21 @@ export class FeatureToggleEditRouteComponent implements OnInit {
     this.featureToggleService.update(this.featureToggle).subscribe();
   }
 
+  public onClickAddConsumer(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      this.selectedEnvironment.consumers.push(value.trim());
+    }
+
+    if (input) {
+      input.value = '';
+    }
+
+    this.featureToggleService.update(this.featureToggle).subscribe();
+  }
+
   public onClickRemoveConsumer(consumer: string): void {
     const index: number = this.selectedEnvironment.consumers.indexOf(consumer);
 
@@ -44,18 +63,6 @@ export class FeatureToggleEditRouteComponent implements OnInit {
     }
 
     this.selectedEnvironment.consumers.splice(index, 1);
-
-    this.featureToggleService.update(this.featureToggle).subscribe();
-  }
-
-  public onKeyUpEnterNewConsumer(): void {
-    if (!this.newConsumer) {
-      return;
-    }
-
-    this.selectedEnvironment.consumers.push(this.newConsumer);
-
-    this.newConsumer = '';
 
     this.featureToggleService.update(this.featureToggle).subscribe();
   }
