@@ -41,7 +41,7 @@
       <mat-list-item>
         <mat-checkbox [(ngModel)]="featureToggle.archived" (change)="onChangeFeatureToggle()">Archived</mat-checkbox>
       </mat-list-item>
-      <ng-container *ngIf="!selectedEnvironment.enabledForAll">
+      <mat-list-item *ngIf="!selectedEnvironment.enabledForAll">
         <mat-form-field>
           <mat-chip-list #chipList>
             <mat-chip
@@ -62,7 +62,7 @@
             />
           </mat-chip-list>
         </mat-form-field>
-      </ng-container>
+      </mat-list-item>
     </mat-list>
   </mat-card>
 </div>
