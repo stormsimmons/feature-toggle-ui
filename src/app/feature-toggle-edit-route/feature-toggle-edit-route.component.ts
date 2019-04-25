@@ -12,13 +12,11 @@ import { MatChipInputEvent } from '@angular/material';
 export class FeatureToggleEditRouteComponent implements OnInit {
   public featureToggle: IFeatureToggle = null;
 
-  public newConsumer = '';
-
   public selectedEnvironment: IEnvironment = null;
 
   public selectedEnvironmentKey: string = null;
 
-  public separatorKeysCodes: number[] = [ENTER, COMMA];
+  public separatorKeysCodes: Array<number> = [ENTER, COMMA];
 
   constructor(protected activatedRoute: ActivatedRoute, protected featureToggleService: FeatureToggleService) {}
 
