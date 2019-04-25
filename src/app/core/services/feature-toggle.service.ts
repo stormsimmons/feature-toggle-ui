@@ -4,7 +4,7 @@ import { IFeatureToggle } from '../models';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { OpenIDService } from './open-id.service';
-import { mergeMap, catchError, map } from 'rxjs/operators';
+import { mergeMap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -49,19 +49,6 @@ export class FeatureToggleService {
             }),
           }),
         ),
-      )
-      .pipe(
-        map((x) => {
-          return {
-            ...x,
-            roleBasedAccessControlItems: [
-              {
-                role: 'view',
-                subject: 'someone@example.com',
-              },
-            ],
-          } as IFeatureToggle;
-        }),
       )
       .pipe(
         catchError((error: Error) => {

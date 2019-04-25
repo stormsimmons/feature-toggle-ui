@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IFeatureToggle, IEnvironment, FeatureToggleService } from '../core';
+import { IFeatureToggle, IEnvironment, FeatureToggleService, OpenIDService } from '../core';
 import { ActivatedRoute } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
+import { tap, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-feature-toggle-edit-route',
@@ -18,18 +19,44 @@ export class FeatureToggleEditRouteComponent implements OnInit {
 
   public separatorKeysCodes: Array<number> = [ENTER, COMMA];
 
-  constructor(protected activatedRoute: ActivatedRoute, protected featureToggleService: FeatureToggleService) {}
+  public user: any = null;
+
+  constructor(
+    protected activatedRoute: ActivatedRoute,
+    protected featureToggleService: FeatureToggleService,
+    protected openIDService: OpenIDService,
+  ) {}
 
   public ngOnInit(): void {
     const key: string = this.activatedRoute.snapshot.params.key;
 
-    this.featureToggleService.find(key).subscribe((featureToggle: IFeatureToggle) => {
-      this.featureToggle = featureToggle;
+    this.openIDService
+      .getUser()
+      .pipe(tap((user) => (this.user = user)))
+      .pipe(mergeMap(() => this.featureToggleService.find(key)))
+      .subscribe((featureToggle: IFeatureToggle) => {
+        this.featureToggle = featureToggle;
 
-      this.selectedEnvironmentKey = this.featureToggle.environments[0].key;
+        this.selectedEnvironmentKey = this.featureToggle.environments[0].key;
 
-      this.onSelectionChangeEnvironmentKey();
-    });
+        this.onSelectionChangeEnvironmentKey();
+      });
+  }
+
+  public authorized(roles: Array<string>): boolean {
+    if (this.featureToggle.user === this.user.profile.email) {
+      return true;
+    }
+
+    if (
+      this.featureToggle.roleBasedAccessControlItems.find(
+        (x) => x.subject === this.user.profile.email && roles.includes(x.role),
+      )
+    ) {
+      return true;
+    }
+
+    return false;
   }
 
   public onChangeFeatureToggle(): void {
