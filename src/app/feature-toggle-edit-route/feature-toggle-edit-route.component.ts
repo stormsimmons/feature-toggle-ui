@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./feature-toggle-edit-route.component.scss'],
 })
 export class FeatureToggleEditRouteComponent implements OnInit {
+  public displayedColumnsForRoleBasedAccessControlItems: Array<string> = ['user', 'role'];
+
   public featureToggle: IFeatureToggle = null;
 
   public newConsumer = '';

@@ -14,10 +14,6 @@ export class AppComponent {
     this.loadUser();
   }
 
-  public onClickAccessControl(): void {
-    this.router.navigateByUrl('/access-control');
-  }
-
   public onClickAudits(): void {
     this.router.navigateByUrl('/audits');
   }

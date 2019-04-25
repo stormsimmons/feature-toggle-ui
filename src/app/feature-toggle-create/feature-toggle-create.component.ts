@@ -66,6 +66,7 @@ export class FeatureToggleCreateComponent implements OnInit {
         }),
         key: this.key.value,
         name: this.name.value,
+        roleBasedAccessControlItems: [],
         updatedAt: new Date().getTime(),
         user: null,
       })

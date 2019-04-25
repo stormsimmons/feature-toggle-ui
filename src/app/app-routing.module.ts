@@ -6,18 +6,12 @@ import { OpenIDGuard } from './open-id.guard';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
-import { AccessControlRouteComponent } from './access-control-route/access-control-route.component';
 
 const routes: Routes = [
   {
     canActivate: [OpenIDGuard],
     component: FeatureTogglesRouteComponent,
     path: '',
-  },
-  {
-    canActivate: [OpenIDGuard],
-    component: AccessControlRouteComponent,
-    path: 'access-control',
   },
   {
     canActivate: [OpenIDGuard],
