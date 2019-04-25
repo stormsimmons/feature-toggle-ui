@@ -2,25 +2,6 @@ div {
   padding: 0px 20px;
 }
 
-table {
-  margin-top: 25px;
-  width: 100%;
-
-  tr {
-    &:nth-child(even) {
-      background: #eceff1;
-    }
-
-    &:nth-child(odd) {
-      background: #fff;
-    }
-
-    mat-chip-list {
-      margin: 10px;
-    }
-  }
-}
-
 mat-form-field {
   width: 100%;
 }

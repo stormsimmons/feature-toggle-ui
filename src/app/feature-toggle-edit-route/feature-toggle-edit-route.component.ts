@@ -10,10 +10,6 @@ import { MatChipInputEvent } from '@angular/material';
   styleUrls: ['./feature-toggle-edit-route.component.scss'],
 })
 export class FeatureToggleEditRouteComponent implements OnInit {
-  public displayedColumnsForRoleBasedAccessControlItems: Array<string> = ['user', 'role'];
-  
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-
   public featureToggle: IFeatureToggle = null;
 
   public newConsumer = '';
@@ -21,6 +17,8 @@ export class FeatureToggleEditRouteComponent implements OnInit {
   public selectedEnvironment: IEnvironment = null;
 
   public selectedEnvironmentKey: string = null;
+
+  public separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(protected activatedRoute: ActivatedRoute, protected featureToggleService: FeatureToggleService) {}
 
