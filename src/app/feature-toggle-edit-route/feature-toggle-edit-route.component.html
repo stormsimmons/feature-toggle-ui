@@ -31,21 +31,26 @@
       <mat-checkbox [(ngModel)]="featureToggle.archived" (change)="onChangeFeatureToggle()">Archived</mat-checkbox>
     </mat-list-item>
     <ng-container *ngIf="!selectedEnvironment.enabledForAll">
-      <mat-list-item *ngFor="let consumer of selectedEnvironment.consumers">
-        <mat-icon (click)="onClickRemoveConsumer(consumer)" matListIcon>delete</mat-icon>
-        {{ consumer }}
-      </mat-list-item>
-      <mat-list-item>
-        <mat-form-field>
+      <mat-form-field>
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let consumer of selectedEnvironment.consumers"
+            [selectable]="false"
+            [removable]="true"
+            (removed)="onClickRemoveConsumer(consumer)"
+          >
+            {{ consumer }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
           <input
-            [(ngModel)]="newConsumer"
-            (keyup.enter)="onKeyUpEnterNewConsumer()"
-            matInput
-            placeholder="New Consumer"
+            placeholder="Consumers"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="onClickAddConsumer($event)"
           />
-          <mat-hint>E.g. my-consumer, my-user, someone@example.com</mat-hint>
-        </mat-form-field>
-      </mat-list-item>
+        </mat-chip-list>
+      </mat-form-field>
     </ng-container>
   </mat-list>
 </mat-card>
