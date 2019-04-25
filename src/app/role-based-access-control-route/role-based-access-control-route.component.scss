@@ -17,4 +17,10 @@ div {
       }
     }
   }
+
+  button[mat-fab] {
+    bottom: 50px;
+    position: fixed;
+    right: 50px;
+  }
 }

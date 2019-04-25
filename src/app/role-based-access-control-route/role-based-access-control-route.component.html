@@ -19,4 +19,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumnsForRoleBasedAccessControlItems"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumnsForRoleBasedAccessControlItems"></tr>
   </table>
+
+  <button (click)="onClickFabAdd()" mat-fab color="primary"><mat-icon matListIcon>add</mat-icon></button>
 </div>

@@ -30,8 +30,8 @@ import { OpenIDService, CustomOpenIDService } from './core';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
-import { AccessControlCreateComponent } from './access-control-create/access-control-create.component';
 import { RoleBasedAccessControlRouteComponent } from './role-based-access-control-route/role-based-access-control-route.component';
+import { RoleBasedAccessControlCreateComponent } from './role-based-access-control-create/role-based-access-control-create.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +42,8 @@ import { RoleBasedAccessControlRouteComponent } from './role-based-access-contro
     CallbackRouteComponent,
     AuditsRouteComponent,
     DocumentationRouteComponent,
-    AccessControlCreateComponent,
     RoleBasedAccessControlRouteComponent,
+    RoleBasedAccessControlCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +74,6 @@ import { RoleBasedAccessControlRouteComponent } from './role-based-access-contro
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AccessControlCreateComponent, FeatureToggleCreateComponent],
+  entryComponents: [RoleBasedAccessControlCreateComponent, FeatureToggleCreateComponent],
 })
 export class AppModule {}

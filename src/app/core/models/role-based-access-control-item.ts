@@ -1,5 +1,5 @@
 export interface IRoleBasedAccessControlItem {
-  role: string;
+  role: string; // administrator, viewer
 
   subject: string;
 }
