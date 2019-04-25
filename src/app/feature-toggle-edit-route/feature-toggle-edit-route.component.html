@@ -1,56 +1,68 @@
-<mat-card *ngIf="featureToggle">
-  <mat-list>
-    <mat-list-item> Key: {{ featureToggle.key }} </mat-list-item>
-    <mat-list-item> Name: {{ featureToggle.name }} </mat-list-item>
-    <mat-list-item> Created By: {{ featureToggle.user }} </mat-list-item>
-    <mat-list-item> Created At: {{ featureToggle.createdAt | date }} </mat-list-item>
-    <mat-list-item> Updated At: {{ featureToggle.updatedAt | date }} </mat-list-item>
-  </mat-list>
+<div>
+  <mat-card *ngIf="featureToggle">
+    <mat-card-header>
+      <mat-card-title>{{ featureToggle.name }}</mat-card-title>
+      <mat-card-subtitle>Created By {{ featureToggle.user }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item> Key: {{ featureToggle.key }} </mat-list-item>
+        <mat-list-item> Name: {{ featureToggle.name }} </mat-list-item>
+        <mat-list-item> Created By: {{ featureToggle.user }} </mat-list-item>
+        <mat-list-item> Created At: {{ featureToggle.createdAt | date }} </mat-list-item>
+        <mat-list-item> Updated At: {{ featureToggle.updatedAt | date }} </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 
-  <div>
-    <mat-form-field>
-      <mat-label>Environment</mat-label>
-      <mat-select [(ngModel)]="selectedEnvironmentKey" (selectionChange)="onSelectionChangeEnvironmentKey()">
-        <mat-option *ngFor="let environment of featureToggle.environments" [value]="environment.key">
-          {{ environment.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <mat-list>
-    <mat-list-item>
-      <mat-checkbox [(ngModel)]="selectedEnvironment.enabled" (change)="onChangeFeatureToggle()">Enabled</mat-checkbox>
-    </mat-list-item>
-    <mat-list-item>
-      <mat-checkbox [(ngModel)]="selectedEnvironment.enabledForAll" (change)="onChangeFeatureToggle()">
-        Enabled for All
-      </mat-checkbox>
-    </mat-list-item>
-    <mat-list-item>
-      <mat-checkbox [(ngModel)]="featureToggle.archived" (change)="onChangeFeatureToggle()">Archived</mat-checkbox>
-    </mat-list-item>
-    <mat-list-item *ngIf="!selectedEnvironment.enabledForAll">
+  <mat-card *ngIf="featureToggle">
+    <div>
       <mat-form-field>
-        <mat-chip-list #chipList>
-          <mat-chip
-            *ngFor="let consumer of selectedEnvironment.consumers"
-            [selectable]="false"
-            [removable]="true"
-            (removed)="onClickRemoveConsumer(consumer)"
-          >
-            {{ consumer }}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-          <input
-            placeholder="Consumers"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="true"
-            (matChipInputTokenEnd)="onClickAddConsumer($event)"
-          />
-        </mat-chip-list>
+        <mat-label>Environment</mat-label>
+        <mat-select [(ngModel)]="selectedEnvironmentKey" (selectionChange)="onSelectionChangeEnvironmentKey()">
+          <mat-option *ngFor="let environment of featureToggle.environments" [value]="environment.key">
+            {{ environment.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-    </mat-list-item>
-  </mat-list>
-</mat-card>
+    </div>
+
+    <mat-list>
+      <mat-list-item>
+        <mat-checkbox [(ngModel)]="selectedEnvironment.enabled" (change)="onChangeFeatureToggle()"
+          >Enabled</mat-checkbox
+        >
+      </mat-list-item>
+      <mat-list-item>
+        <mat-checkbox [(ngModel)]="selectedEnvironment.enabledForAll" (change)="onChangeFeatureToggle()">
+          Enabled for All
+        </mat-checkbox>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-checkbox [(ngModel)]="featureToggle.archived" (change)="onChangeFeatureToggle()">Archived</mat-checkbox>
+      </mat-list-item>
+      <ng-container *ngIf="!selectedEnvironment.enabledForAll">
+        <mat-form-field>
+          <mat-chip-list #chipList>
+            <mat-chip
+              *ngFor="let consumer of selectedEnvironment.consumers"
+              [selectable]="false"
+              [removable]="true"
+              (removed)="onClickRemoveConsumer(consumer)"
+            >
+              {{ consumer }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Consumers"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true"
+              (matChipInputTokenEnd)="onClickAddConsumer($event)"
+            />
+          </mat-chip-list>
+        </mat-form-field>
+      </ng-container>
+    </mat-list>
+  </mat-card>
+</div>
