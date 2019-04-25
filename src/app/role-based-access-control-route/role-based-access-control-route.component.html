@@ -1,5 +1,11 @@
 <div>
-  <table [dataSource]="featureToggle.roleBasedAccessControlItems" mat-table class="mat-elevation-z8">
+  <mat-progress-bar *ngIf="!featureToggle" mode="indeterminate"></mat-progress-bar>
+  <table
+    *ngIf="featureToggle"
+    [dataSource]="featureToggle.roleBasedAccessControlItems"
+    mat-table
+    class="mat-elevation-z8"
+  >
     <ng-container matColumnDef="subject">
       <th mat-header-cell *matHeaderCellDef>Subject</th>
       <td mat-cell *matCellDef="let element">{{ element.subject }}</td>

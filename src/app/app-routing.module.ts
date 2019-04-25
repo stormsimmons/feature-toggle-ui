@@ -6,6 +6,7 @@ import { OpenIDGuard } from './open-id.guard';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
+import { RoleBasedAccessControlRouteComponent } from './role-based-access-control-route/role-based-access-control-route.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,11 @@ const routes: Routes = [
     canActivate: [OpenIDGuard],
     component: FeatureToggleEditRouteComponent,
     path: 'feature-toggle/:key',
+  },
+  {
+    canActivate: [OpenIDGuard],
+    component: RoleBasedAccessControlRouteComponent,
+    path: 'feature-toggle/:key/role-based-access-control',
   },
 ];
 
