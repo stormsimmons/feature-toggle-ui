@@ -1,11 +1,17 @@
 div {
-  padding: 0px 20px;
-}
+  div {
+    padding: 0px 20px;
+  }
 
-mat-form-field {
-  width: 100%;
-}
+  mat-card {
+    margin: 10px 0px;
+  }
 
-mat-icon {
-  cursor: pointer;
+  mat-form-field {
+    width: 100%;
+  }
+
+  mat-icon {
+    cursor: pointer;
+  }
 }
