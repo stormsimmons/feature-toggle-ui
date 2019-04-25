@@ -8,9 +8,8 @@ describe('RoleBasedAccessControlRouteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoleBasedAccessControlRouteComponent ]
-    })
-    .compileComponents();
+      declarations: [RoleBasedAccessControlRouteComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

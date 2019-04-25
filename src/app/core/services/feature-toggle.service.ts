@@ -49,17 +49,20 @@ export class FeatureToggleService {
             }),
           }),
         ),
-      ).pipe(map((x) => {
-        return {
-          ...x,
-          roleBasedAccessControlItems: [
-            {
-              role: 'view',
-              subject: 'someone@example.com',
-            }
-          ],
-        } as IFeatureToggle;
-      }))
+      )
+      .pipe(
+        map((x) => {
+          return {
+            ...x,
+            roleBasedAccessControlItems: [
+              {
+                role: 'view',
+                subject: 'someone@example.com',
+              },
+            ],
+          } as IFeatureToggle;
+        }),
+      )
       .pipe(
         catchError((error: Error) => {
           if (error instanceof HttpErrorResponse && error.status === 401) {
