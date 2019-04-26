@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IFeatureToggle, FeatureToggleService } from '../core';
+import { IFeatureToggle, FeatureToggleService, OpenIDService } from '../core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { RoleBasedAccessControlCreateComponent } from '../role-based-access-control-create/role-based-access-control-create.component';
+import { tap, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-role-based-access-control-route',
@@ -14,22 +15,31 @@ export class RoleBasedAccessControlRouteComponent implements OnInit {
 
   public featureToggle: IFeatureToggle = null;
 
+  public user: any = null;
+
   constructor(
     protected activatedRoute: ActivatedRoute,
     protected dialog: MatDialog,
     protected featureToggleService: FeatureToggleService,
+    protected openIDService: OpenIDService,
   ) {}
 
   public ngOnInit(): void {
     const key: string = this.activatedRoute.snapshot.params.key;
 
-    this.featureToggleService.find(key).subscribe((featureToggle: IFeatureToggle) => {
-      this.featureToggle = featureToggle;
-    });
+    this.openIDService
+      .getUser()
+      .pipe(tap((user) => (this.user = user)))
+      .pipe(mergeMap(() => this.featureToggleService.find(key)))
+      .subscribe((featureToggle: IFeatureToggle) => {
+        this.featureToggle = featureToggle;
+      });
   }
 
   public onClickFabAdd(): void {
-    const dialogRef = this.dialog.open(RoleBasedAccessControlCreateComponent, {});
+    const dialogRef = this.dialog.open(RoleBasedAccessControlCreateComponent, {
+      data: this.featureToggle,
+    });
 
     dialogRef.afterClosed().subscribe(() => {
       this.featureToggle = null;

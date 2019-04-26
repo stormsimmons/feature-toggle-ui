@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { IFeatureToggle, FeatureToggleService } from '../core';
 
 @Component({
   selector: 'app-role-based-access-control-create',
@@ -23,7 +24,11 @@ export class RoleBasedAccessControlCreateComponent implements OnInit {
 
   public subject = new FormControl('', [Validators.required]);
 
-  constructor(protected dialogRef: MatDialogRef<RoleBasedAccessControlCreateComponent>) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) protected featureToggle: IFeatureToggle,
+    protected dialogRef: MatDialogRef<RoleBasedAccessControlCreateComponent>,
+    protected featureToggleService: FeatureToggleService,
+  ) {}
 
   public ngOnInit(): void {}
 
@@ -43,5 +48,14 @@ export class RoleBasedAccessControlCreateComponent implements OnInit {
     if (!this.subject.valid || !this.roleKey) {
       return;
     }
+
+    this.featureToggle.roleBasedAccessControlItems.push({
+      role: this.roleKey,
+      subject: this.subject.value,
+    });
+
+    this.featureToggleService.update(this.featureToggle).subscribe(() => {
+      this.dialogRef.close();
+    });
   }
 }

@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { IFeatureToggle, IEnvironment, FeatureToggleService, OpenIDService } from '../core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
 import { tap, mergeMap } from 'rxjs/operators';
+import { BaseComponent } from '../components';
 
 @Component({
   selector: 'app-feature-toggle-edit-route',
   templateUrl: './feature-toggle-edit-route.component.html',
   styleUrls: ['./feature-toggle-edit-route.component.scss'],
 })
-export class FeatureToggleEditRouteComponent implements OnInit {
+export class FeatureToggleEditRouteComponent extends BaseComponent implements OnInit {
   public featureToggle: IFeatureToggle = null;
 
   public selectedEnvironment: IEnvironment = null;
@@ -25,7 +26,10 @@ export class FeatureToggleEditRouteComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected featureToggleService: FeatureToggleService,
     protected openIDService: OpenIDService,
-  ) {}
+    protected router: Router,
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
     const key: string = this.activatedRoute.snapshot.params.key;
@@ -41,22 +45,6 @@ export class FeatureToggleEditRouteComponent implements OnInit {
 
         this.onSelectionChangeEnvironmentKey();
       });
-  }
-
-  public authorized(roles: Array<string>): boolean {
-    if (this.featureToggle.user === this.user.profile.email) {
-      return true;
-    }
-
-    if (
-      this.featureToggle.roleBasedAccessControlItems.find(
-        (x) => x.subject === this.user.profile.email && roles.includes(x.role),
-      )
-    ) {
-      return true;
-    }
-
-    return false;
   }
 
   public onChangeFeatureToggle(): void {
@@ -88,6 +76,10 @@ export class FeatureToggleEditRouteComponent implements OnInit {
     this.selectedEnvironment.consumers.splice(index, 1);
 
     this.featureToggleService.update(this.featureToggle).subscribe();
+  }
+
+  public onClickRoleBasedAccessControl(): void {
+    this.router.navigateByUrl(`/feature-toggle/${this.featureToggle.key}/role-based-access-control`);
   }
 
   public onSelectionChangeEnvironmentKey(): void {

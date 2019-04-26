@@ -1,5 +1,6 @@
 <div>
   <mat-progress-bar *ngIf="!featureToggles" mode="indeterminate"></mat-progress-bar>
+
   <table
     *ngIf="featureToggles && featureToggles.length"
     [dataSource]="featureToggles"
@@ -34,7 +35,7 @@
       </th>
       <td mat-cell *matCellDef="let element">
         <button
-          *ngIf="authorized(element, ['administrator', 'viewer'])"
+          *ngIf="authorized(user, element, ['administrator', 'viewer'])"
           (click)="onClickView(element)"
           mat-button
           color="primary"
@@ -42,7 +43,7 @@
           View
         </button>
         <button
-          *ngIf="authorized(element, ['administrator', 'viewer']) && !element.archived"
+          *ngIf="authorized(user, element, ['administrator']) && !element.archived"
           (click)="onClickArchive(element)"
           mat-button
           color="accent"

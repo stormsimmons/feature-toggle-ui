@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { FeatureToggleCreateComponent } from '../feature-toggle-create/feature-toggle-create.component';
 import { mergeMap, tap } from 'rxjs/operators';
+import { BaseComponent } from '../components';
 
 @Component({
   selector: 'app-feature-toggles-route',
   templateUrl: './feature-toggles-route.component.html',
   styleUrls: ['./feature-toggles-route.component.scss'],
 })
-export class FeatureTogglesRouteComponent implements OnInit {
+export class FeatureTogglesRouteComponent extends BaseComponent implements OnInit {
   public displayedColumns: Array<string> = ['name', 'status', 'actions'];
 
   public featureToggles: Array<IFeatureToggle> = null;
@@ -24,7 +25,9 @@ export class FeatureTogglesRouteComponent implements OnInit {
     protected featureToggleService: FeatureToggleService,
     protected openIDService: OpenIDService,
     protected router: Router,
-  ) {}
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
     this.openIDService
@@ -34,22 +37,6 @@ export class FeatureTogglesRouteComponent implements OnInit {
       .subscribe((featureToggles: Array<IFeatureToggle>) => {
         this.featureToggles = featureToggles;
       });
-  }
-
-  public authorized(featureToggle: IFeatureToggle, roles: Array<string>): boolean {
-    if (featureToggle.user === this.user.profile.email) {
-      return true;
-    }
-
-    if (
-      featureToggle.roleBasedAccessControlItems.find(
-        (x) => x.subject === this.user.profile.email && roles.includes(x.role),
-      )
-    ) {
-      return true;
-    }
-
-    return false;
   }
 
   public onChangeFeatureToggle(featureToggle: IFeatureToggle): void {

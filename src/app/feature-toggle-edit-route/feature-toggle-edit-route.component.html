@@ -1,4 +1,6 @@
 <div>
+  <mat-progress-bar *ngIf="!featureToggle" mode="indeterminate"></mat-progress-bar>
+
   <mat-card *ngIf="featureToggle">
     <mat-card-header>
       <mat-card-title>{{ featureToggle.name }}</mat-card-title>
@@ -11,6 +13,11 @@
         <mat-list-item> Created By: {{ featureToggle.user }} </mat-list-item>
         <mat-list-item> Created At: {{ featureToggle.createdAt | date }} </mat-list-item>
         <mat-list-item> Updated At: {{ featureToggle.updatedAt | date }} </mat-list-item>
+        <mat-list-item>
+          <button *ngIf="authorized(user, featureToggle, ['administrator'])" (click)="onClickRoleBasedAccessControl()" mat-button color="warn">
+            Role-Based Access Control
+          </button>
+        </mat-list-item>
       </mat-list>
     </mat-card-content>
   </mat-card>
@@ -29,17 +36,29 @@
 
     <mat-list>
       <mat-list-item>
-        <mat-checkbox [(ngModel)]="selectedEnvironment.enabled" (change)="onChangeFeatureToggle()"
+        <mat-checkbox
+          [(ngModel)]="selectedEnvironment.enabled"
+          [disabled]="!authorized(user, featureToggle, ['administrator'])"
+          (change)="onChangeFeatureToggle()"
           >Enabled</mat-checkbox
         >
       </mat-list-item>
       <mat-list-item>
-        <mat-checkbox [(ngModel)]="selectedEnvironment.enabledForAll" (change)="onChangeFeatureToggle()">
+        <mat-checkbox
+          [(ngModel)]="selectedEnvironment.enabledForAll"
+          [disabled]="!authorized(user, featureToggle, ['administrator'])"
+          (change)="onChangeFeatureToggle()"
+        >
           Enabled for All
         </mat-checkbox>
       </mat-list-item>
       <mat-list-item>
-        <mat-checkbox [(ngModel)]="featureToggle.archived" (change)="onChangeFeatureToggle()">Archived</mat-checkbox>
+        <mat-checkbox
+          [(ngModel)]="featureToggle.archived"
+          [disabled]="!authorized(user, featureToggle, ['administrator'])"
+          (change)="onChangeFeatureToggle()"
+          >Archived</mat-checkbox
+        >
       </mat-list-item>
       <mat-list-item *ngIf="!selectedEnvironment.enabledForAll">
         <mat-form-field>
@@ -47,14 +66,15 @@
             <mat-chip
               *ngFor="let consumer of selectedEnvironment.consumers"
               [selectable]="false"
-              [removable]="true"
+              [removable]="authorized(user, featureToggle, ['administrator'])"
               (removed)="onClickRemoveConsumer(consumer)"
             >
               {{ consumer }}
-              <mat-icon matChipRemove>cancel</mat-icon>
+              <mat-icon *ngIf="authorized(user, featureToggle, ['administrator'])" matChipRemove>cancel</mat-icon>
             </mat-chip>
             <input
               placeholder="Consumers"
+              [disabled]="!authorized(user, featureToggle, ['administrator'])"
               [matChipInputFor]="chipList"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               [matChipInputAddOnBlur]="true"
