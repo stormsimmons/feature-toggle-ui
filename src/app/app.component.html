@@ -1,6 +1,4 @@
-<mat-toolbar color="primary">
-  <mat-icon (click)="sidenav.toggle()" matListIcon>menu</mat-icon> Feature Toggle UI
-</mat-toolbar>
+<app-toolbar [sidenav]="sidenav"></app-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened>

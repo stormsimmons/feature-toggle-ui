@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
-import { FeatureToggleService } from '../core';
+import { FeatureToggleService } from '@app/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormControl, Validators } from '@angular/forms';
 

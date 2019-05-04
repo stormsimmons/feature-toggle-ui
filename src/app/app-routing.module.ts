@@ -14,6 +14,11 @@ const routes: Routes = [
     path: 'audits',
   },
   {
+    canActivate: [OpenIDGuard],
+    component: AuditsRouteComponent,
+    path: 'audits/:user',
+  },
+  {
     component: CallbackRouteComponent,
     path: 'callback',
   },

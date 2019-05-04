@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { OpenIDService } from './core';
+import { OpenIDService } from '@app/core';
 
 @Injectable({
   providedIn: 'root',

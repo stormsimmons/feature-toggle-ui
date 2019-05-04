@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { OpenIDService } from './core';
+import { OpenIDService } from '@app/core';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,9 @@ import { OpenIDService } from './core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild('sidenav')
+  public sidenav: MatSidenav = null;
+
   public user: any = null;
 
   constructor(protected openIDService: OpenIDService, protected router: Router) {

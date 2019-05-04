@@ -1,20 +1,13 @@
-mat-toolbar {
-  mat-icon {
-    cursor: pointer;
-    margin-right: 10px;
-  }
-}
-
 mat-sidenav-container {
-  min-height: calc(100% - 64px);
+  min-height: calc(100% - 3.2em);
 
   mat-sidenav {
-    width: 300px;
+    width: 15em;
   }
 
   mat-sidenav-content {
     div {
-      padding: 20px;
+      padding: 1em;
     }
   }
 }

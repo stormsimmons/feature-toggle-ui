@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IFeatureToggle, IEnvironment, FeatureToggleService } from '../core';
+import { IFeatureToggle, IEnvironment, FeatureToggleService } from '@app/core';
 import { ActivatedRoute } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
@@ -37,8 +37,8 @@ export class FeatureToggleEditRouteComponent implements OnInit {
   }
 
   public onClickAddConsumer(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+    const input: HTMLInputElement = event.input;
+    const value: string = event.value;
 
     if ((value || '').trim()) {
       this.selectedEnvironment.consumers.push(value.trim());
@@ -64,6 +64,8 @@ export class FeatureToggleEditRouteComponent implements OnInit {
   }
 
   public onSelectionChangeEnvironmentKey(): void {
-    this.selectedEnvironment = this.featureToggle.environments.find((x) => x.key === this.selectedEnvironmentKey);
+    this.selectedEnvironment = this.featureToggle.environments.find(
+      (x: IEnvironment) => x.key === this.selectedEnvironmentKey,
+    );
   }
 }

@@ -1,19 +1,5 @@
 <div>
-  <mat-card *ngIf="featureToggle">
-    <mat-card-header>
-      <mat-card-title>{{ featureToggle.name }}</mat-card-title>
-      <mat-card-subtitle>Created By {{ featureToggle.user }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item> Key: {{ featureToggle.key }} </mat-list-item>
-        <mat-list-item> Name: {{ featureToggle.name }} </mat-list-item>
-        <mat-list-item> Created By: {{ featureToggle.user }} </mat-list-item>
-        <mat-list-item> Created At: {{ featureToggle.createdAt | date }} </mat-list-item>
-        <mat-list-item> Updated At: {{ featureToggle.updatedAt | date }} </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+  <app-feature-toggle-details [featureToggle]="featureToggle"></app-feature-toggle-details>
 
   <mat-card *ngIf="featureToggle">
     <div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { IFeatureToggle } from '../models';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from '@environments/environment';
 import { OpenIDService } from './open-id.service';
 import { mergeMap, catchError } from 'rxjs/operators';
 

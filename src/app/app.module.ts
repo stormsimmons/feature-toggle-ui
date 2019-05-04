@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
-  MatToolbarModule,
   MatTableModule,
   MatListModule,
   MatCheckboxModule,
@@ -26,10 +25,12 @@ import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/fea
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-toggle-create.component';
 import { HttpClientModule } from '@angular/common/http';
-import { OpenIDService, CustomOpenIDService } from './core';
+import { OpenIDService, CustomOpenIDService } from '@app/core';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
+
+import { AuditModule, FeatureToggleModule, ToolbarModule } from './features';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import { DocumentationRouteComponent } from './documentation-route/documentation
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatToolbarModule,
     MatTableModule,
     MatListModule,
     MatCheckboxModule,
@@ -62,6 +62,10 @@ import { DocumentationRouteComponent } from './documentation-route/documentation
     MatDialogModule,
     MatProgressBarModule,
     MatSnackBarModule,
+
+    AuditModule,
+    FeatureToggleModule,
+    ToolbarModule,
   ],
   providers: [
     {

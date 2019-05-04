@@ -12,14 +12,14 @@ div {
       }
 
       mat-chip-list {
-        margin: 10px;
+        margin: 0.5em;
       }
     }
   }
 
   button[mat-fab] {
-    bottom: 50px;
+    bottom: 2.5em;
     position: fixed;
-    right: 50px;
+    right: 2.5em;
   }
 }
