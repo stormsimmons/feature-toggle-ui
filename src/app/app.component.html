@@ -3,7 +3,7 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <mat-list-item *ngIf="user" (click)="onClickHome()">
+      <mat-list-item *ngIf="user" (click)="onClickProfile()">
         <mat-icon matListIcon>face</mat-icon>
         {{ user.profile.name }}
       </mat-list-item>

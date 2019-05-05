@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuditService, IAudit } from '@app/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-audits-route',
@@ -9,12 +11,22 @@ import { AuditService, IAudit } from '@app/core';
 export class AuditsRouteComponent implements OnInit {
   public audits: Array<IAudit> = null;
 
-  constructor(protected auditService: AuditService) {}
+  public userParam: string = null;
+
+  constructor(protected activatedRoute: ActivatedRoute, protected auditService: AuditService) {}
 
   public ngOnInit(): void {
-    // TODO: Implement user filter
+    this.userParam = this.activatedRoute.snapshot.params.user;
 
-    this.auditService.findAll().subscribe((audits: Array<IAudit>) => {
+    let observable: Observable<Array<IAudit>> = null;
+
+    if (this.userParam) {
+      observable = this.auditService.findAll(this.userParam);
+    } else {
+      observable = this.auditService.findAll();
+    }
+
+    observable.subscribe((audits: Array<IAudit>) => {
       this.audits = audits;
     });
   }

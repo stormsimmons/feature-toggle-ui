@@ -1,4 +1,12 @@
 <div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Audits</mat-card-title>
+      <mat-card-subtitle *ngIf="userParam">Filtered by {{ userParam }}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
   <mat-progress-bar *ngIf="!audits" mode="indeterminate"></mat-progress-bar>
+
   <app-audit-list [audits]="audits"></app-audit-list>
 </div>

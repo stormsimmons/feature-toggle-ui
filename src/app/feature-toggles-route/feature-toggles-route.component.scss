@@ -1,20 +1,6 @@
 div {
-  table {
-    width: 100%;
-
-    tr {
-      &:nth-child(even) {
-        background: #eceff1;
-      }
-
-      &:nth-child(odd) {
-        background: #fff;
-      }
-
-      mat-chip-list {
-        margin: 0.5em;
-      }
-    }
+  mat-card {
+    margin: 1em 0px;
   }
 
   button[mat-fab] {

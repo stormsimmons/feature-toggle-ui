@@ -1,10 +1,10 @@
 <mat-card *ngIf="featureToggle">
   <mat-card-header>
     <mat-card-title>{{ featureToggle.name }}</mat-card-title>
-    <mat-card-subtitle
-      >Created By <a [routerLink]="['/audits', featureToggle.user]">{{ featureToggle.user }}</a> at
-      {{ featureToggle.createdAt | date }}</mat-card-subtitle
-    >
+    <mat-card-subtitle>
+      Created By <a [routerLink]="['/audits', featureToggle.user]">{{ featureToggle.user }}</a> at
+      {{ featureToggle.createdAt | date }}
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <mat-list>

@@ -15,17 +15,19 @@
 
     <mat-list>
       <mat-list-item>
-        <mat-checkbox [(ngModel)]="selectedEnvironment.enabled" (change)="onChangeFeatureToggle()"
-          >Enabled</mat-checkbox
-        >
+        <mat-slide-toggle [(ngModel)]="selectedEnvironment.enabled" (change)="onChangeFeatureToggle()">
+          Enabled
+        </mat-slide-toggle>
       </mat-list-item>
       <mat-list-item>
-        <mat-checkbox [(ngModel)]="selectedEnvironment.enabledForAll" (change)="onChangeFeatureToggle()">
+        <mat-slide-toggle [(ngModel)]="selectedEnvironment.enabledForAll" (change)="onChangeFeatureToggle()">
           Enabled for All
-        </mat-checkbox>
+        </mat-slide-toggle>
       </mat-list-item>
       <mat-list-item>
-        <mat-checkbox [(ngModel)]="featureToggle.archived" (change)="onChangeFeatureToggle()">Archived</mat-checkbox>
+        <mat-slide-toggle [(ngModel)]="featureToggle.archived" (change)="onChangeFeatureToggle()">
+          Archived
+        </mat-slide-toggle>
       </mat-list-item>
       <mat-list-item *ngIf="!selectedEnvironment.enabledForAll">
         <mat-form-field>
@@ -40,11 +42,11 @@
               <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>
             <input
-              placeholder="Consumers"
               [matChipInputFor]="chipList"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               [matChipInputAddOnBlur]="true"
               (matChipInputTokenEnd)="onClickAddConsumer($event)"
+              placeholder="Consumers"
             />
           </mat-chip-list>
         </mat-form-field>

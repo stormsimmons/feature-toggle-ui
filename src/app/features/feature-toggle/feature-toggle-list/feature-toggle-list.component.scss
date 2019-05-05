@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+
+  tr {
+    &:nth-child(even) {
+      background: #eceff1;
+    }
+
+    &:nth-child(odd) {
+      background: #fff;
+    }
+
+    mat-chip-list {
+      margin: 0.5em;
+    }
+  }
+}

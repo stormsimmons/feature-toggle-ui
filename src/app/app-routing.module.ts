@@ -6,8 +6,14 @@ import { OpenIDGuard } from './open-id.guard';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
+import { ProfileRouteComponent } from './profile-route/profile-route.component';
 
 const routes: Routes = [
+  {
+    canActivate: [OpenIDGuard],
+    component: FeatureTogglesRouteComponent,
+    path: '',
+  },
   {
     canActivate: [OpenIDGuard],
     component: AuditsRouteComponent,
@@ -28,13 +34,13 @@ const routes: Routes = [
   },
   {
     canActivate: [OpenIDGuard],
-    component: FeatureTogglesRouteComponent,
-    path: '',
+    component: FeatureToggleEditRouteComponent,
+    path: 'feature-toggle/:key',
   },
   {
     canActivate: [OpenIDGuard],
-    component: FeatureToggleEditRouteComponent,
-    path: 'feature-toggle/:key',
+    component: ProfileRouteComponent,
+    path: 'profile',
   },
 ];
 

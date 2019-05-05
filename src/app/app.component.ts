@@ -30,6 +30,10 @@ export class AppComponent {
     this.router.navigateByUrl('');
   }
 
+  public onClickProfile(): void {
+    this.router.navigateByUrl('/profile');
+  }
+
   public onClickSignOut(): void {
     this.openIDService.signOut().subscribe();
   }

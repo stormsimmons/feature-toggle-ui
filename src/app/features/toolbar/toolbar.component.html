@@ -3,9 +3,9 @@
 
   <span class="spacer"></span>
 
-  <!-- <mat-icon [matMenuTriggerFor]="menu" matListIcon>person</mat-icon>
+  <mat-icon [matMenuTriggerFor]="menu" matListIcon>person</mat-icon>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>Profile</button>
-    <button mat-menu-item>Sign Out</button>
-  </mat-menu> -->
+    <button (click)="onClickProfile()" mat-menu-item>Profile</button>
+    <button (click)="onClickSignOut()" mat-menu-item>Sign Out</button>
+  </mat-menu>
 </mat-toolbar>

@@ -19,6 +19,8 @@ import {
   MatDialogModule,
   MatProgressBarModule,
   MatSnackBarModule,
+  MatSlideToggleModule,
+  MatExpansionModule,
 } from '@angular/material';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
@@ -31,6 +33,7 @@ import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
 
 import { AuditModule, FeatureToggleModule, ToolbarModule } from './features';
+import { ProfileRouteComponent } from './profile-route/profile-route.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,7 @@ import { AuditModule, FeatureToggleModule, ToolbarModule } from './features';
     CallbackRouteComponent,
     AuditsRouteComponent,
     DocumentationRouteComponent,
+    ProfileRouteComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +66,8 @@ import { AuditModule, FeatureToggleModule, ToolbarModule } from './features';
     MatDialogModule,
     MatProgressBarModule,
     MatSnackBarModule,
+    MatSlideToggleModule,
+    MatExpansionModule,
 
     AuditModule,
     FeatureToggleModule,

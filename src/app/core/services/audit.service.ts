@@ -12,16 +12,19 @@ import { mergeMap, catchError } from 'rxjs/operators';
 export class AuditService {
   constructor(protected httpClient: HttpClient, protected openIDService: OpenIDService) {}
 
-  public findAll(): Observable<Array<IAudit>> {
+  public findAll(userParam: string = null): Observable<Array<IAudit>> {
     return this.openIDService
       .getUser()
       .pipe(
         mergeMap((user) =>
-          this.httpClient.get<Array<IAudit>>(`${environment.uri}/api/audit`, {
-            headers: new HttpHeaders({
-              authorization: `Bearer ${user.id_token}`,
-            }),
-          }),
+          this.httpClient.get<Array<IAudit>>(
+            userParam ? `${environment.uri}/api/audit?user=${userParam}` : `${environment.uri}/api/audit`,
+            {
+              headers: new HttpHeaders({
+                authorization: `Bearer ${user.id_token}`,
+              }),
+            },
+          ),
         ),
       )
       .pipe(
