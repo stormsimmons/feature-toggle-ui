@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  uri: 'http://localhost:8080',
+  uri: 'http://localhost:8080/api/default-tenant-id',
   openIdConfiguration: {
     authority: 'https://demo.identityserver.io',
     client_id: 'implicit',

@@ -18,7 +18,7 @@ export class AuditService {
       .pipe(
         mergeMap((user) =>
           this.httpClient.get<Array<IAudit>>(
-            userParam ? `${environment.uri}/api/audit?user=${userParam}` : `${environment.uri}/api/audit`,
+            userParam ? `${environment.uri}/audit?user=${userParam}` : `${environment.uri}/audit`,
             {
               headers: new HttpHeaders({
                 authorization: `Bearer ${user.id_token}`,

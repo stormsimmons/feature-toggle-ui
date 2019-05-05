@@ -18,7 +18,7 @@ export class FeatureToggleService {
       .pipe(
         mergeMap((user) =>
           this.httpClient.post<IFeatureToggle>(
-            `${environment.uri}/api/feature-toggle/${featureToggle.key}`,
+            `${environment.uri}/feature-toggle/${featureToggle.key}`,
             featureToggle,
             {
               headers: new HttpHeaders({
@@ -43,7 +43,7 @@ export class FeatureToggleService {
       .getUser()
       .pipe(
         mergeMap((user) =>
-          this.httpClient.get<IFeatureToggle>(`${environment.uri}/api/feature-toggle/${key}`, {
+          this.httpClient.get<IFeatureToggle>(`${environment.uri}/feature-toggle/${key}`, {
             headers: new HttpHeaders({
               authorization: `Bearer ${user.id_token}`,
             }),
@@ -66,7 +66,7 @@ export class FeatureToggleService {
       .pipe(
         mergeMap((user) =>
           this.httpClient.get<Array<IFeatureToggle>>(
-            `${environment.uri}/api/feature-toggle?includeArchived=${includedArchived}`,
+            `${environment.uri}/feature-toggle?includeArchived=${includedArchived}`,
             {
               headers: new HttpHeaders({
                 authorization: `Bearer ${user.id_token}`,
@@ -90,15 +90,11 @@ export class FeatureToggleService {
       .getUser()
       .pipe(
         mergeMap((user) =>
-          this.httpClient.put<IFeatureToggle>(
-            `${environment.uri}/api/feature-toggle/${featureToggle.key}`,
-            featureToggle,
-            {
-              headers: new HttpHeaders({
-                authorization: `Bearer ${user.id_token}`,
-              }),
-            },
-          ),
+          this.httpClient.put<IFeatureToggle>(`${environment.uri}/feature-toggle/${featureToggle.key}`, featureToggle, {
+            headers: new HttpHeaders({
+              authorization: `Bearer ${user.id_token}`,
+            }),
+          }),
         ),
       )
       .pipe(
