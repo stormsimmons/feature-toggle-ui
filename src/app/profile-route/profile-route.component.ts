@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OpenIDService } from '@app/core';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-profile-route',
@@ -13,5 +14,9 @@ export class ProfileRouteComponent implements OnInit {
 
   public ngOnInit() {
     this.openIDService.getUser().subscribe((user: any) => (this.user = user));
+  }
+
+  public hashedEmailAddress(): string {
+    return Md5.hashStr(this.user.profile.email).toString();
   }
 }
