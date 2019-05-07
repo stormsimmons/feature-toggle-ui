@@ -9,4 +9,13 @@ export const environment = {
     signingKeys: undefined,
     post_logout_redirect_uri: window.location.origin,
   },
+  featureToggle: {
+    defaultEnvironments: [
+      ['development', 'Development'],
+      ['quality-assurance', 'Quality Assurance'],
+      ['user-acceptance-testing', 'User Acceptance Testing'],
+      ['staging', 'Staging'],
+      ['production', 'Production'],
+    ],
+  },
 };

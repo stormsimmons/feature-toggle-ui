@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  uri: 'http://localhost:8080/api/default-tenant-id',
+  uri: 'http://localhost:8080/api',
   openIdConfiguration: {
     authority: 'https://demo.identityserver.io',
     client_id: 'implicit',
@@ -12,6 +12,15 @@ export const environment = {
     scope: 'openid profile email',
     signingKeys: undefined,
     post_logout_redirect_uri: window.location.origin,
+  },
+  featureToggle: {
+    defaultEnvironments: [
+      ['development', 'Development'],
+      ['quality-assurance', 'Quality Assurance'],
+      ['user-acceptance-testing', 'User Acceptance Testing'],
+      ['staging', 'Staging'],
+      ['production', 'Production'],
+    ],
   },
 };
 

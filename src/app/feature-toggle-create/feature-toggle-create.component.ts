@@ -3,6 +3,7 @@ import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { FeatureToggleService } from '@app/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormControl, Validators } from '@angular/forms';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-feature-toggle-create',
@@ -49,13 +50,7 @@ export class FeatureToggleCreateComponent implements OnInit {
       .create({
         archived: false,
         createdAt: new Date().getTime(),
-        environments: [
-          ['development', 'Development'],
-          ['quality-assurance', 'Quality Assurance'],
-          ['user-acceptance-testing', 'User Acceptance Testing'],
-          ['staging', 'Staging'],
-          ['production', 'Production'],
-        ].map((x) => {
+        environments: environment.featureToggle.defaultEnvironments.map((x) => {
           return {
             consumers: [],
             enabled: false,
