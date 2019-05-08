@@ -15,6 +15,13 @@
 
     <mat-list>
       <mat-list-item>
+        <b> Key </b>: &nbsp;
+        <b>
+          <u>{{ selectedEnvironment.key }}</u>
+        </b>
+      </mat-list-item>
+      <mat-list-item> <b>Name</b>: {{ selectedEnvironment.name }} </mat-list-item>
+      <mat-list-item>
         <mat-slide-toggle [(ngModel)]="selectedEnvironment.enabled" (change)="onChangeFeatureToggle()">
           Enabled
         </mat-slide-toggle>
@@ -29,27 +36,11 @@
           Archived
         </mat-slide-toggle>
       </mat-list-item>
-      <mat-list-item *ngIf="!selectedEnvironment.enabledForAll">
-        <mat-form-field>
-          <mat-chip-list #chipList>
-            <mat-chip
-              *ngFor="let consumer of selectedEnvironment.consumers"
-              [selectable]="false"
-              [removable]="true"
-              (removed)="onClickRemoveConsumer(consumer)"
-            >
-              {{ consumer }}
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-            <input
-              [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="true"
-              (matChipInputTokenEnd)="onClickAddConsumer($event)"
-              placeholder="Consumers"
-            />
-          </mat-chip-list>
-        </mat-form-field>
+      <mat-list-item *ngIf="!selectedEnvironment.enabledForAll" style="margin: 20px 0px">
+        <app-feature-toggle-edit-consumers
+          [consumers]="selectedEnvironment.consumers"
+          (change)="onChangeFeatureToggleEditConsumers($event)"
+        ></app-feature-toggle-edit-consumers>
       </mat-list-item>
     </mat-list>
   </mat-card>

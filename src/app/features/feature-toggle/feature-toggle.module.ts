@@ -8,24 +8,29 @@ import {
   MatSlideToggleModule,
   MatChipsModule,
   MatButtonModule,
+  MatIconModule,
+  MatInputModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { FeatureToggleListComponent } from './feature-toggle-list';
 import { FormsModule } from '@angular/forms';
+import { FeatureToggleEditConsumersComponent } from './feature-toggle-edit-consumers';
 
 @NgModule({
-  declarations: [FeatureToggleDetailsComponent, FeatureToggleListComponent],
+  declarations: [FeatureToggleDetailsComponent, FeatureToggleListComponent, FeatureToggleEditConsumersComponent],
   imports: [
     CommonModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatIconModule,
+    MatInputModule,
     MatListModule,
     MatSlideToggleModule,
     MatTableModule,
     RouterModule,
   ],
-  exports: [FeatureToggleDetailsComponent, FeatureToggleListComponent],
+  exports: [FeatureToggleDetailsComponent, FeatureToggleEditConsumersComponent, FeatureToggleListComponent],
 })
 export class FeatureToggleModule {}

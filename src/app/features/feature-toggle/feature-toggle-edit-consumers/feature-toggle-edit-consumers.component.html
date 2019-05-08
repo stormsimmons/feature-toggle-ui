@@ -1,0 +1,20 @@
+<mat-form-field>
+  <mat-chip-list #chipList>
+    <mat-chip
+      *ngFor="let consumer of consumers"
+      [selectable]="false"
+      [removable]="true"
+      (removed)="onClickRemoveConsumer(consumer)"
+    >
+      {{ consumer }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="true"
+      (matChipInputTokenEnd)="onClickAddConsumer($event)"
+      placeholder="Consumers"
+    />
+  </mat-chip-list>
+</mat-form-field>

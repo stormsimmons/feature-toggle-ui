@@ -19,7 +19,7 @@ export class FeatureTogglesRouteComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.featureToggleService.findAll(true).subscribe((featureToggles: Array<IFeatureToggle>) => {
+    this.featureToggleService.findAll(false).subscribe((featureToggles: Array<IFeatureToggle>) => {
       this.featureToggles = featureToggles;
     });
   }
