@@ -1,109 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IFeatureToggle } from '../models';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '@environments/environment';
-import { OpenIDService } from './open-id.service';
-import { mergeMap, catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FeatureToggleService {
-  constructor(protected httpClient: HttpClient, protected openIDService: OpenIDService) {}
+  constructor(protected httpClient: HttpClient) {}
 
   public create(featureToggle: IFeatureToggle): Observable<IFeatureToggle> {
-    return this.openIDService
-      .getUser()
-      .pipe(
-        mergeMap((user) =>
-          this.httpClient.post<IFeatureToggle>(
-            `${environment.uri}/feature-toggle/${featureToggle.key}`,
-            featureToggle,
-            {
-              headers: new HttpHeaders({
-                authorization: `Bearer ${user.id_token}`,
-              }),
-            },
-          ),
-        ),
-      )
-      .pipe(
-        catchError((error: Error) => {
-          if (error instanceof HttpErrorResponse && error.status === 401) {
-            this.openIDService.signIn(true).subscribe();
-          }
-          return throwError(error);
-        }),
-      );
+    return this.httpClient.post<IFeatureToggle>(`/feature-toggle/${featureToggle.key}`, featureToggle);
   }
 
   public find(key: string): Observable<IFeatureToggle> {
-    return this.openIDService
-      .getUser()
-      .pipe(
-        mergeMap((user) =>
-          this.httpClient.get<IFeatureToggle>(`${environment.uri}/feature-toggle/${key}`, {
-            headers: new HttpHeaders({
-              authorization: `Bearer ${user.id_token}`,
-            }),
-          }),
-        ),
-      )
-      .pipe(
-        catchError((error: Error) => {
-          if (error instanceof HttpErrorResponse && error.status === 401) {
-            this.openIDService.signIn(true).subscribe();
-          }
-          return throwError(error);
-        }),
-      );
+    return this.httpClient.get<IFeatureToggle>(`/feature-toggle/${key}`);
   }
 
   public findAll(includedArchived: boolean = false): Observable<Array<IFeatureToggle>> {
-    return this.openIDService
-      .getUser()
-      .pipe(
-        mergeMap((user) =>
-          this.httpClient.get<Array<IFeatureToggle>>(
-            `${environment.uri}/feature-toggle?includeArchived=${includedArchived}`,
-            {
-              headers: new HttpHeaders({
-                authorization: `Bearer ${user.id_token}`,
-              }),
-            },
-          ),
-        ),
-      )
-      .pipe(
-        catchError((error: Error) => {
-          if (error instanceof HttpErrorResponse && error.status === 401) {
-            this.openIDService.signIn(true).subscribe();
-          }
-          return throwError(error);
-        }),
-      );
+    return this.httpClient.get<Array<IFeatureToggle>>(`/feature-toggle?includeArchived=${includedArchived}`);
   }
 
   public update(featureToggle: IFeatureToggle): Observable<IFeatureToggle> {
-    return this.openIDService
-      .getUser()
-      .pipe(
-        mergeMap((user) =>
-          this.httpClient.put<IFeatureToggle>(`${environment.uri}/feature-toggle/${featureToggle.key}`, featureToggle, {
-            headers: new HttpHeaders({
-              authorization: `Bearer ${user.id_token}`,
-            }),
-          }),
-        ),
-      )
-      .pipe(
-        catchError((error: Error) => {
-          if (error instanceof HttpErrorResponse && error.status === 401) {
-            this.openIDService.signIn(true).subscribe();
-          }
-          return throwError(error);
-        }),
-      );
+    return this.httpClient.put<IFeatureToggle>(`/feature-toggle/${featureToggle.key}`, featureToggle);
   }
 }

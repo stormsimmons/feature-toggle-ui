@@ -26,8 +26,8 @@ import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-to
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-toggle-create.component';
-import { HttpClientModule } from '@angular/common/http';
-import { OpenIDService, CustomOpenIDService } from '@app/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { OpenIDService, CustomOpenIDService, CustomHttpInterceptor } from '@app/core';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
@@ -77,6 +77,11 @@ import { ProfileRouteComponent } from './profile-route/profile-route.component';
     {
       provide: OpenIDService,
       useClass: CustomOpenIDService,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],

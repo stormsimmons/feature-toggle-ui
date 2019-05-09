@@ -1,39 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IAudit } from '../models';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '@environments/environment';
-import { OpenIDService } from './open-id.service';
-import { mergeMap, catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuditService {
-  constructor(protected httpClient: HttpClient, protected openIDService: OpenIDService) {}
+  constructor(protected httpClient: HttpClient) {}
 
   public findAll(userParam: string = null): Observable<Array<IAudit>> {
-    return this.openIDService
-      .getUser()
-      .pipe(
-        mergeMap((user) =>
-          this.httpClient.get<Array<IAudit>>(
-            userParam ? `${environment.uri}/audit?user=${userParam}` : `${environment.uri}/audit`,
-            {
-              headers: new HttpHeaders({
-                authorization: `Bearer ${user.id_token}`,
-              }),
-            },
-          ),
-        ),
-      )
-      .pipe(
-        catchError((error: Error) => {
-          if (error instanceof HttpErrorResponse && error.status === 401) {
-            this.openIDService.signIn(true).subscribe();
-          }
-          return throwError(error);
-        }),
-      );
+    return this.httpClient.get<Array<IAudit>>(userParam ? `/audit?user=${userParam}` : `/audit`);
   }
 }
