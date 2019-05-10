@@ -6,6 +6,11 @@
   <mat-icon [matMenuTriggerFor]="menu" matListIcon>person</mat-icon>
   <mat-menu #menu="matMenu">
     <button (click)="onClickProfile()" mat-menu-item>Profile</button>
+    <mat-divider></mat-divider>
+    <button *ngFor="let tenant of tenants" (click)="onClickTenant(tenant)" mat-menu-item>{{ tenant.name }}</button>
+    <mat-divider></mat-divider>
+    <button (click)="onClickManageTenants()" mat-menu-item>Manage Tenants</button>
+    <mat-divider></mat-divider>
     <button (click)="onClickSignOut()" mat-menu-item>Sign Out</button>
   </mat-menu>
 </mat-toolbar>

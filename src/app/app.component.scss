@@ -3,6 +3,14 @@ mat-sidenav-container {
 
   mat-sidenav {
     width: 15em;
+
+    mat-list-item {
+      img {
+        border-radius: 50%;
+        height: 20px;
+        padding: 6px;
+      }
+    }
   }
 
   mat-sidenav-content {

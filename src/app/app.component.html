@@ -4,12 +4,18 @@
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
       <mat-list-item *ngIf="user" (click)="onClickProfile()">
-        <mat-icon matListIcon>face</mat-icon>
+        <img *ngIf="user.profile.picture" src="{{ user.profile.picture }}" />
+        <img *ngIf="!user.profile.picture" src="https://www.gravatar.com/avatar/{{ hashedEmailAddress() }}" />
         {{ user.profile.name }}
       </mat-list-item>
+      <mat-divider></mat-divider>
       <mat-list-item (click)="onClickHome()">
         <mat-icon matListIcon>home</mat-icon>
         Home
+      </mat-list-item>
+      <mat-list-item (click)="onClickTenants()">
+        <mat-icon matListIcon>public</mat-icon>
+        Tenants
       </mat-list-item>
       <mat-list-item (click)="onClickAudits()">
         <mat-icon matListIcon>edit</mat-icon>
@@ -19,6 +25,7 @@
         <mat-icon matListIcon>vpn_key</mat-icon>
         Sign Out
       </mat-list-item>
+      <mat-divider></mat-divider>
       <mat-list-item (click)="onClickDocumentation()">
         <mat-icon matListIcon>link</mat-icon>
         Documentation

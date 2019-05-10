@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OpenIDService } from '@app/core';
 import { MatSidenav } from '@angular/material';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,10 @@ export class AppComponent {
 
   constructor(protected openIDService: OpenIDService, protected router: Router) {
     this.loadUser();
+  }
+
+  public hashedEmailAddress(): string {
+    return Md5.hashStr(this.user.profile.email).toString();
   }
 
   public onClickAudits(): void {
@@ -36,6 +41,10 @@ export class AppComponent {
 
   public onClickSignOut(): void {
     this.openIDService.signOut().subscribe();
+  }
+
+  public onClickTenants(): void {
+    this.router.navigateByUrl('/tenant');
   }
 
   protected loadUser(): void {

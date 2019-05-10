@@ -1,4 +1,6 @@
 mat-card {
+  margin: 0.75em 0px;
+
   mat-card-header {
     div[mat-card-avatar] {
       img {
@@ -6,5 +8,13 @@ mat-card {
         width: 2.5em;
       }
     }
+  }
+}
+
+mat-accordion {
+  margin: 0.75em 0px;
+  
+  table {
+    width: 100%;
   }
 }

@@ -7,7 +7,7 @@ import { IFeatureToggle } from '@app/core';
   styleUrls: ['./feature-toggle-list.component.scss'],
 })
 export class FeatureToggleListComponent implements OnInit {
-  public displayedColumns: Array<string> = ['name', 'status', 'actions'];
+  public displayedColumns: Array<string> = ['name', 'status'];
 
   @Input()
   public featureToggles: Array<IFeatureToggle> = null;

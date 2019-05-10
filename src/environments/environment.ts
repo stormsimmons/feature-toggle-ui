@@ -15,7 +15,7 @@ export const environment = {
     ],
   },
   multiTenancy: {
-    enabled: false,
+    enabled: true,
   },
   openIdConfiguration: {
     authority: 'https://demo.identityserver.io',

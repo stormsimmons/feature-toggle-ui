@@ -33,3 +33,10 @@ $custom-app-theme: mat-light-theme($custom-app-primary, $custom-app-accent, $cus
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($custom-app-theme);
+
+$color: #1a237e;
+
+.mat-toolbar.mat-primary {
+  background: $color;
+  background: linear-gradient(90deg, $color 0%, adjust-hue($color, -40%) 100%);
+}

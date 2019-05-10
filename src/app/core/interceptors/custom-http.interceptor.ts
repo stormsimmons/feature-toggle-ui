@@ -12,7 +12,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
   constructor(protected openIdService: OpenIDService, protected tenantService: TenantService) {}
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const isMultiTenant: boolean = environment.multiTenancy.enabled && req.url !== '/tenant';
+    const isMultiTenant: boolean = environment.multiTenancy.enabled && !req.url.startsWith('/tenant');
 
     const observables: Array<Observable<any>> = isMultiTenant
       ? [this.openIdService.getUser(), this.openIdService.getUser().pipe(mergeMap((user) => this.getTenant(user)))]
@@ -43,21 +43,18 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       );
   }
 
-  protected getTenant(user): Observable<ITenant> {
-    return this.tenantService.findAll().pipe(
-      mergeMap((tenants: Array<ITenant>) => {
-        if (!tenants.length) {
+  protected getTenant(user: any): Observable<ITenant> {
+    return this.tenantService.findSelected().pipe(
+      mergeMap((tenant: ITenant) => {
+        if (!tenant) {
           return this.tenantService
             .create({
               key: Md5.hashStr(user.profile.email.toLowerCase()).toString(),
               name: `Default (${user.profile.email.toLowerCase()})`,
-              selected: true,
               users: [user.profile.email],
             })
             .pipe(mergeMap(() => this.getTenant(user)));
         }
-
-        const tenant: ITenant = tenants.find((x: ITenant) => x.selected) || tenants[0];
 
         return of(tenant);
       }),

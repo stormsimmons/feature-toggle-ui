@@ -7,6 +7,8 @@ import { CallbackRouteComponent } from './callback-route/callback-route.componen
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
 import { ProfileRouteComponent } from './profile-route/profile-route.component';
+import { TenantRouteComponent } from './tenant-route/tenant-route.component';
+import { TenantEditRouteComponent } from './tenant-edit-route/tenant-edit-route.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,16 @@ const routes: Routes = [
     canActivate: [OpenIDGuard],
     component: ProfileRouteComponent,
     path: 'profile',
+  },
+  {
+    canActivate: [OpenIDGuard],
+    component: TenantRouteComponent,
+    path: 'tenant',
+  },
+  {
+    canActivate: [OpenIDGuard],
+    component: TenantEditRouteComponent,
+    path: 'tenant/:key',
   },
 ];
 

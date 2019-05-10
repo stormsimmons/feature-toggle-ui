@@ -21,6 +21,7 @@ import {
   MatSnackBarModule,
   MatSlideToggleModule,
   MatExpansionModule,
+  MatDividerModule,
 } from '@angular/material';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
@@ -34,6 +35,9 @@ import { DocumentationRouteComponent } from './documentation-route/documentation
 
 import { AuditModule, FeatureToggleModule, ToolbarModule } from './features';
 import { ProfileRouteComponent } from './profile-route/profile-route.component';
+import { TenantRouteComponent } from './tenant-route/tenant-route.component';
+import { TenantEditRouteComponent } from './tenant-edit-route/tenant-edit-route.component';
+import { TenantUserAddComponent } from './tenant-user-add/tenant-user-add.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,9 @@ import { ProfileRouteComponent } from './profile-route/profile-route.component';
     AuditsRouteComponent,
     DocumentationRouteComponent,
     ProfileRouteComponent,
+    TenantRouteComponent,
+    TenantEditRouteComponent,
+    TenantUserAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +75,7 @@ import { ProfileRouteComponent } from './profile-route/profile-route.component';
     MatSnackBarModule,
     MatSlideToggleModule,
     MatExpansionModule,
+    MatDividerModule,
 
     AuditModule,
     FeatureToggleModule,
@@ -85,6 +93,6 @@ import { ProfileRouteComponent } from './profile-route/profile-route.component';
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [FeatureToggleCreateComponent],
+  entryComponents: [FeatureToggleCreateComponent, TenantUserAddComponent],
 })
 export class AppModule {}

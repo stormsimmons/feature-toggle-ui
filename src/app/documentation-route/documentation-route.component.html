@@ -23,10 +23,10 @@
           # Shell
           curl -i -H "Accept: application/json" \
           -H "Content-Type: application/json" \
-          -X GET {{ ENVIRONMENT.uri }}/api/feature-toggle/{{ '{key}' }}/enabled/{{ '{environmentKey}' }}/{{ '{consumer}' }}
+          -X GET {{ ENVIRONMENT.uri }}/feature-toggle/{{ '{key}' }}/enabled/{{ '{environmentKey}' }}/{{ '{consumer}' }}
 
           # PowerShell
-          Invoke-WebRequest -Uri {{ ENVIRONMENT.uri }}/api/feature-toggle/{{ '{key}' }}/enabled/{{ '{environmentKey}' }}/{{ '{consumer}' }} -Method GET -ContentType "application/json"
+          Invoke-WebRequest -Uri {{ ENVIRONMENT.uri }}/feature-toggle/{{ '{key}' }}/enabled/{{ '{environmentKey}' }}/{{ '{consumer}' }} -Method GET -ContentType "application/json"
       </code>
     </pre>
   </mat-expansion-panel>
@@ -43,7 +43,7 @@
 
     <pre>
       <code>
-          fetch('{{ ENVIRONMENT.uri }}/api/feature-toggle/{{ '{key}' }}/enabled/{{ '{environmentKey}' }}/{{ '{consumer}' }}')
+          fetch('{{ ENVIRONMENT.uri }}/feature-toggle/{{ '{key}' }}/enabled/{{ '{environmentKey}' }}/{{ '{consumer}' }}')
             .then((response) => response.json())
             .then((json) => console.log(json))
       </code>

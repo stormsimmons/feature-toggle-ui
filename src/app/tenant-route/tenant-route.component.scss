@@ -1,0 +1,17 @@
+mat-card {
+  margin: 1em 0px;
+}
+
+table {
+  width: 100%;
+
+  tr {
+    &:nth-child(even) {
+      background: #eceff1;
+    }
+
+    &:nth-child(odd) {
+      background: #fff;
+    }
+  }
+}
