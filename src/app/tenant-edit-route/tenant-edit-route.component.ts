@@ -30,9 +30,15 @@ export class TenantEditRouteComponent implements OnInit {
   }
 
   public onClickTenantAddUser(tenant: ITenant): void {
-    const dialogRef = this.dialog.open(TenantUserAddComponent, {});
+    const dialogRef = this.dialog.open(TenantUserAddComponent, {
+      data: tenant,
+    });
 
-    dialogRef.afterClosed().subscribe(() => {});
+    dialogRef.afterClosed().subscribe(() => {
+      const key: string = this.activatedRoute.snapshot.params.key;
+
+      this.tenantService.find(key).subscribe((x: ITenant) => (this.tenant = x));
+    });
   }
 
   public onClickTenantRemoveUser(tenant: ITenant, user: string): void {
@@ -46,6 +52,6 @@ export class TenantEditRouteComponent implements OnInit {
 
     this.table.renderRows();
 
-    // this.tenantService.update(tenant).subscribe();
+    this.tenantService.update(tenant).subscribe();
   }
 }

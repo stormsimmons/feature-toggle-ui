@@ -51,7 +51,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
             .create({
               key: Md5.hashStr(user.profile.email.toLowerCase()).toString(),
               name: `Default (${user.profile.email.toLowerCase()})`,
-              users: [user.profile.email],
+              users: [user.profile.email.toLowerCase()],
             })
             .pipe(mergeMap(() => this.getTenant(user)));
         }

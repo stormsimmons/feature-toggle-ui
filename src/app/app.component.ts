@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { OpenIDService } from '@app/core';
 import { MatSidenav } from '@angular/material';
 import { Md5 } from 'ts-md5';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,8 @@ import { Md5 } from 'ts-md5';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  public multiTenancyEnabled: boolean = environment.multiTenancy.enabled;
+
   @ViewChild('sidenav')
   public sidenav: MatSidenav = null;
 

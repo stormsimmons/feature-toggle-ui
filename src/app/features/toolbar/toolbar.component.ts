@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { OpenIDService, TenantService, ITenant } from '@app/core';
 import { Router } from '@angular/router';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-toolbar',
@@ -12,7 +13,7 @@ export class ToolbarComponent implements OnInit {
   @Input()
   public sidenav: MatSidenav = null;
 
-  public tenants: Array<ITenant> = [];
+  public tenants: Array<ITenant> = null;
 
   constructor(
     protected openIDService: OpenIDService,
@@ -21,7 +22,9 @@ export class ToolbarComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.tenantService.findAll().subscribe((tenants: Array<ITenant>) => (this.tenants = tenants));
+    if (environment.multiTenancy.enabled) {
+      this.tenantService.findAll().subscribe((tenants: Array<ITenant>) => (this.tenants = tenants));
+    }
   }
 
   public onClickManageTenants(): void {

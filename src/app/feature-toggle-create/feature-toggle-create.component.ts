@@ -13,8 +13,6 @@ import { environment } from '@environments/environment';
 export class FeatureToggleCreateComponent implements OnInit {
   public key = new FormControl('', [Validators.required]);
 
-  public message: string = null;
-
   public name = new FormControl('', [Validators.required]);
 
   constructor(
