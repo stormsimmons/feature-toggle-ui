@@ -9,4 +9,6 @@ app.get('*', (request, response) => {
   response.sendFile(path.join(__dirname, '..', 'dist', 'feature-toggle-ui', 'index.html'));
 });
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`listening on ${process.env.PORT || 8080}`);
+});
