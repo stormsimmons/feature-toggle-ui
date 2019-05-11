@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  uri: 'http://localhost:8080/api',
+  uri: 'https://feature-toggle-nodejs.herokuapp.com',
   featureToggle: {
     defaultEnvironments: [
       ['development', 'Development'],
@@ -11,7 +11,7 @@ export const environment = {
     ],
   },
   multiTenancy: {
-    enabled: false,
+    enabled: true,
   },
   openIdConfiguration: {
     authority: 'https://demo.identityserver.io',
