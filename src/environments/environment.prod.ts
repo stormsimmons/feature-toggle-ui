@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  uri: 'https://feature-toggle-nodejs.herokuapp.com',
+  uri: 'https://feature-toggle-nodejs.herokuapp.com/api',
   featureToggle: {
     defaultEnvironments: [
       ['development', 'Development'],
