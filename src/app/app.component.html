@@ -3,17 +3,16 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <mat-list-item *ngIf="user" (click)="onClickProfile()">
-        <img *ngIf="user.profile.picture" src="{{ user.profile.picture }}" />
-        <img *ngIf="!user.profile.picture" src="https://www.gravatar.com/avatar/{{ hashedEmailAddress() }}" />
-        {{ user.profile.name }}
+      <mat-list-item *ngIf="state.user" (click)="onClickProfile()">
+        <img src="{{ state.user.profile.picture }}" />
+        {{ state.user.profile.name }}
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item (click)="onClickHome()">
         <mat-icon matListIcon>home</mat-icon>
         Home
       </mat-list-item>
-      <mat-list-item *ngIf="multiTenancyEnabled" (click)="onClickTenants()">
+      <mat-list-item *ngIf="state.tenants" (click)="onClickTenants()">
         <mat-icon matListIcon>public</mat-icon>
         Tenants
       </mat-list-item>

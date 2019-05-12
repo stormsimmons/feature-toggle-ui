@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
-import { FeatureToggleService } from '@app/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { FormControl, Validators } from '@angular/forms';
 import { environment } from '@environments/environment';
+import { FeatureToggleService } from '@app/core';
+import { FormControl, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatDialogRef, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-feature-toggle-create',

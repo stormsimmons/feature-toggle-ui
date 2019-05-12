@@ -1,7 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ITenant, TenantService } from '@app/core';
-import { ActivatedRoute } from '@angular/router';
-import { MatTable, MatDialog } from '@angular/material';
+import { MatDialog, MatTable } from '@angular/material';
 import { TenantUserAddComponent } from '@app/tenant-user-add/tenant-user-add.component';
 
 @Component({

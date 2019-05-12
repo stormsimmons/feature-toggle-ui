@@ -1,7 +1,7 @@
-import { Observable, from, of } from 'rxjs';
 import * as OIDC from 'oidc-client';
+import { catchError, map, tap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { map, tap, catchError } from 'rxjs/operators';
 
 export class OpenIDService {
   protected manager: OIDC.UserManager = null;

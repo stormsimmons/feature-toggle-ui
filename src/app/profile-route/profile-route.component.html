@@ -1,11 +1,10 @@
-<mat-card *ngIf="user">
+<mat-card *ngIf="state.user">
   <mat-card-header>
     <div mat-card-avatar>
-      <img *ngIf="user.profile.picture" src="{{ user.profile.picture }}" />
-      <img *ngIf="!user.profile.picture" src="https://www.gravatar.com/avatar/{{ hashedEmailAddress() }}" />
+      <img src="{{ state.user.profile.picture }}" />
     </div>
-    <mat-card-title>{{ user.profile.name }}</mat-card-title>
-    <mat-card-subtitle>{{ user.profile.email }}</mat-card-subtitle>
+    <mat-card-title>{{ state.user.profile.name }}</mat-card-title>
+    <mat-card-subtitle>{{ state.user.profile.email }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content> </mat-card-content>
 </mat-card>

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule, MatToolbarModule, MatMenuModule, MatDividerModule } from '@angular/material';
+import { MatDividerModule, MatIconModule, MatMenuModule, MatToolbarModule } from '@angular/material';
+import { NgModule } from '@angular/core';
 import { ToolbarComponent } from './toolbar.component';
 
 @NgModule({

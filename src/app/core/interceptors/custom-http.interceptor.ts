@@ -1,11 +1,11 @@
-import { HttpInterceptor, HttpRequest, HttpEvent, HttpHandler, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, throwError, forkJoin, of } from 'rxjs';
-import { OpenIDService, TenantService } from '../services';
-import { mergeMap, catchError } from 'rxjs/operators';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
+import { forkJoin, Observable, of, throwError } from 'rxjs';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { ITenant } from '../models';
 import { Md5 } from 'ts-md5';
+import { OpenIDService, TenantService } from '../services';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
@@ -43,6 +43,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       );
   }
 
+  // TODO: Move creation of tenant to base component.
   protected getTenant(user: any): Observable<ITenant> {
     return this.tenantService.findSelected().pipe(
       mergeMap((tenant: ITenant) => {

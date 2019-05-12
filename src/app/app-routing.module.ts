@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
-import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
-import { OpenIDGuard } from './open-id.guard';
-import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
+import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
+import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
+import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
+import { NgModule } from '@angular/core';
+import { OpenIDGuard } from './open-id.guard';
 import { ProfileRouteComponent } from './profile-route/profile-route.component';
-import { TenantRouteComponent } from './tenant-route/tenant-route.component';
+import { RouterModule, Routes } from '@angular/router';
 import { TenantEditRouteComponent } from './tenant-edit-route/tenant-edit-route.component';
+import { TenantRouteComponent } from './tenant-route/tenant-route.component';
 
 const routes: Routes = [
   {

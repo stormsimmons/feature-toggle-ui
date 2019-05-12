@@ -1,6 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeatureToggleDetailsComponent } from './feature-toggle-details';
+import { FeatureToggleEditConsumersComponent } from './feature-toggle-edit-consumers';
+import { FeatureToggleListComponent } from './feature-toggle-list';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import {
   MatCardModule,
   MatListModule,
@@ -11,10 +15,6 @@ import {
   MatIconModule,
   MatInputModule,
 } from '@angular/material';
-import { RouterModule } from '@angular/router';
-import { FeatureToggleListComponent } from './feature-toggle-list';
-import { FormsModule } from '@angular/forms';
-import { FeatureToggleEditConsumersComponent } from './feature-toggle-edit-consumers';
 
 @NgModule({
   declarations: [FeatureToggleDetailsComponent, FeatureToggleListComponent, FeatureToggleEditConsumersComponent],

@@ -1,31 +1,28 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { BaseComponent, IState, ITenant, OpenIDService, TenantService } from '@app/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { OpenIDService, TenantService, ITenant } from '@app/core';
 import { Router } from '@angular/router';
-import { environment } from '@environments/environment';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent extends BaseComponent implements OnInit {
   @Input()
   public sidenav: MatSidenav = null;
 
-  public tenants: Array<ITenant> = null;
-
   constructor(
-    protected openIDService: OpenIDService,
+    protected openIdService: OpenIDService,
     protected router: Router,
+    store: Store<IState>,
     protected tenantService: TenantService,
-  ) {}
-
-  public ngOnInit(): void {
-    if (environment.multiTenancy.enabled) {
-      this.tenantService.findAll().subscribe((tenants: Array<ITenant>) => (this.tenants = tenants));
-    }
+  ) {
+    super(openIdService, store, tenantService);
   }
+
+  public ngOnInit(): void {}
 
   public onClickManageTenants(): void {
     this.router.navigateByUrl('/tenant');
@@ -36,7 +33,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   public onClickSignOut(): void {
-    this.openIDService.signOut().subscribe();
+    this.openIdService.signOut().subscribe();
   }
 
   public onClickTenant(tenant: ITenant): void {

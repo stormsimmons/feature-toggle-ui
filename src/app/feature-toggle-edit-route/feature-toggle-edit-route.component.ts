@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { IFeatureToggle, IEnvironment, FeatureToggleService } from '@app/core';
 import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FeatureToggleService, IEnvironment, IFeatureToggle } from '@app/core';
 
 @Component({
   selector: 'app-feature-toggle-edit-route',

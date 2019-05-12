@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { OpenIDService } from './open-id.service';
 import { environment } from '@environments/environment';
+import { Injectable } from '@angular/core';
+import { OpenIDService } from './open-id.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',

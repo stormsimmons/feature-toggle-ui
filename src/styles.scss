@@ -40,3 +40,8 @@ $color: #1a237e;
   background: $color;
   background: linear-gradient(90deg, $color 0%, adjust-hue($color, -40%) 100%);
 }
+
+.mat-fab.mat-primary {
+  background: $color;
+  background: linear-gradient(90deg, $color 0%, adjust-hue($color, -40%) 100%);
+}

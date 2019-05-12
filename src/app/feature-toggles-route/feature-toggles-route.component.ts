@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IFeatureToggle, FeatureToggleService } from '@app/core';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
 import { FeatureToggleCreateComponent } from '../feature-toggle-create/feature-toggle-create.component';
+import { FeatureToggleService, IFeatureToggle } from '@app/core';
+import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feature-toggles-route',

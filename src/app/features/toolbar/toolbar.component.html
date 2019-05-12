@@ -6,9 +6,9 @@
   <mat-icon [matMenuTriggerFor]="menu" matListIcon>person</mat-icon>
   <mat-menu #menu="matMenu">
     <button (click)="onClickProfile()" mat-menu-item>Profile</button>
-    <ng-container *ngIf="tenants">
+    <ng-container *ngIf="state.tenants">
       <mat-divider></mat-divider>
-      <button *ngFor="let tenant of tenants" (click)="onClickTenant(tenant)" mat-menu-item>{{ tenant.name }}</button>
+      <button *ngFor="let tenant of state.tenants" (click)="onClickTenant(tenant)" mat-menu-item>{{ tenant.name }}</button>
       <mat-divider></mat-divider>
       <button (click)="onClickManageTenants()" mat-menu-item>Manage Tenants</button>
     </ng-container>

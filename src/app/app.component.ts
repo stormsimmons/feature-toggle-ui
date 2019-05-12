@@ -1,29 +1,25 @@
+import { BaseComponent, IState, OpenIDService, TenantService } from '@app/core';
 import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { OpenIDService } from '@app/core';
 import { MatSidenav } from '@angular/material';
-import { Md5 } from 'ts-md5';
-import { environment } from '@environments/environment';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  public multiTenancyEnabled: boolean = environment.multiTenancy.enabled;
-
+export class AppComponent extends BaseComponent {
   @ViewChild('sidenav')
   public sidenav: MatSidenav = null;
 
-  public user: any = null;
-
-  constructor(protected openIDService: OpenIDService, protected router: Router) {
-    this.loadUser();
-  }
-
-  public hashedEmailAddress(): string {
-    return Md5.hashStr(this.user.profile.email).toString();
+  constructor(
+    protected openIdService: OpenIDService,
+    protected router: Router,
+    store: Store<IState>,
+    tenantService: TenantService,
+  ) {
+    super(openIdService, store, tenantService);
   }
 
   public onClickAudits(): void {
@@ -43,22 +39,10 @@ export class AppComponent {
   }
 
   public onClickSignOut(): void {
-    this.openIDService.signOut().subscribe();
+    this.openIdService.signOut().subscribe();
   }
 
   public onClickTenants(): void {
     this.router.navigateByUrl('/tenant');
-  }
-
-  protected loadUser(): void {
-    this.openIDService.getUser().subscribe((user) => {
-      if (!user) {
-        setTimeout(() => this.loadUser(), 1000);
-
-        return;
-      }
-
-      this.user = user;
-    });
   }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AuditService, IAudit } from '@app/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuditService, IAudit } from '@app/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
