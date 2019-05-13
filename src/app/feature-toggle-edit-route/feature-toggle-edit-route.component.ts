@@ -1,26 +1,29 @@
 import { ActivatedRoute } from '@angular/router';
+import { BaseComponent, FeatureToggleUpdate, IEnvironment, IFeatureToggle, IState } from '@app/core';
 import { Component, OnInit } from '@angular/core';
-import { FeatureToggleService, IEnvironment, IFeatureToggle } from '@app/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-feature-toggle-edit-route',
   templateUrl: './feature-toggle-edit-route.component.html',
   styleUrls: ['./feature-toggle-edit-route.component.scss'],
 })
-export class FeatureToggleEditRouteComponent implements OnInit {
+export class FeatureToggleEditRouteComponent extends BaseComponent implements OnInit {
   public featureToggle: IFeatureToggle = null;
 
   public selectedEnvironment: IEnvironment = null;
 
   public selectedEnvironmentKey: string = null;
 
-  constructor(protected activatedRoute: ActivatedRoute, protected featureToggleService: FeatureToggleService) {}
+  constructor(protected activatedRoute: ActivatedRoute, store: Store<IState>) {
+    super(store);
+  }
 
   public ngOnInit(): void {
     const key: string = this.activatedRoute.snapshot.params.key;
 
-    this.featureToggleService.find(key).subscribe((featureToggle: IFeatureToggle) => {
-      this.featureToggle = featureToggle;
+    this.store.subscribe((state: IState) => {
+      this.featureToggle = state.featureToggles.find((featureToggle: IFeatureToggle) => featureToggle.key === key);
 
       this.selectedEnvironmentKey = this.featureToggle.environments[0].key;
 
@@ -29,11 +32,11 @@ export class FeatureToggleEditRouteComponent implements OnInit {
   }
 
   public onChangeFeatureToggle(): void {
-    this.featureToggleService.update(this.featureToggle).subscribe();
+    this.store.dispatch(new FeatureToggleUpdate(this.featureToggle, false));
   }
 
   public onChangeFeatureToggleEditConsumers(): void {
-    this.featureToggleService.update(this.featureToggle).subscribe();
+    this.store.dispatch(new FeatureToggleUpdate(this.featureToggle, false));
   }
 
   public onSelectionChangeEnvironmentKey(): void {

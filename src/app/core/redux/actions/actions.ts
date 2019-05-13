@@ -18,8 +18,22 @@ export class AuditsSet implements Action {
   constructor(public audits: Array<IAudit>) {}
 }
 
+export class FeatureToggleCreate implements Action {
+  readonly type = ActionTypes.FeatureToggleCreate;
+
+  constructor(public featureToggle: IFeatureToggle, public includeArchived: boolean) {}
+}
+
+export class FeatureToggleUpdate implements Action {
+  readonly type = ActionTypes.FeatureToggleUpdate;
+
+  constructor(public featureToggle: IFeatureToggle, public includeArchived: boolean) {}
+}
+
 export class FeatureTogglesLoad implements Action {
   readonly type = ActionTypes.FeatureTogglesLoad;
+
+  constructor(public includeArchived: boolean) {}
 }
 
 export class FeatureTogglesSet implements Action {

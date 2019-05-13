@@ -1,21 +1,26 @@
-import { catchError, mergeMap } from 'rxjs/operators';
+import { catchError, delayWhen, map, mergeMap, retryWhen, take, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
-import { forkJoin, Observable, of, throwError } from 'rxjs';
+import { forkJoin, Observable, of, throwError, timer } from 'rxjs';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IState } from '../redux';
 import { ITenant } from '../models';
-import { Md5 } from 'ts-md5';
 import { OpenIDService, TenantService } from '../services';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
-  constructor(protected openIdService: OpenIDService, protected tenantService: TenantService) {}
+  constructor(
+    protected openIdService: OpenIDService,
+    protected store: Store<IState>,
+    protected tenantService: TenantService,
+  ) {}
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const isMultiTenant: boolean = environment.multiTenancy.enabled && !req.url.startsWith('/tenant');
 
     const observables: Array<Observable<any>> = isMultiTenant
-      ? [this.openIdService.getUser(), this.openIdService.getUser().pipe(mergeMap((user) => this.getTenant(user)))]
+      ? [this.openIdService.getUser(), this.getTenant()]
       : [this.openIdService.getUser()];
 
     return forkJoin(observables)
@@ -43,22 +48,15 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       );
   }
 
-  // TODO: Move creation of tenant to base component.
-  protected getTenant(user: any): Observable<ITenant> {
-    return this.tenantService.findSelected().pipe(
-      mergeMap((tenant: ITenant) => {
-        if (!tenant) {
-          return this.tenantService
-            .create({
-              key: Md5.hashStr(user.profile.email.toLowerCase()).toString(),
-              name: `Default (${user.profile.email.toLowerCase()})`,
-              users: [user.profile.email.toLowerCase()],
-            })
-            .pipe(mergeMap(() => this.getTenant(user)));
-        }
-
-        return of(tenant);
-      }),
-    );
+  protected getTenant(): Observable<ITenant> {
+    return this.store
+      .pipe(take(1))
+      .pipe(
+        mergeMap((state: IState) => {
+          return state.tenants ? of(state) : throwError(new Error());
+        }),
+      )
+      .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
+      .pipe(map((state: IState) => state.tenants[0]));
   }
 }
