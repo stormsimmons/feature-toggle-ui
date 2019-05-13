@@ -20,9 +20,6 @@ export class FeatureToggleListComponent implements OnInit {
   @Output()
   public changeIncludeArchived: EventEmitter<boolean> = new EventEmitter();
 
-  @Output()
-  public clickView: EventEmitter<IFeatureToggle> = new EventEmitter();
-
   constructor() {}
 
   public ngOnInit(): void {}
@@ -33,9 +30,5 @@ export class FeatureToggleListComponent implements OnInit {
 
   public onChangeIncludeArchived(): void {
     this.changeIncludeArchived.emit(this.includeArchived);
-  }
-
-  public onClickView(featureToggle: IFeatureToggle): void {
-    this.clickView.emit(featureToggle);
   }
 }

@@ -1,7 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
+import { BaseComponent, IState, ITenant, TenantUpdate } from '@app/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ITenant, TenantService } from '@app/core';
+import { empty } from 'rxjs';
 import { MatDialog, MatTable } from '@angular/material';
+import { Store } from '@ngrx/store';
 import { TenantUserAddComponent } from '@app/tenant-user-add/tenant-user-add.component';
 
 @Component({
@@ -9,7 +11,7 @@ import { TenantUserAddComponent } from '@app/tenant-user-add/tenant-user-add.com
   templateUrl: './tenant-edit-route.component.html',
   styleUrls: ['./tenant-edit-route.component.scss'],
 })
-export class TenantEditRouteComponent implements OnInit {
+export class TenantEditRouteComponent extends BaseComponent implements OnInit {
   public displayedColumns: Array<string> = ['user', 'action'];
 
   @ViewChild('table')
@@ -17,16 +19,18 @@ export class TenantEditRouteComponent implements OnInit {
 
   public tenant: ITenant = null;
 
-  constructor(
-    protected activatedRoute: ActivatedRoute,
-    protected dialog: MatDialog,
-    protected tenantService: TenantService,
-  ) {}
+  constructor(protected activatedRoute: ActivatedRoute, protected dialog: MatDialog, store: Store<IState>) {
+    super(store);
+  }
 
   public ngOnInit(): void {
     const key: string = this.activatedRoute.snapshot.params.key;
 
-    this.tenantService.find(key).subscribe((tenant: ITenant) => (this.tenant = tenant));
+    this.store.subscribe((state: IState) => {
+      if (state.tenants) {
+        this.tenant = state.tenants.find((x: ITenant) => x.key === key);
+      }
+    });
   }
 
   public onClickTenantAddUser(tenant: ITenant): void {
@@ -34,10 +38,16 @@ export class TenantEditRouteComponent implements OnInit {
       data: tenant,
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      const key: string = this.activatedRoute.snapshot.params.key;
+    dialogRef.afterClosed().subscribe((dialogResult: string) => {
+      if (!tenant) {
+        return empty();
+      }
 
-      this.tenantService.find(key).subscribe((x: ITenant) => (this.tenant = x));
+      tenant.users.push(dialogResult);
+
+      this.table.renderRows();
+
+      this.store.dispatch(new TenantUpdate(tenant));
     });
   }
 
@@ -52,6 +62,6 @@ export class TenantEditRouteComponent implements OnInit {
 
     this.table.renderRows();
 
-    this.tenantService.update(tenant).subscribe();
+    this.store.dispatch(new TenantUpdate(tenant));
   }
 }

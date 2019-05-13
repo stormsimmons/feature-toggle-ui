@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ITenant, TenantService } from '@app/core';
+import { ITenant } from '@app/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -14,7 +14,6 @@ export class TenantUserAddComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) protected tenant: ITenant,
     protected dialogRef: MatDialogRef<TenantUserAddComponent>,
-    protected tenantService: TenantService,
   ) {}
 
   public ngOnInit(): void {}
@@ -36,10 +35,6 @@ export class TenantUserAddComponent implements OnInit {
       return;
     }
 
-    this.tenant.users.push(this.user.value.toLowerCase());
-
-    this.tenantService.update(this.tenant).subscribe(() => {
-      this.dialogRef.close();
-    });
+    this.dialogRef.close(this.user.value.toLowerCase());
   }
 }

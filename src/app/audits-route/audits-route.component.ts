@@ -1,33 +1,27 @@
 import { ActivatedRoute } from '@angular/router';
-import { AuditService, IAudit } from '@app/core';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AuditService, AuditsLoad, BaseComponent, IState, AuditsLoadByUser } from '@app/core';
 
 @Component({
   selector: 'app-audits-route',
   templateUrl: './audits-route.component.html',
   styleUrls: ['./audits-route.component.scss'],
 })
-export class AuditsRouteComponent implements OnInit {
-  public audits: Array<IAudit> = null;
-
+export class AuditsRouteComponent extends BaseComponent implements OnInit {
   public userParam: string = null;
 
-  constructor(protected activatedRoute: ActivatedRoute, protected auditService: AuditService) {}
+  constructor(protected activatedRoute: ActivatedRoute, protected auditService: AuditService, store: Store<IState>) {
+    super(store);
+  }
 
   public ngOnInit(): void {
     this.userParam = this.activatedRoute.snapshot.params.user;
 
-    let observable: Observable<Array<IAudit>> = null;
-
     if (this.userParam) {
-      observable = this.auditService.findAll(this.userParam);
+      this.store.dispatch(new AuditsLoadByUser(this.userParam));
     } else {
-      observable = this.auditService.findAll();
+      this.store.dispatch(new AuditsLoad());
     }
-
-    observable.subscribe((audits: Array<IAudit>) => {
-      this.audits = audits;
-    });
   }
 }

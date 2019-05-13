@@ -5,8 +5,16 @@ import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
-import { CustomHttpInterceptor, CustomOpenIDService, metaReducers, OpenIDService, reducers } from '@app/core';
-import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
+import {
+  CustomHttpInterceptor,
+  CustomOpenIDService,
+  metaReducers,
+  OpenIDService,
+  reducers,
+  AuditsEffects,
+  UserEffects,
+  TenantEffects,
+} from '@app/core';
 import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-toggle-create.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
@@ -33,9 +41,9 @@ import {
   MatProgressBarModule,
   MatSnackBarModule,
   MatSlideToggleModule,
-  MatExpansionModule,
   MatDividerModule,
 } from '@angular/material';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -45,7 +53,6 @@ import {
     FeatureToggleCreateComponent,
     CallbackRouteComponent,
     AuditsRouteComponent,
-    DocumentationRouteComponent,
     ProfileRouteComponent,
     TenantRouteComponent,
     TenantEditRouteComponent,
@@ -72,13 +79,13 @@ import {
     MatProgressBarModule,
     MatSnackBarModule,
     MatSlideToggleModule,
-    MatExpansionModule,
     MatDividerModule,
 
     AuditModule,
     FeatureToggleModule,
     ToolbarModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([AuditsEffects, TenantEffects, UserEffects]),
   ],
   providers: [
     {

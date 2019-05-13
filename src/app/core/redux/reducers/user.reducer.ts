@@ -12,9 +12,12 @@ export function userReducer(state = initialState, action: Action): IUser {
         ...(action as UserSet).user,
         profile: {
           ...(action as UserSet).user.profile,
+          email: (action as UserSet).user.profile.email.toLowerCase(),
           picture: (action as UserSet).user.profile.picture
             ? (action as UserSet).user.profile.picture
-            : `https://www.gravatar.com/avatar/${Md5.hashStr((action as UserSet).user.profile.email).toString()}`,
+            : `https://www.gravatar.com/avatar/${Md5.hashStr(
+                (action as UserSet).user.profile.email.toLowerCase(),
+              ).toString()}`,
         },
       };
     default:

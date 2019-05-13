@@ -1,6 +1,5 @@
 import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
-import { DocumentationRouteComponent } from './documentation-route/documentation-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 import { NgModule } from '@angular/core';
@@ -29,10 +28,6 @@ const routes: Routes = [
   {
     component: CallbackRouteComponent,
     path: 'callback',
-  },
-  {
-    component: DocumentationRouteComponent,
-    path: 'documentation',
   },
   {
     canActivate: [OpenIDGuard],

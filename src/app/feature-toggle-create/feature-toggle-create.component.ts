@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@environments/environment';
-import { FeatureToggleService } from '@app/core';
 import { FormControl, Validators } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-feature-toggle-create',
@@ -15,11 +13,7 @@ export class FeatureToggleCreateComponent implements OnInit {
 
   public name = new FormControl('', [Validators.required]);
 
-  constructor(
-    protected dialogRef: MatDialogRef<FeatureToggleCreateComponent>,
-    protected featureToggleService: FeatureToggleService,
-    protected snackBar: MatSnackBar,
-  ) {}
+  constructor(protected dialogRef: MatDialogRef<FeatureToggleCreateComponent>) {}
 
   public ngOnInit(): void {}
 
@@ -44,46 +38,22 @@ export class FeatureToggleCreateComponent implements OnInit {
       return;
     }
 
-    this.featureToggleService
-      .create({
-        archived: false,
-        createdAt: new Date().getTime(),
-        environments: environment.featureToggle.defaultEnvironments.map((x) => {
-          return {
-            consumers: [],
-            enabled: false,
-            enabledForAll: false,
-            key: x[0],
-            name: x[1],
-          };
-        }),
-        key: this.key.value,
-        name: this.name.value,
-        updatedAt: new Date().getTime(),
-        user: null,
-      })
-      .subscribe(
-        () => {
-          this.dialogRef.close();
-        },
-        (error: Error) => {
-          if (error instanceof HttpErrorResponse) {
-            switch (error.status) {
-              case 303:
-                this.showErrorMessage(`Key '${this.key.value}' is already taken. Please choose a different key.`);
-                break;
-              default:
-                this.showErrorMessage('An error occurred.');
-                break;
-            }
-          }
-        },
-      );
-  }
-
-  protected showErrorMessage(message: string): void {
-    this.snackBar.open(message, undefined, {
-      duration: 5000,
+    this.dialogRef.close({
+      archived: false,
+      createdAt: new Date().getTime(),
+      environments: environment.featureToggle.defaultEnvironments.map((x) => {
+        return {
+          consumers: [],
+          enabled: false,
+          enabledForAll: false,
+          key: x[0],
+          name: x[1],
+        };
+      }),
+      key: this.key.value,
+      name: this.name.value,
+      updatedAt: new Date().getTime(),
+      user: null,
     });
   }
 }

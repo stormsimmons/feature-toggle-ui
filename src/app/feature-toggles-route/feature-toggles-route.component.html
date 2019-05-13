@@ -11,7 +11,6 @@
     [featureToggles]="featureToggles"
     (changeFeatureToggle)="onChangeFeatureToggle($event)"
     (changeIncludeArchived)="onChangeIncludeArchived($event)"
-    (clickView)="onClickView($event)"
   ></app-feature-toggle-list>
 
   <mat-card *ngIf="featureToggles && !featureToggles.length">

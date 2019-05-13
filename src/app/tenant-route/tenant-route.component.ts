@@ -1,4 +1,4 @@
-import { BaseComponent, IState, OpenIDService, TenantService } from '@app/core';
+import { BaseComponent, IState } from '@app/core';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -10,8 +10,8 @@ import { Store } from '@ngrx/store';
 export class TenantRouteComponent extends BaseComponent implements OnInit {
   public displayedColumns: Array<string> = ['name'];
 
-  constructor(openIdService: OpenIDService, store: Store<IState>, tenantService: TenantService) {
-    super(openIdService, store, tenantService);
+  constructor(store: Store<IState>) {
+    super(store);
   }
 
   public ngOnInit(): void {}

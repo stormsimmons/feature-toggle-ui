@@ -1,4 +1,4 @@
-import { BaseComponent, IState, OpenIDService, TenantService } from '@app/core';
+import { BaseComponent, IState } from '@app/core';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -8,8 +8,8 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./profile-route.component.scss'],
 })
 export class ProfileRouteComponent extends BaseComponent implements OnInit {
-  constructor(openIdService: OpenIDService, store: Store<IState>, tenantService: TenantService) {
-    super(openIdService, store, tenantService);
+  constructor(store: Store<IState>) {
+    super(store);
   }
 
   public ngOnInit() {}

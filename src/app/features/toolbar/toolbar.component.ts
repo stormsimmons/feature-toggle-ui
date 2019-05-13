@@ -19,7 +19,7 @@ export class ToolbarComponent extends BaseComponent implements OnInit {
     store: Store<IState>,
     protected tenantService: TenantService,
   ) {
-    super(openIdService, store, tenantService);
+    super(store);
   }
 
   public ngOnInit(): void {}

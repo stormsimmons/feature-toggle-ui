@@ -8,26 +8,28 @@
         {{ state.user.profile.name }}
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item (click)="onClickHome()">
-        <mat-icon matListIcon>home</mat-icon>
-        Home
+      <mat-list-item>
+        <a [routerLink]="['/']">
+          <mat-icon matListIcon>home</mat-icon>
+          Home
+        </a>
       </mat-list-item>
-      <mat-list-item *ngIf="state.tenants" (click)="onClickTenants()">
-        <mat-icon matListIcon>public</mat-icon>
-        Tenants
+      <mat-list-item *ngIf="state.tenants">
+        <a [routerLink]="['/tenant']">
+          <mat-icon matListIcon>public</mat-icon>
+          Tenants
+        </a>
       </mat-list-item>
-      <mat-list-item (click)="onClickAudits()">
-        <mat-icon matListIcon>edit</mat-icon>
-        Audits
+      <mat-list-item>
+        <a [routerLink]="['/audits']">
+          <mat-icon matListIcon>edit</mat-icon>
+          Audits
+        </a>
       </mat-list-item>
+      <mat-divider></mat-divider>
       <mat-list-item (click)="onClickSignOut()">
         <mat-icon matListIcon>vpn_key</mat-icon>
         Sign Out
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item (click)="onClickDocumentation()">
-        <mat-icon matListIcon>link</mat-icon>
-        Documentation
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>

@@ -1,4 +1,4 @@
-import { BaseComponent, IState, OpenIDService, TenantService } from '@app/core';
+import { BaseComponent, IState, OpenIDService } from '@app/core';
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
@@ -13,25 +13,8 @@ export class AppComponent extends BaseComponent {
   @ViewChild('sidenav')
   public sidenav: MatSidenav = null;
 
-  constructor(
-    protected openIdService: OpenIDService,
-    protected router: Router,
-    store: Store<IState>,
-    tenantService: TenantService,
-  ) {
-    super(openIdService, store, tenantService);
-  }
-
-  public onClickAudits(): void {
-    this.router.navigateByUrl('/audits');
-  }
-
-  public onClickDocumentation(): void {
-    this.router.navigateByUrl('/documentation');
-  }
-
-  public onClickHome(): void {
-    this.router.navigateByUrl('');
+  constructor(protected openIdService: OpenIDService, protected router: Router, store: Store<IState>) {
+    super(store);
   }
 
   public onClickProfile(): void {
@@ -40,9 +23,5 @@ export class AppComponent extends BaseComponent {
 
   public onClickSignOut(): void {
     this.openIdService.signOut().subscribe();
-  }
-
-  public onClickTenants(): void {
-    this.router.navigateByUrl('/tenant');
   }
 }

@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./callback-route.component.scss'],
 })
 export class CallbackRouteComponent implements OnInit {
-  constructor(protected openIDService: OpenIDService, protected router: Router) {}
+  constructor(protected openIdService: OpenIDService, protected router: Router) {}
 
   public ngOnInit(): void {
-    this.openIDService.callback().subscribe(() => {
+    this.openIdService.callback().subscribe(() => {
       this.router.navigateByUrl('');
     });
   }
