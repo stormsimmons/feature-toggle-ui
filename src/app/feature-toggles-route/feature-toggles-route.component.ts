@@ -24,6 +24,8 @@ export class FeatureTogglesRouteComponent extends BaseComponent implements OnIni
   }
 
   public ngOnInit(): void {
+    super.ngOnInit();
+
     this.store.dispatch(new FeatureTogglesLoad(false));
   }
 

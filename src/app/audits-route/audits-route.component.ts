@@ -16,6 +16,8 @@ export class AuditsRouteComponent extends BaseComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    super.ngOnInit();
+
     this.userParam = this.activatedRoute.snapshot.params.user;
 
     if (this.userParam) {

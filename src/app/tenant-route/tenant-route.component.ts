@@ -14,5 +14,7 @@ export class TenantRouteComponent extends BaseComponent implements OnInit {
     super(store);
   }
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    super.ngOnInit();
+  }
 }

@@ -1,5 +1,5 @@
 import * as OIDC from 'oidc-client';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { from, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -40,7 +40,7 @@ export class OpenIDService {
   }
 
   public getUser(): Observable<any> {
-    return from(this.manager.getUser());
+    return of(null).pipe(mergeMap(() => from(this.manager.getUser())));
   }
 
   public signIn(force: boolean = false): Observable<boolean> {

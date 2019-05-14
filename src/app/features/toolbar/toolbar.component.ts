@@ -22,7 +22,9 @@ export class ToolbarComponent extends BaseComponent implements OnInit {
     super(store);
   }
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    super.ngOnInit();
+  }
 
   public onClickManageTenants(): void {
     this.router.navigateByUrl('/tenant');

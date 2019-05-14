@@ -21,7 +21,7 @@ export function featureTogglesReducer(state = initialState, action: Action): Arr
         };
       });
     case ActionTypes.FeatureTogglesSet:
-      return (action as FeatureTogglesSet).featureToggles;
+      return [...(action as FeatureTogglesSet).featureToggles];
     default:
       return state;
   }

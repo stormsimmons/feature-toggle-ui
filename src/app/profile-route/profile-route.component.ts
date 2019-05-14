@@ -12,5 +12,7 @@ export class ProfileRouteComponent extends BaseComponent implements OnInit {
     super(store);
   }
 
-  public ngOnInit() {}
+  public ngOnInit() {
+    super.ngOnInit();
+  }
 }

@@ -20,6 +20,8 @@ export class FeatureToggleEditRouteComponent extends BaseComponent implements On
   }
 
   public ngOnInit(): void {
+    super.ngOnInit();
+
     const key: string = this.activatedRoute.snapshot.params.key;
 
     this.store.subscribe((state: IState) => {
