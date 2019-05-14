@@ -54,6 +54,18 @@ export class TenantUpdate implements Action {
   constructor(public tenant: ITenant) {}
 }
 
+export class TenantUpdateAddUser implements Action {
+  readonly type = ActionTypes.TenantUpdateAddUser;
+
+  constructor(public tenant: ITenant, public user: string) {}
+}
+
+export class TenantUpdateRemoveUser implements Action {
+  readonly type = ActionTypes.TenantUpdateRemoveUser;
+
+  constructor(public tenant: ITenant, public user: string) {}
+}
+
 export class TenantsLoad implements Action {
   readonly type = ActionTypes.TenantsLoad;
 }

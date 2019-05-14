@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { BaseComponent, IState, ITenant, TenantUpdate } from '@app/core';
+import { BaseComponent, IState, ITenant, TenantUpdate, TenantUpdateAddUser, TenantUpdateRemoveUser } from '@app/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { empty } from 'rxjs';
 import { MatDialog, MatTable } from '@angular/material';
@@ -29,6 +29,10 @@ export class TenantEditRouteComponent extends BaseComponent implements OnInit {
     this.store.subscribe((state: IState) => {
       if (state.tenants) {
         this.tenant = state.tenants.find((x: ITenant) => x.key === key);
+
+        if (this.table) {
+          this.table.renderRows();
+        }
       }
     });
   }
@@ -39,29 +43,15 @@ export class TenantEditRouteComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((dialogResult: string) => {
-      if (!tenant) {
+      if (!dialogResult) {
         return empty();
       }
 
-      tenant.users.push(dialogResult);
-
-      this.table.renderRows();
-
-      this.store.dispatch(new TenantUpdate(tenant));
+      this.store.dispatch(new TenantUpdateAddUser(tenant, dialogResult));
     });
   }
 
   public onClickTenantRemoveUser(tenant: ITenant, user: string): void {
-    const index: number = tenant.users.indexOf(user);
-
-    if (index === -1) {
-      return;
-    }
-
-    tenant.users.splice(index, 1);
-
-    this.table.renderRows();
-
-    this.store.dispatch(new TenantUpdate(tenant));
+    this.store.dispatch(new TenantUpdateRemoveUser(tenant, user));
   }
 }

@@ -33,14 +33,10 @@ export class FeatureToggleEffects {
     .pipe(mergeMap(() => this.featureToggleService.findAll()))
     .pipe(map((featureToggles: Array<IFeatureToggle>) => new FeatureTogglesSet(featureToggles)));
 
-  @Effect()
+  @Effect({ dispatch: false })
   public update = this.actions
     .pipe(ofType(ActionTypes.FeatureToggleUpdate))
     .pipe(
-      mergeMap((action: Action) =>
-        this.featureToggleService
-          .update((action as FeatureToggleUpdate).featureToggle)
-          .pipe(map(() => new FeatureTogglesLoad((action as FeatureToggleUpdate).includeArchived))),
-      ),
+      mergeMap((action: Action) => this.featureToggleService.update((action as FeatureToggleUpdate).featureToggle)),
     );
 }

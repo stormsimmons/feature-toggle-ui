@@ -4,7 +4,7 @@ import { forkJoin, Observable, of, throwError, timer } from 'rxjs';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IState } from '../redux';
-import { ITenant } from '../models';
+import { ITenant, IUser } from '../models';
 import { OpenIDService, TenantService } from '../services';
 import { Store } from '@ngrx/store';
 
@@ -19,9 +19,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const isMultiTenant: boolean = environment.multiTenancy.enabled && !req.url.startsWith('/tenant');
 
-    const observables: Array<Observable<any>> = isMultiTenant
-      ? [this.openIdService.getUser(), this.getTenant()]
-      : [this.openIdService.getUser()];
+    const observables: Array<Observable<any>> = isMultiTenant ? [this.getUser(), this.getTenant()] : [this.getUser()];
 
     return forkJoin(observables)
       .pipe(
@@ -58,5 +56,12 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       )
       .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
       .pipe(map((state: IState) => state.tenants[0]));
+  }
+
+  protected getUser(): Observable<IUser> {
+    return this.openIdService
+      .getUser()
+      .pipe(mergeMap((user) => (user ? of(user) : throwError(new Error()))))
+      .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))));
   }
 }
