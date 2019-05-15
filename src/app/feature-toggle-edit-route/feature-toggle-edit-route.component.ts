@@ -1,22 +1,14 @@
 import { ActivatedRoute } from '@angular/router';
-import {
-  BaseComponent,
-  FeatureToggleUpdate,
-  IEnvironment,
-  IFeatureToggle,
-  IState,
-  FeatureTogglesLoad,
-} from '@app/core';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { environment } from '@environments/environment';
+import { IEnvironment, IFeatureToggle, FeatureToggleService, ITenant, TenantService } from '@app/core';
 
 @Component({
   selector: 'app-feature-toggle-edit-route',
   templateUrl: './feature-toggle-edit-route.component.html',
   styleUrls: ['./feature-toggle-edit-route.component.scss'],
 })
-export class FeatureToggleEditRouteComponent extends BaseComponent implements OnInit {
+export class FeatureToggleEditRouteComponent implements OnInit {
   public ENVIRONMENT = environment;
 
   public featureToggle: IFeatureToggle = null;
@@ -25,40 +17,34 @@ export class FeatureToggleEditRouteComponent extends BaseComponent implements On
 
   public selectedEnvironmentKey: string = null;
 
-  constructor(protected activatedRoute: ActivatedRoute, store: Store<IState>) {
-    super(store);
-  }
+  public tenant: ITenant = null;
+
+  constructor(
+    protected activatedRoute: ActivatedRoute,
+    protected featureToggleService: FeatureToggleService,
+    public tenantService: TenantService,
+  ) {}
 
   public ngOnInit(): void {
-    super.ngOnInit();
-
-    if (!this.state.featureToggles) {
-      this.store.dispatch(new FeatureTogglesLoad(true));
-    }
-
     const key: string = this.activatedRoute.snapshot.params.key;
 
-    this.store.subscribe((state: IState) => {
-      if (this.state.featureToggles) {
-        this.featureToggle = state.featureToggles.find((featureToggle: IFeatureToggle) => featureToggle.key === key);
+    this.featureToggleService.find(key).subscribe((featureToggle: IFeatureToggle) => {
+      this.featureToggle = featureToggle;
 
-        if (this.featureToggle) {
-          this.selectedEnvironmentKey = this.featureToggle.environments[0].key;
+      this.selectedEnvironmentKey = this.featureToggle.environments[0].key;
 
-          this.onSelectionChangeEnvironmentKey();
-        } else {
-          this.store.dispatch(new FeatureTogglesLoad(true));
-        }
-      }
+      this.onSelectionChangeEnvironmentKey();
     });
+
+    this.tenantService.findEnsure().subscribe((tenant: ITenant) => (this.tenant = tenant));
   }
 
   public onChangeFeatureToggle(): void {
-    this.store.dispatch(new FeatureToggleUpdate(this.featureToggle, false));
+    this.featureToggleService.update(this.featureToggle).subscribe();
   }
 
   public onChangeFeatureToggleEditConsumers(): void {
-    this.store.dispatch(new FeatureToggleUpdate(this.featureToggle, false));
+    this.featureToggleService.update(this.featureToggle).subscribe();
   }
 
   public onSelectionChangeEnvironmentKey(): void {

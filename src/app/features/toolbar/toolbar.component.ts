@@ -1,29 +1,36 @@
-import { BaseComponent, IState, ITenant, OpenIDService, TenantService } from '@app/core';
 import { Component, Input, OnInit } from '@angular/core';
+import { delayWhen, mergeMap, retryWhen } from 'rxjs/operators';
+import { environment } from '@environments/environment';
+import { ITenant, OpenIDService, TenantService } from '@app/core';
 import { MatSidenav } from '@angular/material';
+import { of, throwError, timer } from 'rxjs';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
 })
-export class ToolbarComponent extends BaseComponent implements OnInit {
+export class ToolbarComponent implements OnInit {
   @Input()
   public sidenav: MatSidenav = null;
+
+  public tenants: Array<ITenant> = null;
 
   constructor(
     protected openIdService: OpenIDService,
     protected router: Router,
-    store: Store<IState>,
     protected tenantService: TenantService,
-  ) {
-    super(store);
-  }
+  ) {}
 
   public ngOnInit(): void {
-    super.ngOnInit();
+    if (environment.multiTenancy.enabled) {
+      this.tenantService
+        .findAll()
+        .pipe(mergeMap((tenants: Array<ITenant>) => (tenants.length ? of(tenants) : throwError(new Error()))))
+        .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
+        .subscribe((tenants: Array<ITenant>) => (this.tenants = tenants));
+    }
   }
 
   public onClickManageTenants(): void {
@@ -39,8 +46,6 @@ export class ToolbarComponent extends BaseComponent implements OnInit {
   }
 
   public onClickTenant(tenant: ITenant): void {
-    this.tenantService.setSelectedTenant(tenant).subscribe(() => {
-      window.location.reload();
-    });
+    // TODO
   }
 }

@@ -1,5 +1,5 @@
 <div>
-  <app-feature-toggle-details [featureToggle]="featureToggle"></app-feature-toggle-details>
+  <app-feature-toggle-details *ngIf="featureToggle" [featureToggle]="featureToggle"></app-feature-toggle-details>
 
   <mat-card *ngIf="featureToggle">
     <div>
@@ -13,14 +13,14 @@
       </mat-form-field>
     </div>
 
-    <div class="grey-section">
+    <div *ngIf="featureToggle && tenant" class="grey-section">
       <label>Use this link to check the state of your feature toggle.</label>
       <span>GET</span>
       <a
         href="{{
           [
             ENVIRONMENT.uri,
-            state.tenant.key,
+            tenant.key,
             'feature-toggle',
             featureToggle.key,
             'enabled',
@@ -29,13 +29,13 @@
           ].join('/')
         }}"
       >
-        {{ ENVIRONMENT.uri }}/{{ state.tenant.key }}/feature-toggle/{{ featureToggle.key }}/enabled/{{
+        {{ ENVIRONMENT.uri }}/{{ tenant.key }}/feature-toggle/{{ featureToggle.key }}/enabled/{{
           selectedEnvironment.key
         }}/<span>my-consumer</span>
       </a>
     </div>
 
-    <mat-list>
+    <mat-list *ngIf="featureToggle">
       <mat-list-item>
         <b> Key </b>: &nbsp;
         <b>

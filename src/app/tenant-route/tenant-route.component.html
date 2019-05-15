@@ -5,9 +5,9 @@
     </mat-card-header>
   </mat-card>
 
-  <mat-progress-bar *ngIf="!state.tenants" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="!tenants" mode="indeterminate"></mat-progress-bar>
 
-  <table *ngIf="state.tenants" [dataSource]="state.tenants" mat-table class="mat-elevation-z8">
+  <table *ngIf="tenants" [dataSource]="tenants" mat-table class="mat-elevation-z8">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let element">

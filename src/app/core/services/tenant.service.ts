@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ITenant } from '../models';
-import { map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { map, mergeMap, retryWhen, delayWhen } from 'rxjs/operators';
+import { Observable, of, throwError, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,14 +18,10 @@ export class TenantService {
     return this.findAll().pipe(map((tenants: Array<ITenant>) => tenants.find((x: ITenant) => x.key === key)));
   }
 
-  public findSelected(): Observable<ITenant> {
-    return this.findAll().pipe(
-      map((tenants: Array<ITenant>) => {
-        const tenantKey: string = localStorage.getItem('feature-toggle:tenant:key');
-
-        return tenants.find((x: ITenant) => x.key === tenantKey) || tenants[0];
-      }),
-    );
+  public findEnsure(): Observable<ITenant> {
+    return this.findAll()
+      .pipe(mergeMap((tenants: Array<ITenant>) => (tenants.length ? of(tenants[0]) : throwError(new Error()))))
+      .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))));
   }
 
   public findAll(): Observable<Array<ITenant>> {

@@ -1,25 +1,21 @@
-import { catchError, delayWhen, map, mergeMap, retryWhen, take, tap } from 'rxjs/operators';
+import { catchError, delayWhen, map, mergeMap, retryWhen } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { forkJoin, Observable, of, throwError, timer } from 'rxjs';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IState } from '../redux';
 import { ITenant, IUser } from '../models';
 import { OpenIDService, TenantService } from '../services';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
-  constructor(
-    protected openIdService: OpenIDService,
-    protected store: Store<IState>,
-    protected tenantService: TenantService,
-  ) {}
+  constructor(protected openIdService: OpenIDService, protected tenantService: TenantService) {}
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const isMultiTenant: boolean = environment.multiTenancy.enabled && !req.url.startsWith('/tenant');
 
-    const observables: Array<Observable<any>> = isMultiTenant ? [this.getUser(), this.getTenant()] : [this.getUser()];
+    const observables: Array<Observable<any>> = isMultiTenant
+      ? [this.getUser(), this.tenantService.findEnsure()]
+      : [this.getUser()];
 
     return forkJoin(observables)
       .pipe(
@@ -46,22 +42,10 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       );
   }
 
-  protected getTenant(): Observable<ITenant> {
-    return this.store
-      .pipe(take(1))
-      .pipe(
-        mergeMap((state: IState) => {
-          return state.tenant ? of(state) : throwError(new Error());
-        }),
-      )
-      .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
-      .pipe(map((state: IState) => state.tenant));
-  }
-
   protected getUser(): Observable<IUser> {
     return this.openIdService
       .getUser()
-      .pipe(mergeMap((user) => (user ? of(user) : throwError(new Error()))))
+      .pipe(mergeMap((user: IUser) => (user ? of(user) : throwError(new Error()))))
       .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))));
   }
 }

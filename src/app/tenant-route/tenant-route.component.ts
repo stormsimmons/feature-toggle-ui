@@ -1,20 +1,19 @@
-import { BaseComponent, IState } from '@app/core';
+import { ITenant, TenantService } from '@app/core';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-tenant-route',
   templateUrl: './tenant-route.component.html',
   styleUrls: ['./tenant-route.component.scss'],
 })
-export class TenantRouteComponent extends BaseComponent implements OnInit {
+export class TenantRouteComponent implements OnInit {
   public displayedColumns: Array<string> = ['name'];
 
-  constructor(store: Store<IState>) {
-    super(store);
-  }
+  public tenants: Array<ITenant> = null;
+
+  constructor(protected tenantService: TenantService) {}
 
   public ngOnInit(): void {
-    super.ngOnInit();
+    this.tenantService.findAll().subscribe((tenants: Array<ITenant>) => (this.tenants = tenants));
   }
 }

@@ -1,42 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FeatureToggleCreateComponent } from '../feature-toggle-create/feature-toggle-create.component';
 import { MatDialog } from '@angular/material';
-import { Store } from '@ngrx/store';
-import {
-  IFeatureToggle,
-  IState,
-  BaseComponent,
-  FeatureTogglesLoad,
-  FeatureToggleCreate,
-  FeatureToggleUpdate,
-} from '@app/core';
+import { IFeatureToggle, FeatureToggleService } from '@app/core';
 
 @Component({
   selector: 'app-feature-toggles-route',
   templateUrl: './feature-toggles-route.component.html',
   styleUrls: ['./feature-toggles-route.component.scss'],
 })
-export class FeatureTogglesRouteComponent extends BaseComponent implements OnInit {
-  public includeArchived: boolean = false;
+export class FeatureTogglesRouteComponent implements OnInit {
+  public featureToggles: Array<IFeatureToggle> = null;
 
-  constructor(protected dialog: MatDialog, store: Store<IState>) {
-    super(store);
-  }
+  constructor(protected dialog: MatDialog, protected featureToggleService: FeatureToggleService) {}
 
   public ngOnInit(): void {
-    super.ngOnInit();
-
-    this.store.dispatch(new FeatureTogglesLoad(false));
+    this.featureToggleService
+      .findAll(false)
+      .subscribe((featureToggles: Array<IFeatureToggle>) => (this.featureToggles = featureToggles));
   }
 
   public onChangeFeatureToggle(featureToggle: IFeatureToggle): void {
-    this.store.dispatch(new FeatureToggleUpdate(featureToggle, this.includeArchived));
+    this.featureToggleService.update(featureToggle).subscribe();
   }
 
   public onChangeIncludeArchived(includeArchived: boolean): void {
-    this.includeArchived = includeArchived;
-
-    this.store.dispatch(new FeatureTogglesLoad(this.includeArchived));
+    this.featureToggleService
+      .findAll(includeArchived)
+      .subscribe((featureToggles: Array<IFeatureToggle>) => (this.featureToggles = featureToggles));
   }
 
   public onClickFabAdd(): void {
@@ -44,7 +34,7 @@ export class FeatureTogglesRouteComponent extends BaseComponent implements OnIni
 
     dialogRef.afterClosed().subscribe((dialogResult: IFeatureToggle) => {
       if (dialogResult) {
-        this.store.dispatch(new FeatureToggleCreate(dialogResult, this.includeArchived));
+        this.featureToggleService.create(dialogResult).subscribe();
       }
     });
   }

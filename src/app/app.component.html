@@ -3,9 +3,9 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <mat-list-item *ngIf="state.user" (click)="onClickProfile()">
-        <img src="{{ state.user.profile.picture }}" />
-        {{ state.user.profile.name }}
+      <mat-list-item *ngIf="user" (click)="onClickProfile()">
+        <img src="{{ user.profile.picture }}" />
+        {{ user.profile.name }}
       </mat-list-item>
       <mat-divider></mat-divider>
       <a [routerLink]="['/']">
@@ -15,7 +15,7 @@
         </mat-list-item>
       </a>
       <a [routerLink]="['/tenant']">
-        <mat-list-item *ngIf="state.tenants">
+        <mat-list-item *ngIf="tenants">
           <mat-icon matListIcon>public</mat-icon>
           Tenants
         </mat-list-item>

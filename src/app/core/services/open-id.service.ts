@@ -1,6 +1,7 @@
 import * as OIDC from 'oidc-client';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { from, Observable, of } from 'rxjs';
+import { Md5 } from 'ts-md5';
 import { Router } from '@angular/router';
 
 export class OpenIDService {
@@ -40,7 +41,26 @@ export class OpenIDService {
   }
 
   public getUser(): Observable<any> {
-    return of(null).pipe(mergeMap(() => from(this.manager.getUser())));
+    return of(null).pipe(
+      mergeMap(() =>
+        from(
+          this.manager.getUser().then((user) => {
+            return user
+              ? {
+                  ...user,
+                  profile: {
+                    ...user.profile,
+                    email: user.profile.email.toLowerCase(),
+                    picture: user.profile.picture
+                      ? user.profile.picture
+                      : `https://www.gravatar.com/avatar/${Md5.hashStr(user.profile.email.toLowerCase()).toString()}`,
+                  },
+                }
+              : null;
+          }),
+        ),
+      ),
+    );
   }
 
   public signIn(force: boolean = false): Observable<boolean> {
