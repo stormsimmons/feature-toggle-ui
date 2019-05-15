@@ -7,6 +7,7 @@ export class BaseComponent implements OnInit {
   public state: IState = {
     audits: null,
     featureToggles: null,
+    tenant: null,
     tenants: null,
     user: null,
   };

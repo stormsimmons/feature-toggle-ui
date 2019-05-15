@@ -30,7 +30,7 @@ export class TenantEditRouteComponent extends BaseComponent implements OnInit {
 
     this.store.subscribe((state: IState) => {
       if (state.tenants) {
-        this.tenant = state.tenants.find((x: ITenant) => x.key === key);
+        this.tenant = state.tenant;
 
         if (this.table) {
           this.table.renderRows();

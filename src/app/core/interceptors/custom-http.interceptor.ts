@@ -51,11 +51,11 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       .pipe(take(1))
       .pipe(
         mergeMap((state: IState) => {
-          return state.tenants ? of(state) : throwError(new Error());
+          return state.tenant ? of(state) : throwError(new Error());
         }),
       )
       .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
-      .pipe(map((state: IState) => state.tenants[0]));
+      .pipe(map((state: IState) => state.tenant));
   }
 
   protected getUser(): Observable<IUser> {

@@ -13,6 +13,28 @@
       </mat-form-field>
     </div>
 
+    <div class="grey-section">
+      <label>Use this link to check the state of your feature toggle.</label>
+      <span>GET</span>
+      <a
+        href="{{
+          [
+            ENVIRONMENT.uri,
+            state.tenant.key,
+            'feature-toggle',
+            featureToggle.key,
+            'enabled',
+            selectedEnvironment.key,
+            'my-consumer'
+          ].join('/')
+        }}"
+      >
+        {{ ENVIRONMENT.uri }}/{{ state.tenant.key }}/feature-toggle/{{ featureToggle.key }}/enabled/{{
+          selectedEnvironment.key
+        }}/<span>my-consumer</span>
+      </a>
+    </div>
+
     <mat-list>
       <mat-list-item>
         <b> Key </b>: &nbsp;

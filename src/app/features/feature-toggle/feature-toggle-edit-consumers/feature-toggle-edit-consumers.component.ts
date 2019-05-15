@@ -25,7 +25,7 @@ export class FeatureToggleEditConsumersComponent implements OnInit {
     const value: string = event.value;
 
     if ((value || '').trim()) {
-      this.consumers.push(value.trim());
+      this.consumers.push(value.trim().toLowerCase());
 
       this.change.emit(this.consumers);
     }

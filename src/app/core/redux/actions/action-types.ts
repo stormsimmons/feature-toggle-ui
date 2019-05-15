@@ -7,6 +7,7 @@ export enum ActionTypes {
   FeatureTogglesLoad = '[FeatureToggles] Load',
   FeatureTogglesSet = '[FeatureToggles] Set',
   TenantCreate = '[Tenant] Create',
+  TenantSet = '[Tenant] Set',
   TenantUpdate = '[Tenant] Update',
   TenantUpdateAddUser = '[Tenant] Update Add User',
   TenantUpdateRemoveUser = '[Tenant] Update Remove User',

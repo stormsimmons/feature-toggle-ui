@@ -46,11 +46,11 @@ export class FeatureToggleCreateComponent implements OnInit {
           consumers: [],
           enabled: false,
           enabledForAll: false,
-          key: x[0],
+          key: x[0].toLowerCase(),
           name: x[1],
         };
       }),
-      key: this.key.value,
+      key: this.key.value.toLowerCase(),
       name: this.name.value,
       updatedAt: new Date().getTime(),
       user: null,

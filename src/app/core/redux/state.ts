@@ -5,6 +5,8 @@ export interface IState {
 
   featureToggles: Array<IFeatureToggle>;
 
+  tenant: ITenant;
+
   tenants: Array<ITenant>;
 
   user: IUser;

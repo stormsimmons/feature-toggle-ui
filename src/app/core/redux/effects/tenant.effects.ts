@@ -15,6 +15,7 @@ import {
   TenantUpdate,
   TenantUpdateAddUser,
   TenantUpdateRemoveUser,
+  TenantSet,
 } from '../actions';
 
 @Injectable()
@@ -54,52 +55,62 @@ export class TenantEffects {
       }),
     );
 
-  // @Effect({ dispatch: false })
-  // public update = this.actions
-  //   .pipe(ofType(ActionTypes.TenantUpdate))
-  //   .pipe(mergeMap((action: Action) => this.tenantService.update((action as TenantUpdate).tenant)));
+  @Effect()
+  public set = this.actions.pipe(ofType(ActionTypes.TenantsSet)).pipe(
+    map((action: Action) => {
+      const tenants: Array<ITenant> = (action as TenantsSet).tenants;
+
+      const tenantKey: string = localStorage.getItem('feature-toggle:tenant:key');
+
+      const tenant: ITenant = tenants.find((x: ITenant) => x.key === tenantKey) || tenants[0];
+
+      return new TenantSet({
+        ...tenant,
+        users: [...tenant.users],
+      });
+    }),
+  );
+
+  @Effect({ dispatch: false })
+  public update = this.actions
+    .pipe(ofType(ActionTypes.TenantUpdate))
+    .pipe(mergeMap((action: Action) => this.tenantService.update((action as TenantUpdate).tenant)));
 
   @Effect()
-  public updateAddUser = this.actions
-    .pipe(ofType(ActionTypes.TenantUpdateAddUser))
-    .pipe(
-      mergeMap((action: Action) => {
-        const tenant: ITenant = {
-          ...(action as TenantUpdateAddUser).tenant,
-          users: [...(action as TenantUpdateAddUser).tenant.users],
-        };
+  public updateAddUser = this.actions.pipe(ofType(ActionTypes.TenantUpdateAddUser)).pipe(
+    map((action: Action) => {
+      const tenant: ITenant = {
+        ...(action as TenantUpdateAddUser).tenant,
+        users: [...(action as TenantUpdateAddUser).tenant.users],
+      };
 
-        const user: string = (action as TenantUpdateAddUser).user;
+      const user: string = (action as TenantUpdateAddUser).user;
 
-        tenant.users.push(user);
+      tenant.users.push(user);
 
-        return this.tenantService.update(tenant);
-      }),
-    )
-    .pipe(map((tenant: ITenant) => new TenantUpdate(tenant)));
+      return new TenantUpdate(tenant);
+    }),
+  );
 
   @Effect()
-  public updateRemoveUser = this.actions
-    .pipe(ofType(ActionTypes.TenantUpdateRemoveUser))
-    .pipe(
-      mergeMap((action: Action) => {
-        const tenant: ITenant = {
-          ...(action as TenantUpdateRemoveUser).tenant,
-          users: [...(action as TenantUpdateRemoveUser).tenant.users],
-        };
+  public updateRemoveUser = this.actions.pipe(ofType(ActionTypes.TenantUpdateRemoveUser)).pipe(
+    map((action: Action) => {
+      const tenant: ITenant = {
+        ...(action as TenantUpdateRemoveUser).tenant,
+        users: [...(action as TenantUpdateRemoveUser).tenant.users],
+      };
 
-        const user: string = (action as TenantUpdateRemoveUser).user;
+      const user: string = (action as TenantUpdateRemoveUser).user;
 
-        const index: number = tenant.users.indexOf(user);
+      const index: number = tenant.users.indexOf(user);
 
-        if (index === -1) {
-          return;
-        }
+      if (index === -1) {
+        return;
+      }
 
-        tenant.users.splice(index, 1);
+      tenant.users.splice(index, 1);
 
-        return this.tenantService.update(tenant);
-      }),
-    )
-    .pipe(map((tenant: ITenant) => new TenantUpdate(tenant)));
+      return new TenantUpdate(tenant);
+    }),
+  );
 }
