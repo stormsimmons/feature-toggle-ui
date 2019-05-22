@@ -28,10 +28,33 @@
             'my-consumer'
           ].join('/')
         }}"
+        target="_blank"
       >
         {{ ENVIRONMENT.uri }}/{{ tenant.key }}/feature-toggle/{{ featureToggle.key }}/enabled/{{
           selectedEnvironment.key
         }}/<span>my-consumer</span>
+      </a>
+    </div>
+
+    <div *ngIf="featureToggle && !ENVIRONMENT.multiTenancy.enabled" class="grey-section">
+      <label>Use this link to check the state of your feature toggle.</label>
+      <span>GET</span>
+      <a
+        href="{{
+          [
+            ENVIRONMENT.uri,
+            'feature-toggle',
+            featureToggle.key,
+            'enabled',
+            selectedEnvironment.key,
+            'my-consumer'
+          ].join('/')
+        }}"
+        target="_blank"
+      >
+        {{ ENVIRONMENT.uri }}/feature-toggle/{{ featureToggle.key }}/enabled/{{ selectedEnvironment.key }}/<span
+          >my-consumer</span
+        >
       </a>
     </div>
 
