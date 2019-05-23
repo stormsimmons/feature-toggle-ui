@@ -34,7 +34,11 @@ export class FeatureTogglesRouteComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((dialogResult: IFeatureToggle) => {
       if (dialogResult) {
-        this.featureToggleService.create(dialogResult).subscribe();
+        this.featureToggleService.create(dialogResult).subscribe(() => {
+          this.featureToggleService
+            .findAll(false)
+            .subscribe((featureToggles: Array<IFeatureToggle>) => (this.featureToggles = featureToggles));
+        });
       }
     });
   }
