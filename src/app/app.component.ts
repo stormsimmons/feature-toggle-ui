@@ -13,7 +13,7 @@ import { environment } from '@environments/environment';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @ViewChild('sidenav')
+  @ViewChild('sidenav', { static: true })
   public sidenav: MatSidenav = null;
 
   public tenants: Array<ITenant> = null;

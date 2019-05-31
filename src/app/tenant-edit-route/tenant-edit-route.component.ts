@@ -13,7 +13,7 @@ import { ITenant, TenantService } from '@app/core';
 export class TenantEditRouteComponent implements OnInit {
   public displayedColumns: Array<string> = ['user', 'action'];
 
-  @ViewChild('table')
+  @ViewChild('table', { static: true })
   public table: MatTable<ITenant> = null;
 
   public tenant: ITenant = null;
