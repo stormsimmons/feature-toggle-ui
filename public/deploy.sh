@@ -1,9 +1,9 @@
-git clone https://github.com/xyzblocks/xyzblocks.dev.git
+git clone https://github.com/xyzblocks/feature-toggle-ui.git
 
-cd xyzblocks.dev
+cd feature-toggle-ui/public
 
-docker build --no-cache -t xyzblocks-dev .
+docker build --no-cache -t foggle-io .
 
-docker run -d --name xyzblocks-dev -p 8081:80 xyzblocks-dev
+docker run -d --name foggle-io -p 8081:80 foggle-io
 
 sudo letsencrypt certonly --standalone --email xyzblocks@gmail.com -d foggle.io
