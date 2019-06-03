@@ -1,5 +1,7 @@
 FROM nginx
 
+COPY nginx.conf /etc/nginx/sites-enabled/default
+
 RUN apt-get update
 RUN apt-get upgrade -y
 

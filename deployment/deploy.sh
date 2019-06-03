@@ -1,12 +1,12 @@
-# apt install letsencrypt
+# apt install -y letsencrypt
 # letsencrypt certonly --standalone --email xyzblocks@gmail.com -d foggle.io
 # letsencrypt certonly --standalone --email xyzblocks@gmail.com -d app.foggle.io
 
 apt update
-apt install nginx
+apt install -y nginx
 ufw allow 'Nginx Full'
 systemctl enable nginx
-curl -o /etc/nginx/sites-enabled/foggle.io 
+curl -o /etc/nginx/sites-enabled/foggle.io https://raw.githubusercontent.com/xyzblocks/feature-toggle-ui/master/deployment/nginx.conf
 
 git clone https://github.com/xyzblocks/feature-toggle-ui.git
 
