@@ -1,6 +1,6 @@
 FROM nginx
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build-stage nginx.conf /etc/nginx/conf.d/default.conf
 
 RUN apt-get update
 RUN apt-get upgrade -y
