@@ -1,6 +1,6 @@
 FROM nginx
 
-COPY nginx.conf /etc/nginx/sites-enabled/default
+COPY nginx.conf /etc/nginx/nginx.conf
 
 RUN apt-get update
 RUN apt-get upgrade -y
