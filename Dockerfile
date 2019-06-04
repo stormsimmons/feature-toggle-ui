@@ -11,7 +11,7 @@ RUN apt-get install -y curl
 
 WORKDIR /usr/src/app
 
-RUN git clone https://github.com/xyzblocks/feature-toggle-ui.git .
+COPY . ./
 
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get install -y nodejs
