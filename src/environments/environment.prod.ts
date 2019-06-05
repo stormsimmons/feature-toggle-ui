@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  uri: 'http://localhost:8080/api',
+  uri: 'https://foggle.io/api',
   featureToggle: {
     defaultEnvironments: [
       ['development', 'Development'],
@@ -14,8 +14,8 @@ export const environment = {
     enabled: true,
   },
   openIdConfiguration: {
-    authority: 'https://demo.identityserver.io',
-    client_id: 'implicit',
+    authority: 'https://xyzblocks.auth0.com',
+    client_id: 'SJytKyPQ5eiPtmIrxdmFmun3JKtXmkAR',
     redirect_uri: `${window.location.origin}/callback`,
     scope: 'openid profile email',
     signingKeys: undefined,
