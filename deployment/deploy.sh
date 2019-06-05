@@ -13,6 +13,6 @@ curl -o /etc/nginx/sites-enabled/foggle.io https://raw.githubusercontent.com/xyz
 
 docker run -d --name foggle-io -p 8081:80 xyzblocks/foggle-io
 
-docker run -d --name feature-toggle-ui -p 8082:80 xyzblocks/feature-toggle-ui
+docker run -d --name app-foggle-io -p 8082:80 xyzblocks/app-foggle-io
 
 docker run -d --name feature-toggle-nodejs -p 8083:8080 -e "AUDIENCE=SJytKyPQ5eiPtmIrxdmFmun3JKtXmkAR" -e "AUTHORITY=https://xyzblocks.auth0.com" -e "CONNECTION_STRING=" -e "HOST=0.0.0.0"  xyzblocks/feature-toggle-nodejs
