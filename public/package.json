@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "test": "node-sass ./sass -o ./css && http-server ."
-  },
-  "dependencies": {
-    "node-sass": "^4.12.0"
-  }
-}
