@@ -1,3 +1,0 @@
-Sitemap: https://foggle.io/sitemap.xml
-User-agent: *
-Disallow: 
