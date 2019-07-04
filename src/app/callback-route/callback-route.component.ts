@@ -11,8 +11,10 @@ export class CallbackRouteComponent implements OnInit {
   constructor(protected openIdService: OpenIDService, protected router: Router) {}
 
   public ngOnInit(): void {
-    this.openIdService.callback().subscribe(() => {
-      this.router.navigateByUrl('');
-    });
+    setTimeout(() => {
+      this.openIdService.callback().subscribe(() => {
+        this.router.navigateByUrl('');
+      });
+    }, 1500);
   }
 }
