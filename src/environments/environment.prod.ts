@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  uri: 'http://localhost:8080/api',
+  uri: `${window.location.protocol}//api.${window.location.hostname}`,
   featureToggle: {
     defaultEnvironments: [
       ['development', 'Development'],
