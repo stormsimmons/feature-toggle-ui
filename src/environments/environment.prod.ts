@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  uri: `${window.location.protocol}//api.${window.location.hostname}/api`,
+  uri: `${window.location.protocol}//api.foggle.io/api`,
   featureToggle: {
     defaultEnvironments: [
       ['development', 'Development'],
