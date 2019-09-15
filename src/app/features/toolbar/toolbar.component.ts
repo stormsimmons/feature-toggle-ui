@@ -42,7 +42,9 @@ export class ToolbarComponent implements OnInit {
   }
 
   public onClickSignOut(): void {
-    this.openIdService.signOut().subscribe();
+    this.openIdService.signOut().subscribe(() => {
+      window.location.reload();
+    });
   }
 
   public onClickTenant(tenant: ITenant): void {
