@@ -65,6 +65,8 @@ export class AppComponent {
   }
 
   public onClickSignOut(): void {
-    this.openIdService.signOut().subscribe();
+    this.openIdService.signOut().subscribe(() => {
+      window.location.reload();
+    });
   }
 }
