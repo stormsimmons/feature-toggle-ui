@@ -14,8 +14,8 @@ export const environment = {
     enabled: true,
   },
   openIdConfiguration: {
-    authority: 'https://xyzblocks.auth0.com',
-    client_id: 'SJytKyPQ5eiPtmIrxdmFmun3JKtXmkAR',
+    authority: 'https://accounts.google.com',
+    client_id: '510656710354-hbnunafcifiihhqevemqiu2tadhrl11u.apps.googleusercontent.com',
     redirect_uri: `${window.location.origin}/callback`,
     scope: 'openid profile email',
     signingKeys: undefined,
