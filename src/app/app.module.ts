@@ -5,7 +5,7 @@ import { AuditsRouteComponent } from './audits-route/audits-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CallbackRouteComponent } from './callback-route/callback-route.component';
-import { FeatureToggleCreateComponent } from './feature-toggle-create/feature-toggle-create.component';
+import { FeatureToggleCreateComponent } from './features/feature-toggle/feature-toggle-create/feature-toggle-create.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

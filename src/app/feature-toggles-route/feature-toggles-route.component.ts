@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FeatureToggleCreateComponent } from '../feature-toggle-create/feature-toggle-create.component';
+import { FeatureToggleCreateComponent } from '../features/feature-toggle/feature-toggle-create/feature-toggle-create.component';
 import { MatDialog } from '@angular/material';
 import { IFeatureToggle, FeatureToggleService } from '@app/core';
 
