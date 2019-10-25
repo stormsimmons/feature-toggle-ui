@@ -4,7 +4,7 @@
 
 ## [Check it out here](https://feature-toggle.xyzblocks.dev)
 
-![Screenshot](https://github.com/xyzblocks/xyzblocks.dev/raw/master/images/screenshot.png)
+![Screenshot](https://github.com/xyzblocks/feature-toggle-ui/raw/master/screenshot.png)
 
 ## Contributing
 
