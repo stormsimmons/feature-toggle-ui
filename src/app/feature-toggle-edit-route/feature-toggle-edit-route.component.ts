@@ -36,9 +36,7 @@ export class FeatureToggleEditRouteComponent implements OnInit {
       this.onSelectionChangeEnvironmentKey();
     });
 
-    if (environment.multiTenancy.enabled) {
-      this.tenantService.findEnsure().subscribe((tenant: ITenant) => (this.tenant = tenant));
-    }
+    this.tenantService.findEnsure().subscribe((tenant: ITenant) => (this.tenant = tenant));
   }
 
   public onChangeFeatureToggle(): void {

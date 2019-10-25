@@ -3,7 +3,7 @@ import { environment } from '@environments/environment';
 import { forkJoin, Observable, of, throwError, timer } from 'rxjs';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ITenant, IUser } from '../models';
+import { IUser } from '../models';
 import { OpenIDService, TenantService } from '../services';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
   constructor(protected openIdService: OpenIDService, protected tenantService: TenantService) {}
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const isMultiTenant: boolean = environment.multiTenancy.enabled && !req.url.startsWith('/tenant');
+    const isMultiTenant: boolean = !req.url.startsWith('/tenant');
 
     const observables: Array<Observable<any>> = isMultiTenant
       ? [this.getUser(), this.tenantService.findEnsure()]

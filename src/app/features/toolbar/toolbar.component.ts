@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { delayWhen, mergeMap, retryWhen } from 'rxjs/operators';
-import { environment } from '@environments/environment';
 import { ITenant, OpenIDService, TenantService } from '@app/core';
 import { MatSidenav } from '@angular/material';
 import { of, throwError, timer } from 'rxjs';
@@ -24,13 +23,11 @@ export class ToolbarComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    if (environment.multiTenancy.enabled) {
-      this.tenantService
-        .findAll()
-        .pipe(mergeMap((tenants: Array<ITenant>) => (tenants.length ? of(tenants) : throwError(new Error()))))
-        .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
-        .subscribe((tenants: Array<ITenant>) => (this.tenants = tenants));
-    }
+    this.tenantService
+      .findAll()
+      .pipe(mergeMap((tenants: Array<ITenant>) => (tenants.length ? of(tenants) : throwError(new Error()))))
+      .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
+      .subscribe((tenants: Array<ITenant>) => (this.tenants = tenants));
   }
 
   public onClickManageTenants(): void {

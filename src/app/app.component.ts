@@ -5,7 +5,6 @@ import { MatSidenav } from '@angular/material';
 import { Md5 } from 'ts-md5';
 import { of, throwError, timer } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -25,39 +24,30 @@ export class AppComponent {
     protected router: Router,
     protected tenantService: TenantService,
   ) {
-    if (environment.multiTenancy.enabled) {
-      this.tenantService
-        .findAll()
-        .pipe(mergeMap((tenants: Array<ITenant>) => (tenants.length ? of(tenants) : throwError(new Error()))))
-        .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
-        .subscribe((tenants: Array<ITenant>) => (this.tenants = tenants));
+    this.tenantService
+      .findAll()
+      .pipe(mergeMap((tenants: Array<ITenant>) => (tenants.length ? of(tenants) : throwError(new Error()))))
+      .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
+      .subscribe((tenants: Array<ITenant>) => (this.tenants = tenants));
 
-      this.openIdService
-        .getUser()
-        .pipe(mergeMap((user: IUser) => (user ? of(user) : throwError(new Error()))))
-        .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
-        .pipe(tap((user: IUser) => (this.user = user)))
-        .pipe(mergeMap(() => this.tenantService.findAll()))
-        .pipe(
-          mergeMap((tenants: Array<ITenant>) =>
-            tenants.length
-              ? of(null)
-              : this.tenantService.create({
-                  key: Md5.hashStr(this.user.profile.email).toString(),
-                  name: `Default (${this.user.profile.email})`,
-                  users: [this.user.profile.email],
-                }),
-          ),
-        )
-        .subscribe();
-    } else {
-      this.openIdService
-        .getUser()
-        .pipe(mergeMap((user: IUser) => (user ? of(user) : throwError(new Error()))))
-        .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
-        .pipe(tap((user: IUser) => (this.user = user)))
-        .subscribe();
-    }
+    this.openIdService
+      .getUser()
+      .pipe(mergeMap((user: IUser) => (user ? of(user) : throwError(new Error()))))
+      .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))))
+      .pipe(tap((user: IUser) => (this.user = user)))
+      .pipe(mergeMap(() => this.tenantService.findAll()))
+      .pipe(
+        mergeMap((tenants: Array<ITenant>) =>
+          tenants.length
+            ? of(null)
+            : this.tenantService.create({
+                key: Md5.hashStr(this.user.profile.email).toString(),
+                name: `Default (${this.user.profile.email})`,
+                users: [this.user.profile.email],
+              }),
+        ),
+      )
+      .subscribe();
   }
 
   public onClickProfile(): void {

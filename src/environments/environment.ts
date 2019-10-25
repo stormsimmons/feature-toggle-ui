@@ -14,9 +14,6 @@ export const environment = {
       ['production', 'Production'],
     ],
   },
-  multiTenancy: {
-    enabled: true,
-  },
   openIdConfiguration: {
     authority: 'https://demo.identityserver.io',
     client_id: 'implicit',
