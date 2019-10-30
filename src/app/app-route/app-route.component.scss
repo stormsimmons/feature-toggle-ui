@@ -1,0 +1,24 @@
+mat-toolbar {
+  mat-icon {
+    cursor: pointer;
+    margin-right: 0.5em;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+mat-sidenav-container {
+  min-height: calc(100% - 4em);
+
+  mat-sidenav {
+    width: 15em;
+  }
+
+  mat-sidenav-content {
+    div {
+      padding: 1em;
+    }
+  }
+}

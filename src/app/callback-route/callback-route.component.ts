@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { OpenIDService } from '@app/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,13 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./callback-route.component.scss'],
 })
 export class CallbackRouteComponent implements OnInit {
-  constructor(protected openIdService: OpenIDService, protected router: Router) {}
+  constructor(protected router: Router) {}
 
   public ngOnInit(): void {
     setTimeout(() => {
-      this.openIdService.callback().subscribe(() => {
-        this.router.navigateByUrl('');
-      });
-    }, 1500);
+      this.router.navigateByUrl('/app/home');
+    }, 2000);
   }
 }

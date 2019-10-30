@@ -1,53 +1,36 @@
-import { AuditsRouteComponent } from './audits-route/audits-route.component';
-import { CallbackRouteComponent } from './callback-route/callback-route.component';
-import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
-import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeRouteComponent } from './home-route/home-route.component';
+import { CallbackRouteComponent } from './callback-route/callback-route.component';
 import { OpenIDGuard } from './open-id.guard';
-import { ProfileRouteComponent } from './profile-route/profile-route.component';
-import { RouterModule, Routes } from '@angular/router';
-import { TenantEditRouteComponent } from './tenant-edit-route/tenant-edit-route.component';
-import { TenantRouteComponent } from './tenant-route/tenant-route.component';
+import { SignInRouteComponent } from './sign-in-route/sign-in-route.component';
+import { AppRouteComponent } from './app-route/app-route.component';
+import { CreateFeatureToggleRouteComponent } from './create-feature-toggle-route/create-feature-toggle-route.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/app/home', pathMatch: 'full' },
   {
     canActivate: [OpenIDGuard],
-    component: FeatureTogglesRouteComponent,
-    path: '',
-  },
-  {
-    canActivate: [OpenIDGuard],
-    component: AuditsRouteComponent,
-    path: 'audits',
-  },
-  {
-    canActivate: [OpenIDGuard],
-    component: AuditsRouteComponent,
-    path: 'audits/:user',
+    children: [
+      {
+        component: HomeRouteComponent,
+        path: 'home',
+      },
+      {
+        component: CreateFeatureToggleRouteComponent,
+        path: 'feature-toggle/create',
+      },
+    ],
+    component: AppRouteComponent,
+    path: 'app',
   },
   {
     component: CallbackRouteComponent,
     path: 'callback',
   },
   {
-    canActivate: [OpenIDGuard],
-    component: FeatureToggleEditRouteComponent,
-    path: 'feature-toggle/:key',
-  },
-  {
-    canActivate: [OpenIDGuard],
-    component: ProfileRouteComponent,
-    path: 'profile',
-  },
-  {
-    canActivate: [OpenIDGuard],
-    component: TenantRouteComponent,
-    path: 'tenant',
-  },
-  {
-    canActivate: [OpenIDGuard],
-    component: TenantEditRouteComponent,
-    path: 'tenant/:key',
+    component: SignInRouteComponent,
+    path: 'sign-in',
   },
 ];
 

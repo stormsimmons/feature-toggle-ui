@@ -1,14 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css');
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
@@ -20,28 +14,40 @@ body {
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$custom-app-primary: mat-palette($mat-indigo, 900);
-$custom-app-accent: mat-palette($mat-orange, 900);
+$feature-toggle-ui-primary: mat-palette($mat-indigo);
+$feature-toggle-ui-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$custom-app-warn: mat-palette($mat-red, 900);
+$feature-toggle-ui-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$custom-app-theme: mat-light-theme($custom-app-primary, $custom-app-accent, $custom-app-warn);
+$feature-toggle-ui-theme: mat-light-theme(
+  $feature-toggle-ui-primary,
+  $feature-toggle-ui-accent,
+  $feature-toggle-ui-warn
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($custom-app-theme);
+@include angular-material-theme($feature-toggle-ui-theme);
 
-$color: #1a237e;
+/* You can add global styles to this file, and also import other style files */
 
-.mat-toolbar.mat-primary {
-  background: $color;
-  background: linear-gradient(90deg, $color 0%, adjust-hue($color, -40%) 100%);
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
 }
 
-.mat-fab.mat-primary {
-  background: $color;
-  background: linear-gradient(90deg, $color 0%, adjust-hue($color, -40%) 100%);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0em;
 }

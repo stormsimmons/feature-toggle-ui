@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-list>
+    <h3 mat-subheader>Recent Updates</h3>
+    <ng-container *ngIf="audits">
+      <mat-list-item *ngFor="let audit of audits">
+        <mat-icon mat-list-icon>info_outline</mat-icon>
+        <h4 mat-line>{{ audit.message }}</h4>
+        <p mat-line>{{ audit.timestamp | date }} | {{ audit.user }}</p>
+      </mat-list-item>
+    </ng-container>
+    <mat-list-item *ngIf="!audits">
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

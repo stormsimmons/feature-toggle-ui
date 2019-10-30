@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Contact Us</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input [(ngModel)]="emailAddress" matInput placeholder="Email Address" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Subject" />
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Message"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onClickClose()" mat-button>Close</button>
+  <button mat-button cdkFocusInitial>Send</button>
+</div>

@@ -1,0 +1,20 @@
+<div class="breadcrumb">
+  <app-breadcrumb [items]="['Application', 'Home']"></app-breadcrumb>
+  <div>
+    {{ date | date }}
+  </div>
+</div>
+
+<h1>Home</h1>
+
+<div class="statistics-cards">
+  <app-statistics-card [text]="'feature toggles'" [value]="numberOfFeatureToggles()"></app-statistics-card>
+
+  <app-statistics-card [text]="'archived feature toggles'" [value]="numberOfArchivedFeatureToggles()"></app-statistics-card>
+</div>
+
+<div class="recent-updates">
+  <app-feature-toggle-list [featureToggles]="featureToggles"></app-feature-toggle-list>
+
+  <app-recent-updates [audits]="audits"></app-recent-updates>
+</div>

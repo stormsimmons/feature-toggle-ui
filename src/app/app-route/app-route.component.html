@@ -1,0 +1,73 @@
+<mat-toolbar color="primary">
+  <mat-icon (click)="sidenav.toggle()" matListIcon>menu</mat-icon> Feature Toggle
+
+  <span class="spacer"></span>
+
+  <!-- <mat-icon [matMenuTriggerFor]="menu" matListIcon>person</mat-icon>
+    <mat-menu #menu="matMenu">
+      <button (click)="onClickProfile()" mat-menu-item>Profile</button>
+      <ng-container *ngIf="tenants">
+        <mat-divider></mat-divider>
+        <button *ngFor="let tenant of tenants" (click)="onClickTenant(tenant)" mat-menu-item>{{ tenant.name }}</button>
+        <mat-divider></mat-divider>
+        <button (click)="onClickManageTenants()" mat-menu-item>Manage Tenants</button>
+      </ng-container>
+      <mat-divider></mat-divider>
+      <button (click)="onClickSignOut()" mat-menu-item>Sign Out</button>
+    </mat-menu> -->
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-nav-list>
+      <a [routerLink]="['/profile']">
+        <mat-list-item>
+          <mat-icon matListIcon>person_outline</mat-icon>
+          {{ user.name }}
+        </mat-list-item>
+      </a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/']">
+        <mat-list-item>
+          <mat-icon matListIcon>home_outline</mat-icon>
+          Home
+        </mat-list-item>
+      </a>
+      <a [routerLink]="['/']">
+        <mat-list-item>
+          <mat-icon matListIcon>data_usage_outline</mat-icon>
+          Analytics
+        </mat-list-item>
+      </a>
+      <a [routerLink]="['/']">
+        <mat-list-item>
+          <mat-icon matListIcon>info_outline</mat-icon>
+          Feature Toggles
+        </mat-list-item>
+      </a>
+      <mat-divider></mat-divider>
+      <a [routerLink]="['/']">
+        <mat-list-item>
+          <mat-icon matListIcon>work_outline</mat-icon>
+          API Documentation
+        </mat-list-item>
+      </a>
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="onClickContactUs()">
+        <mat-icon matListIcon>email_outline</mat-icon>
+        Contact Us
+      </mat-list-item>
+      <a [routerLink]="['/sign-in']">
+        <mat-list-item>
+          <mat-icon matListIcon>vpn_key_outline</mat-icon>
+          Sign Out
+        </mat-list-item>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

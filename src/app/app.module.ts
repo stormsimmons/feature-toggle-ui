@@ -1,84 +1,44 @@
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { AuditModule, FeatureToggleModule, ToolbarModule } from './features';
-import { AuditsRouteComponent } from './audits-route/audits-route.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
-import { CallbackRouteComponent } from './callback-route/callback-route.component';
-import { FeatureToggleCreateComponent } from './features/feature-toggle/feature-toggle-create/feature-toggle-create.component';
-import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
-import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
 import { NgModule } from '@angular/core';
-import { ProfileRouteComponent } from './profile-route/profile-route.component';
-import { TenantEditRouteComponent } from './tenant-edit-route/tenant-edit-route.component';
-import { TenantRouteComponent } from './tenant-route/tenant-route.component';
-import { TenantUserAddComponent } from './tenant-user-add/tenant-user-add.component';
-import { CustomHttpInterceptor, CustomOpenIDService, OpenIDService } from '@app/core';
-import {
-  MatTableModule,
-  MatListModule,
-  MatCheckboxModule,
-  MatButtonModule,
-  MatChipsModule,
-  MatCardModule,
-  MatSelectModule,
-  MatInputModule,
-  MatIconModule,
-  MatSidenavModule,
-  MatDialogModule,
-  MatProgressBarModule,
-  MatSnackBarModule,
-  MatSlideToggleModule,
-  MatDividerModule,
-} from '@angular/material';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { OAuthModule } from 'angular-oauth2-oidc';
+
+import { HomeRouteComponent } from './home-route/home-route.component';
+import { CallbackRouteComponent } from './callback-route/callback-route.component';
+import { SignInRouteComponent } from './sign-in-route/sign-in-route.component';
+
+import { AngularMaterialModule } from './angular-material.module';
+import { ComponentsModule } from './components';
+import { CustomHttpInterceptor } from './core';
+import { AppRouteComponent } from './app-route/app-route.component';
+import { CreateFeatureToggleRouteComponent } from './create-feature-toggle-route/create-feature-toggle-route.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FeatureTogglesRouteComponent,
-    FeatureToggleEditRouteComponent,
-    FeatureToggleCreateComponent,
+    AppRouteComponent,
+    HomeRouteComponent,
+    CreateFeatureToggleRouteComponent,
     CallbackRouteComponent,
-    AuditsRouteComponent,
-    ProfileRouteComponent,
-    TenantRouteComponent,
-    TenantEditRouteComponent,
-    TenantUserAddComponent,
+    SignInRouteComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
     ReactiveFormsModule,
-    MatTableModule,
-    MatListModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatCardModule,
-    MatSelectModule,
-    MatInputModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatDialogModule,
-    MatProgressBarModule,
-    MatSnackBarModule,
-    MatSlideToggleModule,
-    MatDividerModule,
-
-    AuditModule,
-    FeatureToggleModule,
-    ToolbarModule,
+    HttpClientModule,
+    OAuthModule.forRoot(),
+    AngularMaterialModule,
+    ComponentsModule,
   ],
   providers: [
-    {
-      provide: OpenIDService,
-      useClass: CustomOpenIDService,
-    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CustomHttpInterceptor,
@@ -86,6 +46,5 @@ import {
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [FeatureToggleCreateComponent, TenantUserAddComponent],
 })
 export class AppModule {}

@@ -1,31 +1,34 @@
-import { catchError, delayWhen, map, mergeMap, retryWhen } from 'rxjs/operators';
-import { environment } from '@environments/environment';
-import { forkJoin, Observable, of, throwError, timer } from 'rxjs';
+import { catchError, mergeMap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
+import { Observable, of, throwError } from 'rxjs';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUser } from '../models';
-import { OpenIDService, TenantService } from '../services';
+import { ITenant } from '../models';
+import { TenantService } from '../services';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
-  constructor(protected openIdService: OpenIDService, protected tenantService: TenantService) {}
+  constructor(protected oauthService: OAuthService, protected tenantService: TenantService) {}
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const isMultiTenant: boolean = !req.url.startsWith('/tenant');
+    const isMultiTenant: boolean = !req.url.startsWith('/tenant') && !req.url.startsWith('https://');
 
-    const observables: Array<Observable<any>> = isMultiTenant
-      ? [this.getUser(), this.tenantService.findEnsure()]
-      : [this.getUser()];
-
-    return forkJoin(observables)
+    return (isMultiTenant ? this.tenantService.findEnsure() : of(null))
       .pipe(
-        mergeMap((result: Array<any>) => {
-          const user = result[0];
-          const tenant = result[1];
+        mergeMap((tenant: ITenant) => {
+          let url: string = req.url;
+
+          if (req.url.startsWith('https://')) {
+          } else if (req.url.startsWith('/tenant')) {
+            url = `${environment.uri}${req.url}`;
+          } else {
+            url = `${environment.uri}/${tenant.key}${req.url}`;
+          }
 
           const requestClone = req.clone({
-            headers: req.headers.set('authorization', `Bearer ${user.id_token}`),
-            url: isMultiTenant ? `${environment.uri}/${tenant.key}${req.url}` : `${environment.uri}${req.url}`,
+            headers: req.headers.set('authorization', `Bearer ${this.oauthService.getAccessToken()}`),
+            url,
           });
 
           return next.handle(requestClone);
@@ -34,18 +37,11 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       .pipe(
         catchError((error: Error) => {
           if (error instanceof HttpErrorResponse && error.status === 401) {
-            this.openIdService.signIn(true).subscribe();
+            this.oauthService.initLoginFlow();
           }
 
           return throwError(error);
         }),
       );
-  }
-
-  protected getUser(): Observable<IUser> {
-    return this.openIdService
-      .getUser()
-      .pipe(mergeMap((user: IUser) => (user ? of(user) : throwError(new Error()))))
-      .pipe(retryWhen((errors) => errors.pipe(delayWhen(() => timer(1000)))));
   }
 }

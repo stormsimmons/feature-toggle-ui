@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { OpenIDService } from '@app/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OpenIDGuard implements CanActivate {
-  constructor(protected openIDService: OpenIDService) {}
+  constructor(protected oauthService: OAuthService, protected router: Router) {}
 
-  public canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.openIDService.signIn();
+  public async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    await this.oauthService.loadDiscoveryDocument();
+
+    const accessToken: string = this.oauthService.getAccessToken();
+
+    const result: boolean = accessToken ? true : false;
+
+    if (!result) {
+      this.router.navigateByUrl('/sign-in');
+    }
+
+    return result;
   }
 }

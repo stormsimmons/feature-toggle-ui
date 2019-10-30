@@ -1,0 +1,36 @@
+div.breadcrumb {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 0em;
+}
+
+h1 {
+  margin: 0.5em 1em;
+}
+
+div.statistics-cards {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+
+  app-statistics-card {
+    margin: 0em 1em;
+    width: 50%;
+  }
+}
+
+div.recent-updates {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+
+  app-feature-toggle-list {
+    margin: 1em;
+    width: 50%;
+  }
+
+  app-recent-updates {
+    margin: 1em;
+    width: 50%;
+  }
+}

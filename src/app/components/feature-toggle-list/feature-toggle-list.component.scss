@@ -1,0 +1,12 @@
+mat-card {
+  mat-list {
+    mat-list-item.empty-state {
+      display: flex;
+      justify-content: center;
+
+      button {
+        color: #ffffff;
+      }
+    }
+  }
+}

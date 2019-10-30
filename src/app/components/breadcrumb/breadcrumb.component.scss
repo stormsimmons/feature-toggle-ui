@@ -1,0 +1,14 @@
+ul.breadcrumb {
+  color: #666666;
+  list-style: none;
+  margin: 0em;
+  padding: 0em;
+
+  li {
+    display: inline;
+
+    + li:before {
+      content: '/\00a0';
+    }
+  }
+}
