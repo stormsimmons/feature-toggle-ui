@@ -15,18 +15,10 @@ import { AngularMaterialModule } from './angular-material.module';
 import { ComponentsModule } from './components';
 import { CustomHttpInterceptor } from './core';
 import { AppRouteComponent } from './app-route/app-route.component';
-import { CreateFeatureToggleRouteComponent } from './create-feature-toggle-route/create-feature-toggle-route.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AppRouteComponent,
-    HomeRouteComponent,
-    CreateFeatureToggleRouteComponent,
-    CallbackRouteComponent,
-    SignInRouteComponent,
-  ],
+  declarations: [AppComponent, AppRouteComponent, HomeRouteComponent, CallbackRouteComponent, SignInRouteComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,

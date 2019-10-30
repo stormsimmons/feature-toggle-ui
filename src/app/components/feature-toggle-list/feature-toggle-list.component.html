@@ -1,10 +1,20 @@
 <mat-card>
   <mat-list>
-    <h3 mat-subheader>Feature Toggles</h3>
+    <h3 mat-subheader>
+      <span>Feature Toggles</span>
+      <button *ngIf="featureToggles" (click)="onClickCreateFeatureToggle()" mat-icon-button color="accent">
+        <mat-icon>add</mat-icon>
+      </button>
+    </h3>
+
     <ng-container *ngIf="featureToggles">
       <mat-list-item *ngFor="let featureToggle of featureToggles">
-        <mat-icon mat-list-icon>info_outline</mat-icon>
-        <h4 mat-line>{{ featureToggle.name }}</h4>
+        <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-toggle-on"></mat-icon>
+        <h4 mat-line>
+          <a [routerLink]="['feature-toggle', 'create']">
+            {{ featureToggle.name }}
+          </a>
+        </h4>
         <p mat-line>{{ featureToggle.createdAt | date }} | {{ featureToggle.user }}</p>
       </mat-list-item>
     </ng-container>
@@ -14,9 +24,9 @@
     </mat-list-item>
 
     <mat-list-item *ngIf="featureToggles && !featureToggles.length" class="empty-state">
-      <a [routerLink]="'/app/feature-toggle/create'" mat-raised-button color="accent">
+      <button (click)="onClickCreateFeatureToggle()" mat-raised-button color="accent">
         <mat-icon mat-list-icon>add_outline</mat-icon> Create
-      </a>
+      </button>
     </mat-list-item>
   </mat-list>
 </mat-card>

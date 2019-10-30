@@ -6,7 +6,7 @@ import { RecentUpdatesComponent } from './recent-updates';
 import { StatisticsCardComponent } from './statistics-card';
 import { AngularMaterialModule } from '../angular-material.module';
 import { AppRoutingModule } from '../app-routing.module';
-import { ContactUsDialogComponent } from './dialogs';
+import { ContactUsDialogComponent, CreateFeatureToggleDialogComponent } from './dialogs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -16,9 +16,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RecentUpdatesComponent,
     StatisticsCardComponent,
     ContactUsDialogComponent,
+    CreateFeatureToggleDialogComponent,
   ],
   imports: [CommonModule, AngularMaterialModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   exports: [BreadcrumbComponent, FeatureToggleListComponent, RecentUpdatesComponent, StatisticsCardComponent],
-  entryComponents: [ContactUsDialogComponent],
+  entryComponents: [ContactUsDialogComponent, CreateFeatureToggleDialogComponent],
 })
 export class ComponentsModule {}

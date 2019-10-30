@@ -1,11 +1,22 @@
 mat-card {
-  mat-list {
-    mat-list-item.empty-state {
-      display: flex;
-      justify-content: center;
+  h3[mat-subheader] {
+    display: flex;
+    justify-content: space-between;
+  }
 
-      button {
-        color: #ffffff;
+  mat-list {
+    mat-list-item {
+      mat-icon {
+        // font-size: 1.5em;
+      }
+
+      &.empty-state {
+        display: flex;
+        justify-content: center;
+
+        button {
+          color: #ffffff;
+        }
       }
     }
   }

@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { IFeatureToggle } from 'src/app/core';
+import { CreateFeatureToggleDialogComponent } from '../dialogs';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-feature-toggle-list',
@@ -7,10 +9,25 @@ import { IFeatureToggle } from 'src/app/core';
   styleUrls: ['./feature-toggle-list.component.scss'],
 })
 export class FeatureToggleListComponent implements OnInit {
+  @Output()
+  public createFeatureToggle: EventEmitter<IFeatureToggle> = new EventEmitter();
+
   @Input()
   public featureToggles: Array<IFeatureToggle> = null;
 
-  constructor() {}
+  constructor(protected dialog: MatDialog) {}
 
   public ngOnInit() {}
+
+  public onClickCreateFeatureToggle(): void {
+    const dialogRef: MatDialogRef<CreateFeatureToggleDialogComponent> = this.dialog.open(
+      CreateFeatureToggleDialogComponent,
+    );
+
+    dialogRef.afterClosed().subscribe((x) => {
+      if (x) {
+        this.createFeatureToggle.emit(x);
+      }
+    });
+  }
 }

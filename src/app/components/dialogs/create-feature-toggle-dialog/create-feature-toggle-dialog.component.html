@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Create Feature Toggle</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <mat-form-field>
+      <input formControlName="name" matInput placeholder="Feature Toggle Name" />
+      <mat-hint *ngIf="formGroup.get('name').value" align="end">
+        key: <b>{{ toSlug(formGroup.get('name').value) }}</b>
+      </mat-hint>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onClickClose()" mat-button>Close</button>
+  <button (click)="onClickCreate()" mat-button cdkFocusInitial>Create</button>
+</div>

@@ -41,9 +41,9 @@ export class HomeRouteComponent implements OnInit {
       )
       .subscribe();
 
-    this.auditService.findAll().subscribe((x) => (this.audits = x));
+    this.auditService.findAll().subscribe((x: Array<IAudit>) => (this.audits = x));
 
-    this.featureToggleService.findAll(true).subscribe((x) => (this.featureToggles = x));
+    this.featureToggleService.findAll(true).subscribe((x: Array<IFeatureToggle>) => (this.featureToggles = x));
   }
 
   public numberOfFeatureToggles(): number {
@@ -59,6 +59,12 @@ export class HomeRouteComponent implements OnInit {
       return null;
     }
 
-    return this.featureToggles.filter((x) => !x.archived).length;
+    return this.featureToggles.filter((x: IFeatureToggle) => x.archived).length;
+  }
+
+  public onCreateFeatureToggle(featureToggle: IFeatureToggle): void {
+    this.featureToggleService.create(featureToggle).subscribe(() => {
+      this.featureToggleService.findAll(false).subscribe((x: Array<IFeatureToggle>) => (this.featureToggles = x));
+    });
   }
 }

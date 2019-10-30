@@ -3,7 +3,7 @@
     <h3 mat-subheader>Recent Updates</h3>
     <ng-container *ngIf="audits">
       <mat-list-item *ngFor="let audit of audits">
-        <mat-icon mat-list-icon>info_outline</mat-icon>
+        <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-pencil"></mat-icon>
         <h4 mat-line>{{ audit.message }}</h4>
         <p mat-line>{{ audit.timestamp | date }} | {{ audit.user }}</p>
       </mat-list-item>
