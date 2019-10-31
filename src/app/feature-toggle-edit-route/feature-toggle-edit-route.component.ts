@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 export class FeatureToggleEditRouteComponent implements OnInit {
   public date: number = new Date().getTime();
 
+  public environmentdisplayedColumns: Array<string> = ['value'];
+
   public featureToggle: IFeatureToggle = null;
 
   constructor(protected activatedRoute: ActivatedRoute, protected featureToggleService: FeatureToggleService) {}
