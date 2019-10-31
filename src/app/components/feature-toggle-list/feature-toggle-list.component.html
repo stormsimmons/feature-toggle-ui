@@ -11,7 +11,7 @@
       <mat-list-item *ngFor="let featureToggle of featureToggles">
         <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-toggle-on"></mat-icon>
         <h4 mat-line>
-          <a [routerLink]="['feature-toggle', 'create']">
+          <a [routerLink]="['', 'app', 'feature-toggle', featureToggle.key, 'edit']">
             {{ featureToggle.name }}
           </a>
         </h4>

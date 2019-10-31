@@ -1,0 +1,51 @@
+<mat-progress-bar *ngIf="!featureToggle" mode="query"></mat-progress-bar>
+
+<ng-container *ngIf="featureToggle">
+  <div class="breadcrumb">
+    <app-breadcrumb [items]="['Application', 'Feature Toggle', featureToggle.name, 'Edit']"></app-breadcrumb>
+    <div>
+      <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-clock"></mat-icon>
+      {{ date | date }}
+    </div>
+  </div>
+
+  <h1>{{ featureToggle.name }}</h1>
+
+  <h2>Environments</h2>
+
+  <div>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let environment of featureToggle.environments">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ environment.name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- <mat-form-field>
+          <input matInput placeholder="First name" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Age" />
+        </mat-form-field> -->
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <!-- <div class="statistics-cards">
+        <app-statistics-card [text]="'feature toggles'" [value]="numberOfFeatureToggles()"></app-statistics-card>
+      
+        <app-statistics-card
+          [text]="'archived feature toggles'"
+          [value]="numberOfArchivedFeatureToggles()"
+        ></app-statistics-card>
+      </div>
+      
+      <div class="recent-updates">
+        <app-feature-toggle-list (createFeatureToggle)="onCreateFeatureToggle($event)" [featureToggles]="featureToggles">
+        </app-feature-toggle-list>
+      
+        <app-recent-updates [audits]="audits"></app-recent-updates>
+      </div> -->
+</ng-container>

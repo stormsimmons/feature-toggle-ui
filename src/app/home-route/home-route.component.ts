@@ -4,6 +4,7 @@ import { mergeMap } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { OAuthService } from 'angular-oauth2-oidc';
 import * as Uuid from 'uuid';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-route',
@@ -21,6 +22,7 @@ export class HomeRouteComponent implements OnInit {
     protected auditService: AuditService,
     protected featureToggleService: FeatureToggleService,
     protected oauthService: OAuthService,
+    protected router: Router,
     protected tenantService: TenantService,
   ) {}
 
@@ -63,8 +65,17 @@ export class HomeRouteComponent implements OnInit {
   }
 
   public onCreateFeatureToggle(featureToggle: IFeatureToggle): void {
-    this.featureToggleService.create(featureToggle).subscribe(() => {
-      this.featureToggleService.findAll(false).subscribe((x: Array<IFeatureToggle>) => (this.featureToggles = x));
-    });
+    const featureToggles: Array<IFeatureToggle> = this.featureToggles;
+
+    this.featureToggles = null;
+
+    this.featureToggleService.create(featureToggle).subscribe(
+      () => {
+        this.router.navigateByUrl(`/feature-toggle/${featureToggle.key}/edit`);
+      },
+      () => {
+        this.featureToggles = featureToggles;
+      },
+    );
   }
 }

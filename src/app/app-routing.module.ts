@@ -5,6 +5,7 @@ import { CallbackRouteComponent } from './callback-route/callback-route.componen
 import { OpenIDGuard } from './open-id.guard';
 import { SignInRouteComponent } from './sign-in-route/sign-in-route.component';
 import { AppRouteComponent } from './app-route/app-route.component';
+import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/app/home', pathMatch: 'full' },
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         component: HomeRouteComponent,
         path: 'home',
+      },
+      {
+        component: FeatureToggleEditRouteComponent,
+        path: 'feature-toggle/:key/edit',
       },
     ],
     component: AppRouteComponent,

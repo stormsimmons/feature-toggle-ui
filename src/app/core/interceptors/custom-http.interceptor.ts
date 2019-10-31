@@ -37,7 +37,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       .pipe(
         catchError((error: Error) => {
           if (error instanceof HttpErrorResponse && error.status === 401) {
-            this.oauthService.initLoginFlow();
+            // this.oauthService.initLoginFlow();
           }
 
           return throwError(error);
