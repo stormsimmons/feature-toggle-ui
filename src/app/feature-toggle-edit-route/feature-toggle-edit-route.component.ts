@@ -19,4 +19,8 @@ export class FeatureToggleEditRouteComponent implements OnInit {
   public ngOnInit(): void {
     this.featureToggleService.find(this.activatedRoute.snapshot.params.key).subscribe((x) => (this.featureToggle = x));
   }
+
+  public onChangeFeatureToggle(): void {
+    this.featureToggleService.update(this.featureToggle).subscribe();
+  }
 }

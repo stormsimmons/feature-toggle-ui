@@ -6,8 +6,9 @@ mat-card {
 
   mat-list {
     mat-list-item {
-      mat-icon {
-        // font-size: 1.5em;
+      &.view-all {
+        display: flex;
+        justify-content: center;
       }
 
       &.empty-state {

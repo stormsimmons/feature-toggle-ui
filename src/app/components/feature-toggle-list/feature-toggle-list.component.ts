@@ -19,6 +19,10 @@ export class FeatureToggleListComponent implements OnInit {
 
   public ngOnInit() {}
 
+  public getFeatureToggles(): Array<IFeatureToggle> {
+    return this.featureToggles.filter((x) => !x.archived);
+  }
+
   public onClickCreateFeatureToggle(): void {
     const dialogRef: MatDialogRef<CreateFeatureToggleDialogComponent> = this.dialog.open(
       CreateFeatureToggleDialogComponent,

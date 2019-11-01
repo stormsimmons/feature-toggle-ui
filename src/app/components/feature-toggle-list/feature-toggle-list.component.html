@@ -8,7 +8,7 @@
     </h3>
 
     <ng-container *ngIf="featureToggles">
-      <mat-list-item *ngFor="let featureToggle of featureToggles">
+      <mat-list-item *ngFor="let featureToggle of getFeatureToggles()">
         <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-toggle-on"></mat-icon>
         <h4 mat-line>
           <a [routerLink]="['', 'app', 'feature-toggle', featureToggle.key, 'edit']">
@@ -18,6 +18,10 @@
         <p mat-line>{{ featureToggle.createdAt | date }} | {{ featureToggle.user }}</p>
       </mat-list-item>
     </ng-container>
+
+    <mat-list-item *ngIf="featureToggles" class="view-all">
+      <button mat-button color="primary">View All</button>
+    </mat-list-item>
 
     <mat-list-item *ngIf="!featureToggles">
       <mat-progress-bar mode="query"></mat-progress-bar>

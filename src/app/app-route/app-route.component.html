@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <mat-icon (click)="sidenav.toggle()" matListIcon>menu</mat-icon> Feature Toggle
+  <mat-icon (click)="sidenav.toggle()" fontSet="fal" fontIcon="fa-bars" matListIcon></mat-icon> Feature Toggle
 
   <span class="spacer"></span>
 
@@ -22,44 +22,42 @@
     <mat-nav-list>
       <a [routerLink]="['/profile']">
         <mat-list-item>
-          <mat-icon matListIcon>person_outline</mat-icon>
+          <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-user"></mat-icon>
           {{ user.name }}
         </mat-list-item>
       </a>
       <mat-divider></mat-divider>
       <a [routerLink]="['/']">
         <mat-list-item>
-          <mat-icon matListIcon>home_outline</mat-icon>
+          <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-home"></mat-icon>
           Home
         </mat-list-item>
       </a>
+      <mat-list-item>
+        <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-chart-pie"></mat-icon>
+        <s>Analytics</s>
+      </mat-list-item>
       <a [routerLink]="['/']">
         <mat-list-item>
-          <mat-icon matListIcon>data_usage_outline</mat-icon>
-          Analytics
-        </mat-list-item>
-      </a>
-      <a [routerLink]="['/']">
-        <mat-list-item>
-          <mat-icon matListIcon>info_outline</mat-icon>
+          <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-toggle-on"></mat-icon>
           Feature Toggles
         </mat-list-item>
       </a>
       <mat-divider></mat-divider>
       <a [routerLink]="['/']">
         <mat-list-item>
-          <mat-icon matListIcon>work_outline</mat-icon>
+          <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-book"></mat-icon>
           API Documentation
         </mat-list-item>
       </a>
       <mat-divider></mat-divider>
       <mat-list-item (click)="onClickContactUs()">
-        <mat-icon matListIcon>email_outline</mat-icon>
+        <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-envelope"></mat-icon>
         Contact Us
       </mat-list-item>
       <a [routerLink]="['/sign-in']">
         <mat-list-item>
-          <mat-icon matListIcon>vpn_key_outline</mat-icon>
+          <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-sign-out"></mat-icon>
           Sign Out
         </mat-list-item>
       </a>
