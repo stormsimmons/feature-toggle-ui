@@ -1,3 +1,43 @@
+// div.breadcrumb {
+//   display: flex;
+//   justify-content: space-between;
+//   margin: 1em 0em;
+// }
+
+// h1 {
+//   margin: 0.5em 1em;
+
+//   mat-icon {
+//     margin: 0em 0.5em 0em 0em;
+//   }
+// }
+
+// div.cards {
+//   display: flex;
+
+//   mat-card {
+//     flex-basis: 0;
+//     flex-grow: 1;
+//     margin: 1em;
+
+//     mat-card-content {
+//       div {
+//         span.keyword {
+//           color: #d73a49;
+//         }
+
+//         span.method {
+//           color: #6f42c1;
+//         }
+
+//         span.string {
+//           color: #032f62;
+//         }
+//       }
+//     }
+//   }
+// }
+
 div.breadcrumb {
   display: flex;
   justify-content: space-between;
@@ -5,7 +45,7 @@ div.breadcrumb {
 }
 
 h1 {
-  margin: 0.5em 1em;
+  margin: 0.5em 0.5em;
 
   mat-icon {
     margin: 0em 0.5em 0em 0em;
@@ -13,11 +53,58 @@ h1 {
 }
 
 div.cards {
-  display: flex;
-
   mat-card {
-    flex-basis: 0;
-    flex-grow: 1;
-    margin: 1em;
+    margin: 0.5em;
+
+    mat-card-content {
+      div {
+        font-size: 0.75em;
+
+        span.keyword {
+          color: #d73a49;
+        }
+
+        span.method {
+          color: #6f42c1;
+        }
+
+        span.string {
+          color: #032f62;
+        }
+      }
+    }
   }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  div.cards {
+    display: flex;
+
+    mat-card {
+      flex-basis: 0;
+      flex-grow: 1;
+
+      mat-card-content {
+        div {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
 }
