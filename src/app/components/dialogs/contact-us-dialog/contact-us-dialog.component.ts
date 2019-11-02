@@ -17,6 +17,10 @@ export class ContactUsDialogComponent implements OnInit {
   public ngOnInit(): void {}
 
   public onClickClose(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
+  }
+
+  public onClickSend(): void {
+    this.dialogRef.close(true);
   }
 }

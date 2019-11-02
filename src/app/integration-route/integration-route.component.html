@@ -1,51 +1,26 @@
 <div class="breadcrumb">
-  <app-breadcrumb [items]="['Application', 'Integration']"></app-breadcrumb>
+  <app-breadcrumb [items]="[ENVIRONMENT.information.name, 'Integration']"></app-breadcrumb>
   <div>
     <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-clock"></mat-icon>
     {{ date | date }}
   </div>
 </div>
 
-<h1>Integration</h1>
+<h1><mat-icon fontSet="fal" fontIcon="fa-puzzle-piece"></mat-icon> Integration</h1>
 
-<div class="cards">
-  <mat-card>
+<div *ngFor="let programmingLanguagePair of programmingLanguages" class="cards">
+  <mat-card *ngFor="let programmingLanguage of programmingLanguagePair">
     <mat-card-header>
-      <mat-card-title>JavaScript</mat-card-title>
-      <mat-card-subtitle>Use Feature Toggle in your JavaScript application</mat-card-subtitle>
+      <mat-card-title>{{ programmingLanguage }}</mat-card-title>
+      <mat-card-subtitle
+        >Use {{ ENVIRONMENT.information.name }} in your {{ programmingLanguage }} application.</mat-card-subtitle
+      >
     </mat-card-header>
     <mat-card-content>
       <code></code>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>JavaScript</mat-card-title>
-      <mat-card-subtitle>Use Feature Toggle in your JavaScript application</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <code></code>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>JavaScript</mat-card-title>
-      <mat-card-subtitle>Use Feature Toggle in your JavaScript application</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <code></code>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <button mat-button>VIEW</button>
     </mat-card-actions>
   </mat-card>
 </div>
