@@ -14,6 +14,14 @@ mat-sidenav-container {
 
   mat-sidenav {
     width: 15em;
+
+    mat-nav-list {
+      mat-list-item {
+        mat-icon {
+          margin: 0em 0.5em;
+        }
+      }
+    }
   }
 
   mat-sidenav-content {

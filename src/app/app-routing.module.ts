@@ -6,6 +6,7 @@ import { OpenIDGuard } from './open-id.guard';
 import { SignInRouteComponent } from './sign-in-route/sign-in-route.component';
 import { AppRouteComponent } from './app-route/app-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
+import { IntegrationRouteComponent } from './integration-route/integration-route.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/app/home', pathMatch: 'full' },
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         component: FeatureToggleEditRouteComponent,
         path: 'feature-toggle/:key/edit',
+      },
+      {
+        component: IntegrationRouteComponent,
+        path: 'integration',
       },
     ],
     component: AppRouteComponent,

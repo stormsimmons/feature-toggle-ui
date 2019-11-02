@@ -17,6 +17,7 @@ import { CustomHttpInterceptor } from './core';
 import { AppRouteComponent } from './app-route/app-route.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
+import { IntegrationRouteComponent } from './integration-route/integration-route.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/fea
     HomeRouteComponent,
     CallbackRouteComponent,
     FeatureToggleEditRouteComponent,
+    IntegrationRouteComponent,
     SignInRouteComponent,
   ],
   imports: [
