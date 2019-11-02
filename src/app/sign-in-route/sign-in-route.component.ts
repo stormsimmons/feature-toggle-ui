@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sign-in-route',
@@ -7,6 +8,8 @@ import { OAuthService } from 'angular-oauth2-oidc';
   styleUrls: ['./sign-in-route.component.scss'],
 })
 export class SignInRouteComponent implements OnInit {
+  public ENVIRONMENT = environment;
+
   constructor(protected oauthService: OAuthService) {}
 
   public ngOnInit(): void {}

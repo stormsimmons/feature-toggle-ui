@@ -3,6 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  information: {
+    name: 'Foggle.io',
+  },
   production: false,
   uri: 'http://localhost:8080/api',
 };
