@@ -11,7 +11,7 @@
       <mat-list-item *ngFor="let featureToggle of getFeatureToggles()">
         <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-toggle-on"></mat-icon>
         <h4 mat-line>
-          <a [routerLink]="['', 'app', 'feature-toggle', featureToggle.key, 'edit']">
+          <a [routerLink]="['', 'app', 'feature-toggles', featureToggle.key, 'edit']">
             {{ featureToggle.name }}
           </a>
         </h4>
@@ -20,7 +20,7 @@
     </ng-container>
 
     <mat-list-item *ngIf="featureToggles" class="view-all">
-      <button mat-button color="primary">View All</button>
+      <a [routerLink]="['..', 'feature-toggles']" mat-button color="primary">View All</a>
     </mat-list-item>
 
     <mat-list-item *ngIf="!featureToggles">

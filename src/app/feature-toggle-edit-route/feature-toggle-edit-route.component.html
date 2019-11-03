@@ -2,14 +2,14 @@
 
 <ng-container *ngIf="featureToggle">
   <div class="breadcrumb">
-    <app-breadcrumb [items]="['Application', 'Feature Toggle', featureToggle.name]"></app-breadcrumb>
+    <app-breadcrumb [items]="[ENVIRONMENT.information.name, 'Feature Toggles', featureToggle.name]"></app-breadcrumb>
     <div>
       <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-clock"></mat-icon>
       {{ date | date }}
     </div>
   </div>
 
-  <h1>{{ featureToggle.name }}</h1>
+  <h1><mat-icon fontSet="fal" fontIcon="fa-toggle-on"></mat-icon> {{ featureToggle.name }}</h1>
 
   <mat-card>
     <mat-card-content>

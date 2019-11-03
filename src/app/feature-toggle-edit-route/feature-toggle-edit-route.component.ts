@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeatureToggleService, IFeatureToggle } from '../core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-feature-toggle-edit-route',
@@ -10,7 +11,9 @@ import { ActivatedRoute } from '@angular/router';
 export class FeatureToggleEditRouteComponent implements OnInit {
   public date: number = new Date().getTime();
 
-  public environmentdisplayedColumns: Array<string> = ['value'];
+  public ENVIRONMENT = environment;
+
+  public environmentDisplayedColumns: Array<string> = ['value'];
 
   public featureToggle: IFeatureToggle = null;
 

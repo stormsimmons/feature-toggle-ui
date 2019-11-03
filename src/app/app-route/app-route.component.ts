@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MOCK_DATA } from '../core';
 import { ContactUsDialogComponent } from '../components/dialogs';
-import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar, MatSidenav } from '@angular/material';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-app-route',
@@ -12,14 +14,29 @@ import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 export class AppRouteComponent implements OnInit {
   public user: any = MOCK_DATA.USER;
 
-  public sideNavMode: string = screen.width > 768 ? 'side' : 'over';
+  @ViewChild('sidenav', { static: false })
+  public sidenav: MatSidenav = null;
 
-  public sideNavOpened: boolean = screen.width > 768 ? true : false;
+  public sidenavMode: string = screen.width > 768 ? 'side' : 'over';
 
-  constructor(protected dialog: MatDialog, protected oauthService: OAuthService, protected snackBar: MatSnackBar) {}
+  public sidenavOpened: boolean = screen.width > 768 ? true : false;
+
+  constructor(
+    protected activatedRoute: ActivatedRoute,
+    protected dialog: MatDialog,
+    protected oauthService: OAuthService,
+    protected router: Router,
+    protected snackBar: MatSnackBar,
+  ) {}
 
   public ngOnInit(): void {
     this.initialize();
+
+    this.router.events.pipe(filter((x) => x instanceof NavigationEnd)).subscribe((x) => {
+      if (this.sidenavMode === 'over') {
+        this.sidenav.close();
+      }
+    });
   }
 
   public onClickContactUs(): void {

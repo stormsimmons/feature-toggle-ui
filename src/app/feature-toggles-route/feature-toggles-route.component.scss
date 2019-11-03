@@ -12,28 +12,8 @@ h1 {
   }
 }
 
-div.cards {
-  mat-card {
-    margin: 0.5em;
-
-    mat-card-content {
-      div {
-        font-size: 0.75em;
-
-        span.keyword {
-          color: #d73a49;
-        }
-
-        span.method {
-          color: #6f42c1;
-        }
-
-        span.string {
-          color: #032f62;
-        }
-      }
-    }
-  }
+table {
+  width: 100%;
 }
 
 // Extra small devices (portrait phones, less than 576px)
@@ -45,20 +25,6 @@ div.cards {
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-  div.cards {
-    display: flex;
-
-    mat-card {
-      flex-basis: 0;
-      flex-grow: 1;
-
-      mat-card-content {
-        div {
-          font-size: 1em;
-        }
-      }
-    }
-  }
 }
 
 // Large devices (desktops, 992px and up)

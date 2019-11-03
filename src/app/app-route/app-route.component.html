@@ -12,7 +12,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [mode]="sideNavMode" [opened]="sideNavOpened">
+  <mat-sidenav #sidenav [mode]="sidenavMode" [opened]="sidenavOpened">
     <mat-nav-list>
       <a [routerLink]="['/profile']">
         <mat-list-item>
@@ -31,7 +31,7 @@
         <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-chart-pie"></mat-icon>
         <s>Analytics</s>
       </mat-list-item>
-      <a [routerLink]="['/']">
+      <a [routerLink]="['feature-toggles']">
         <mat-list-item>
           <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-toggle-on"></mat-icon>
           Feature Toggles

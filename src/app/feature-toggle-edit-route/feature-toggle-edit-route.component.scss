@@ -5,11 +5,15 @@ div.breadcrumb {
 }
 
 h1 {
-  margin: 0.5em 1em;
+  margin: 0.5em 0.5em;
+
+  mat-icon {
+    margin: 0em 0.5em 0em 0em;
+  }
 }
 
 h2 {
-  margin: 1em 1em;
+  margin: 0.5em 0.5em;
 }
 
 div {

@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<h1>Home</h1>
+<h1><mat-icon fontSet="fal" fontIcon="fa-home"></mat-icon> Home</h1>
 
 <div class="statistics-cards">
   <app-statistics-card [text]="'feature toggles'" [value]="numberOfFeatureToggles()"></app-statistics-card>
@@ -17,7 +17,7 @@
   ></app-statistics-card>
 </div>
 
-<div class="recent-updates">
+<div class="feature-toggle-list recent-updates">
   <app-feature-toggle-list (createFeatureToggle)="onCreateFeatureToggle($event)" [featureToggles]="featureToggles">
   </app-feature-toggle-list>
 

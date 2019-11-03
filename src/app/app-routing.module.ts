@@ -7,6 +7,7 @@ import { SignInRouteComponent } from './sign-in-route/sign-in-route.component';
 import { AppRouteComponent } from './app-route/app-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { IntegrationRouteComponent } from './integration-route/integration-route.component';
+import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/app/home', pathMatch: 'full' },
@@ -18,8 +19,12 @@ const routes: Routes = [
         path: 'home',
       },
       {
+        component: FeatureTogglesRouteComponent,
+        path: 'feature-toggles',
+      },
+      {
         component: FeatureToggleEditRouteComponent,
-        path: 'feature-toggle/:key/edit',
+        path: 'feature-toggles/:key/edit',
       },
       {
         component: IntegrationRouteComponent,
