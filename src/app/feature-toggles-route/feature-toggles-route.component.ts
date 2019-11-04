@@ -17,26 +17,18 @@ export class FeatureTogglesRouteComponent implements OnInit {
   public ENVIRONMENT = environment;
 
   public featureToggles: Array<IFeatureToggle> = null;
-  public featureTogglesFull: Array<IFeatureToggle> = null;
 
   constructor(protected featureToggleService: FeatureToggleService) { }
 
   public ngOnInit(): void {
     this.featureToggleService.findAll(true).subscribe((x) => {
-      this.featureTogglesFull = x;
-      this.featureToggles = [...this.featureTogglesFull];
+      this.featureToggles = x;
     });
   }
 
-  public searchToggles(): void {
-    //TODO: Extend to API for search 
-    if (this.searchText) {
-      this.featureToggles = this.featureTogglesFull.
-        filter(x =>
-          x.name.toLowerCase()
-            .includes(this.searchText.toLowerCase()));
-    } else {
-      this.featureToggles = [...this.featureTogglesFull]
-    }
+  public onKeyUpSearchFeatureToggles(): void {
+    this.featureToggleService.search(this.searchText).subscribe(
+      x => this.featureToggles = x
+    )
   }
 }

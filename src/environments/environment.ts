@@ -7,7 +7,7 @@ export const environment = {
     name: 'Foggle.io',
   },
   production: false,
-  uri: 'https://api.feature-toggle.xyzblocks.dev/api',
+  uri: 'http://localhost:8080/api',
 };
 
 /*
