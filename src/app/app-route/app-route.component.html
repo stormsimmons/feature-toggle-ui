@@ -1,27 +1,28 @@
 <mat-toolbar color="primary">
-  <mat-icon (click)="sidenav.toggle()" fontSet="fal" fontIcon="fa-bars" mat-list-icon></mat-icon> Feature Toggle
+  <mat-icon (click)="sidenav.toggle()" fontSet="fal" fontIcon="fa-bars" mat-list-icon></mat-icon>
+  {{ ENVIRONMENT.information.name }}
 
   <span class="spacer"></span>
 
   <mat-icon [matMenuTriggerFor]="menu" mat-list-icon fontSet="fal" fontIcon="fa-user"></mat-icon>
   <mat-menu #menu="matMenu">
-    <a [routerLink]="['/profile']" mat-menu-item>Profile</a>
+    <a [routerLink]="['profile']" mat-menu-item>Profile</a>
     <mat-divider></mat-divider>
-    <a [routerLink]="['/sign-in']" mat-menu-item>Sign Out</a>
+    <a [routerLink]="['', 'sign-in']" mat-menu-item>Sign Out</a>
   </mat-menu>
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav [mode]="sidenavMode" [opened]="sidenavOpened">
     <mat-nav-list>
-      <a [routerLink]="['/profile']">
+      <a [routerLink]="['profile']">
         <mat-list-item>
           <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-user"></mat-icon>
           {{ user.name }}
         </mat-list-item>
       </a>
       <mat-divider></mat-divider>
-      <a [routerLink]="['/']">
+      <a [routerLink]="['']">
         <mat-list-item>
           <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-home"></mat-icon>
           Home
@@ -37,6 +38,10 @@
           Feature Toggles
         </mat-list-item>
       </a>
+      <mat-list-item>
+        <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-university"></mat-icon>
+        <s>Tenants</s>
+      </mat-list-item>
       <mat-divider></mat-divider>
       <a [routerLink]="['integration']">
         <mat-list-item>
@@ -49,7 +54,7 @@
         <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-envelope"></mat-icon>
         Contact Us
       </mat-list-item>
-      <a [routerLink]="['/sign-in']">
+      <a [routerLink]="['', 'sign-in']">
         <mat-list-item>
           <mat-icon mat-list-icon fontSet="fal" fontIcon="fa-sign-out"></mat-icon>
           Sign Out

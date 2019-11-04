@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { IntegrationRouteComponent } from './integration-route/integration-route.component';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
+import { ProfileRouteComponent } from './profile-route/profile-route.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-to
     FeatureTogglesRouteComponent,
     FeatureToggleEditRouteComponent,
     IntegrationRouteComponent,
+    ProfileRouteComponent,
     SignInRouteComponent,
   ],
   imports: [

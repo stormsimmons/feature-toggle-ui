@@ -8,6 +8,7 @@ import { AppRouteComponent } from './app-route/app-route.component';
 import { FeatureToggleEditRouteComponent } from './feature-toggle-edit-route/feature-toggle-edit-route.component';
 import { IntegrationRouteComponent } from './integration-route/integration-route.component';
 import { FeatureTogglesRouteComponent } from './feature-toggles-route/feature-toggles-route.component';
+import { ProfileRouteComponent } from './profile-route/profile-route.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/app/home', pathMatch: 'full' },
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         component: IntegrationRouteComponent,
         path: 'integration',
+      },
+      {
+        component: ProfileRouteComponent,
+        path: 'profile',
       },
     ],
     component: AppRouteComponent,

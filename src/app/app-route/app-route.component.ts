@@ -5,6 +5,7 @@ import { ContactUsDialogComponent } from '../components/dialogs';
 import { MatDialog, MatDialogRef, MatSnackBar, MatSidenav } from '@angular/material';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-app-route',
@@ -12,6 +13,8 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./app-route.component.scss'],
 })
 export class AppRouteComponent implements OnInit {
+  public ENVIRONMENT = environment;
+
   public user: any = MOCK_DATA.USER;
 
   @ViewChild('sidenav', { static: false })

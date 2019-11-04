@@ -5,6 +5,7 @@ import { of, from } from 'rxjs';
 import { OAuthService } from 'angular-oauth2-oidc';
 import * as Uuid from 'uuid';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home-route',
@@ -15,6 +16,8 @@ export class HomeRouteComponent implements OnInit {
   public audits: Array<IAudit> = null;
 
   public date: number = new Date().getTime();
+
+  public ENVIRONMENT = environment;
 
   public featureToggles: Array<IFeatureToggle> = null;
 
