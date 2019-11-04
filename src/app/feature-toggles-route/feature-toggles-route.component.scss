@@ -15,6 +15,15 @@ h1 {
 table {
   width: 100%;
 }
+h1{
+  float: left;
+}
+.feature-search {
+  position: relative;
+  float: right;
+  right: 5%;
+  top: 10px;
+}
 
 // Extra small devices (portrait phones, less than 576px)
 // No media query since this is the default in Bootstrap
