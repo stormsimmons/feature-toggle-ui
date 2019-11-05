@@ -18,17 +18,23 @@ export class FeatureTogglesRouteComponent implements OnInit {
 
   public featureToggles: Array<IFeatureToggle> = null;
 
+  public isSearching:boolean = false;
+
   constructor(protected featureToggleService: FeatureToggleService) { }
 
   public ngOnInit(): void {
     this.featureToggleService.findAll(true).subscribe((x) => {
-      this.featureToggles = x;
+      this.featureToggles = x
     });
   }
 
   public onKeyUpSearchFeatureToggles(): void {
+    this.isSearching = true;
     this.featureToggleService.search(this.searchText).subscribe(
-      x => this.featureToggles = x
+      x => {
+        this.featureToggles = x;
+        this.isSearching = false;
+      }
     )
   }
 }

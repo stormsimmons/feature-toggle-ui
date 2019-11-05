@@ -10,13 +10,17 @@
   </div>
 
   <h1>
-    <span><mat-icon fontSet="fal" fontIcon="fa-toggle-on"></mat-icon> Feature Toggles</span>
+    <span>
+      <mat-icon fontSet="fal" fontIcon="fa-toggle-on"></mat-icon> Feature Toggles
+    </span>
 
-    <mat-form-field >
-      <input  [(ngModel)]="searchText" (keyup)="onKeyUpSearchFeatureToggles()" matInput name="search" placeholder="Search Feature Toggles" >
+    <mat-form-field>
+      <input [(ngModel)]="searchText" (keyup)="onKeyUpSearchFeatureToggles()" matInput name="search"
+        placeholder="Search Feature Toggles">
     </mat-form-field>
   </h1>
-  
+
+  <mat-progress-bar *ngIf="isSearching" mode="query"></mat-progress-bar>
   <table mat-table [dataSource]="featureToggles" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
